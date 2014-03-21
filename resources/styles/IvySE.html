@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <title>Ivy Schema Editor</title>
+        <meta name="author" content="Ivy Information Systems">
+        <link rel="shortcut icon" href="../../../api/repos/IvySE/static/custom/img/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="../../../api/repos/IvySE/static/custom/img/favicon.ico">
+
+        @HEADER@        
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        <style type="text/css">
+            /* override bootstrap styles */
+          @import url('http://fonts.googleapis.com/css?family=Oswald:300,400:latin,latin-ext');
+
+          .navbar-form input, .form-inline input {
+            width:auto;
+          }
+
+          body {
+            padding-top:50px;
+            color:#646464;
+            background-color:#efefef;
+          }
+
+          h1,h2,h3,.highlight,.navbar a,#masthead h4 {
+            font-family:'Oswald',arial narrow,sans-serif;
+          }
+
+          footer {
+            margin-top:40px;
+            padding-top:40px;
+            padding-bottom:40px;
+            background-color:#cecece;
+          }
+
+
+          #masthead {
+            min-height:178px;
+            background-color:#B0E36F;
+            color:#aaaacc;
+          }
+
+          #masthead h1 {
+            font-size: 55px;
+            line-height: 1;
+            color:#fefeff;
+            margin-top:45px;
+          }
+
+          #masthead .well {
+            margin-top:31px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+          }
+
+          #topPanel {
+            padding-top:0px;
+            padding-left:22px;
+            padding-right:22px;
+          }
+          #topPanel .panel-body {
+            padding-top:0px;
+          }
+
+          .navbar.affix {
+            position:fixed;
+            top:0;
+            width:100%;
+          }
+
+          .top-spacer {
+            background-color:#ffffff;
+            height:40px;
+          }
+
+          a,a:hover {
+            color:#223344;
+            text-decoration:none;
+          }
+
+          .icon-bar {
+            background-color:#fff;
+          }
+
+          @media screen and (min-width: 768px) {
+            #masthead h1 {
+              font-size: 60px;
+            }
+          }
+
+          .navbar-bright {
+            background-color:#8CC63F;
+            color:#fff;
+            margin-bottom: 0;
+            border-width: 0;
+          }
+
+          .navbar-bright a, .navbar-bright .navbar-brand, #masthead h4 {
+            color:#fff;
+            font-size:14px;
+            text-transform: uppercase;
+            letter-spacing:.08em;
+          }
+
+          .navbar-bright li > a:hover {
+            background-color:#539100;
+          }
+
+          .dropdown-menu {
+            min-width: 250px;
+          }
+
+          .caret {
+            color:#fff;
+          }
+
+          .navbar-toggle {
+            color:#fff;
+            border-width:0;
+          }
+
+          .navbar-toggle:hover {
+            background-color:#fff;
+          }
+
+          .panel {
+            border-color:transparent;
+            border-radius:0;
+          }
+
+          .thumbnail {
+            margin-bottom:8px;
+          }
+
+          .img-container {
+            overflow:hidden;
+            height:170px;
+          }
+
+          .img-container img {
+            min-width:280px;
+            min-height:180px;
+            max-width:380px;
+            max-height:280px;
+          }
+
+          .txt-container {
+            overflow:hidden;
+            height:100px;
+          }
+
+          .panel .lead {
+            overflow:hidden;
+            height:90px;
+          }
+
+          .label-float{
+            margin:0 auto;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            width:100%;
+            opacity:.9;
+            padding:6px;
+            color:#fff;
+          }
+              
+          .btn-twitter {background-color:#4099FF;color:#fff;}
+          .btn-linkedin {background-color:#3B5998;color:#fff;}
+          .btn-google-plus {background-color:#d34836;color:#fff;}
+          .btn-youtube {background-color:#BA1500;color:#fff;}
+          .btn-github {background-color:#808080;color:#fff;}
+
+          .btn-twitter:hover {background-color:#3088FF;color:#62BBFF;}
+          .btn-linkedin:hover {background-color:#2A4998;color:#4C6BBA;}
+          .btn-google-plus:hover {background-color:#C23836;color:#E45A58;}
+          .btn-youtube:hover {background-color:#C20300;color:#E80300;}
+          .btn-github:hover {background-color:#A6A6A6;color:#BFBFBF;}
+
+          a.logo {
+              background-attachment: scroll;
+              background-clip: border-box;
+              background-color: rgba(0, 0, 0, 0);
+              background-origin: padding-box;
+              background-position: 0 50%;
+              background-repeat: no-repeat;
+              background-size: auto auto;
+              display: block;
+              height: 30px;
+              width: 60px;
+          }
+
+          .logo {
+              -moz-text-decoration-color: -moz-use-text-color;
+              -moz-text-decoration-line: none;
+              -moz-text-decoration-style: solid;
+              background-color: #FFFFFF;
+              border-bottom-left-radius: 2px;
+              border-bottom-right-radius: 2px;
+              border-top-left-radius: 2px;
+              border-top-right-radius: 2px;
+              color: #80CC28;
+              display: block;
+              font-size: 20px;
+              font-weight: 700;
+              margin-bottom: 9px;
+              margin-left: 10px;
+              margin-top: 5px;
+              padding-bottom: 3px;
+              padding-left: 3px;
+              padding-right: 3px;
+              padding-top: 3px;
+              text-align: center;
+              text-shadow: 0 0 1px;
+              width: 34px;
+          }
+        </style>
+    </head>
+    
+    
+    <body>
+        
+      <header class="navbar navbar-bright navbar-fixed-top" role="banner">
+        <div class="container">
+          <div class="navbar-header">
+            <a target="_blank" class="logo" href="http://www.ivy-is.co.uk">
+              <img style="margin-right:25px" class="logo" src="../../../api/repos/IvySE/static/custom/img/ivy_logo.png">
+            </a>
+          </div>
+          <nav class="collapse navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="main">Ivy SE</a>
+              </li>
+              <li>
+                <a href="config">Config</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <div id="masthead">  
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7">
+              <h1>Ivy Schema Editor
+                <p class="lead"></p>
+              </h1>
+            </div>
+            <div class="col-md-5">
+              <div class="well"> 
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="col-md-12">
+                      <h5>This plugin provide a text editor for your published mondrian schemas.</h5>
+                      <h5>Just choose one.</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        </div><!-- /cont -->
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="top-spacer"> </div>
+            </div>
+          </div> 
+        </div><!-- /cont -->
+        
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"> 
+            <div class="panel">
+              <div class="panel-body">
+                @CONTENT@                                                                                                         
+              </div>
+            </div>
+         	</div><!--/col-12-->
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="IvySE-Footer">
+          @FOOTER@
+      </div>
+
+      <footer>
+        <div class="container" id="footer">
+        <div class="row">
+          <div class="col col-sm-12">
+            <h3>Follow Us</h3>
+            <div class="btn-group">
+             <a class="btn btn-twitter btn-xs" href="https://twitter.com/ivyinfosystems" target="_blank"><i class="fa fa-twitter icon-large"></i> Twitter</a>
+             <a class="btn btn-linkedin btn-xs" href="https://www.linkedin.com/company/ivy-information-systems-limited" target="_blank"><i class="fa fa-linkedin icon-large"></i> LinkedIn</a>
+             <a class="btn btn-google-plus btn-xs" href="https://plus.google.com/u/0/108452706135373305901/posts" target="_blank"><i class="fa fa-google-plus icon-large"></i> Google+</a>
+             <a class="btn btn-youtube btn-xs" href="http://www.youtube.com/channel/UCQ1LoJvl5VAZplKjCGiZPsQ" target="_blank"><i class="fa fa-youtube icon-large"></i> Youtube</a>
+             <a class="btn btn-github btn-xs" href="https://github.com/ivylabs" target="_blank"><i class="fa fa-github icon-large"></i> Github</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </footer>
+        
+    </body>
+</html>

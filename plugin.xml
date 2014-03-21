@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin title="IvySE" loader="DEFAULT">
+<overlays>
+		<overlay id="startup.IvySE" resourcebundle="content/IvySE/resources/lang/messages">
+			<menubar id="toolsmenu">
+	        	<menuitem id="IvySE" label="${Launcher.IvySE}" command="mantleXulHandler.openUrl('${Launcher.IvySE}','${Launcher.IvySE_TOOLTIP}','plugin/IvySE/api/default')"/>
+	      	</menubar>
+	    </overlay>
+	</overlays>
+	<lifecycle-listener class="pt.webdetails.cpk.CpkLifecycleListener"/>
+	<static-paths>
+		<static-path url="/IvySE/static" localFolder="static"/>
+		<static-path url="/IvySE/resources" localFolder="resources"/>
+	</static-paths>
+	<content-types>
+		<content-type>
+			<title>IvySE</title>
+			<description></description>
+			<company name="" url="" logo="@PLUGIN_COMPANY_LOGO@"></company>
+		</content-type>
+	</content-types>
+	<content-generator
+		id="IvySE"
+		title="IvySE"
+		type="IvySE"
+		class="pt.webdetails.cpk.CpkContentGenerator"/>
+	<!-- Menu entry -->
+	<menu-items>
+		<!--<menu-item id="IvySE_main" anchor="tools-submenu" label="IvySE" command="content/IvySE/" type="MENU_ITEM" how="LAST_CHILD"/>-->
+	</menu-items>
+</plugin>

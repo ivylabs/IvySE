@@ -1,0 +1,662 @@
+{
+ "layout": {
+  "title": "main",
+  "rows": [
+   {
+    "id": "d561f44c-6e75-603d-e6a1-aa77882dece1",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "CSS",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Css",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": "table.tableComponent tr{\n    cursor: pointer;\n} \n\ndiv.textEditorComponent div.textEditorControls{\n    background-color: #8CC63F;\n} ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "696720de-c948-b857-87e1-2a646cd5b640",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "f3a94695-aec9-4396-6ebf-e3b280ea5b46",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "696720de-c948-b857-87e1-2a646cd5b640",
+    "properties": [
+     {
+      "name": "name",
+      "value": "TABLE",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "6",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "col-md-offset-3",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "b20b4993-69b5-21d8-f487-f2d00150e044",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "f0c72d63-9d6d-a21f-67d7-bc64ca6253fb",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "b20b4993-69b5-21d8-f487-f2d00150e044",
+    "properties": [
+     {
+      "name": "name",
+      "value": "EDITOR",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "12",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   }
+  ]
+ },
+ "components": {
+  "rows": [
+   {
+    "id": "OTHERCOMPONENTS",
+    "name": "Others",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Others",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "9a0baab0-ea7f-db86-a5d8-f6939362ba9d",
+    "type": "ComponentsTable",
+    "typeDesc": "table Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "SCHEMA_TABLES",
+      "type": "Id"
+     },
+     {
+      "name": "expandContainerObject",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "oLanguage",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[\"Schema Name\"]",
+      "type": "Array"
+     },
+     {
+      "name": "colTypes",
+      "value": "[\"String\"]",
+      "type": "colTypesCustom"
+     },
+     {
+      "name": "colFormats",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "colWidths",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "colSortable",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "expandParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "paginate",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "filter",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "info",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "sort",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "displayLength",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "lengthChange",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "expandOnClick",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "colSearchable",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "drawCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "dataSource",
+      "value": "GET_SCHEMAS",
+      "type": "Datasource"
+     },
+     {
+      "name": "sortBy",
+      "value": "[]",
+      "type": "SortByArray"
+     },
+     {
+      "name": "sDom",
+      "value": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+      "type": "JavaScript"
+     },
+     {
+      "name": "priority",
+      "value": "1",
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "paginationType",
+      "value": "two_button",
+      "type": "PaginationType"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:TABLE}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "paginateServerside",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n      $(\"#\"+this.htmlObject).find(\"table\").wrap( document.createElement( \"div\" ) );\n      $(\"#\"+this.htmlObject).find(\"table\").addClass(\"table table-striped table-hover table-bordered\");\n      $(\"#\"+this.htmlObject).find(\"table\").css(\"margin-bottom\", \"5px\");\n      $(\"#\"+this.htmlObject).css(\"margin-bottom\", \"10px\");\n      $(\"#\"+this.htmlObject).find(\"table\").parent().addClass(\"table-responsive\");\n      $(\"#\"+this.htmlObject).find(\"table tr\").removeClass(\"odd even\");\n      $(\"#\"+this.htmlObject+\" div:first\").css(\"min-height\",\"inherit\");\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     },
+     {
+      "name": "extraOptions",
+      "value": "[]",
+      "type": "OptionArray"
+     },
+     {
+      "name": "clickAction",
+      "value": "function(elem){\n    Dashboards.fireChange(\"SCHEMA_NAME\", elem.series);\n    Dashboards.fireChange(\"SCHEMA\", \"/etc/mondrian/\"+elem.series+\"/schema.xml\");\n}",
+      "type": "JavaScript"
+     }
+    ]
+   },
+   {
+    "id": "51fe6cb8-efb6-efec-2800-de3016511197",
+    "type": "ComponentsTextEditorComponent",
+    "typeDesc": "Text Editor",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "TEXT_EDITOR",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:SCHEMA}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "['${p:SCHEMA}']",
+      "type": "Listeners"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "priority",
+      "value": "2",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:EDITOR}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject).css(\"height\", \"600px\");\n    this.defaultButtons[0][\"label\"] = \"Update Schema\";\n    this.template = function(){ \n        return \"<div class='textEditorComponent'><div class='textEditorControls'>\"+\n        \"<div class='textEditorFile'><span class='fileLabel'>Schema: </span>\"+SCHEMA_NAME+\"</div>\"+\n        \"<div class='textEditorButtons'>{{#buttons}}<button class='{{clazz}} btn'>{{label}}</button>{{/buttons}}</div>\" +\n        \"</div><div class='textEditorNotification'><span class='textEditorNotificationMsg'>Test</span></div>\"+\n        \"<div class='textEditorRightPanel'></div>\"+\n        \"<div class='textEditorIframeContainer'><div class='textEditorIframe'><iframe seamless='true' marginheight='0'></iframe></div>\"+\n        \"</div>\"\n    };\n    \n    this.notify = function(msg, level){\n        var result = \"Error on save \" + SCHEMA_NAME + \" schema.\"\n        if(\"file '\" + SCHEMA + \"' saved ok\" == msg){\n            result = SCHEMA_NAME + \" schema saved.\";\n            $.ajax({\n                url: \"../../saiku/api/admin/discover/refresh\",\n                type: 'get',\n                dataType: 'xml',\n                async: false\n            });\n            $.ajax({\n                url: \"../../../api/system/refresh/mondrianSchemaCache\",\n                type: 'get',\n                dataType: 'xml',\n                async: false\n            });\n            $.ajax({\n                url: \"../../cda/api/cacheMonitor/removeAll?method=removeAll\",\n                type: 'post',\n                dataType: 'xml',\n                async: false\n            });\n        }\n        var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n        $notifications.text(result);\n        $notifications.show().delay(4000).fadeOut('slow');\n    }\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "GENERIC",
+    "name": "Generic",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Generic",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "867c61b5-d9f0-f450-5afa-6b6de3487430",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "SCHEMA",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "a7c1058e-8095-6bc1-e5ea-89937000f491",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "SCHEMA_NAME",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   }
+  ]
+ },
+ "datasources": {
+  "rows": [
+   {
+    "id": "IVYSE_CPKENDPOINTS",
+    "name": "IVYSE Endpoints",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "IVYSE Endpoints",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "103405ae-7591-60c7-7eee-6440f57a514b",
+    "type": "ComponentsIvySE_getSchemas_CPKENDPOINT",
+    "typeDesc": "getSchemas Endpoint",
+    "parent": "IVYSE_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "GET_SCHEMAS",
+      "type": "Id"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "IvySE",
+    "meta_endpoint": "getSchemas"
+   },
+   {
+    "id": "7420c3e6-12c8-cc89-1ade-b57d809ae09d",
+    "type": "ComponentsIvySE_getContentSchema_CPKENDPOINT",
+    "typeDesc": "? ComponentsIvySE_getContentSchema_CPKENDPOINT",
+    "parent": "IVYSE_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "GET_SCHEMA_CONTENT",
+      "type": "Id"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "IvySE",
+    "meta_endpoint": "getContentSchema"
+   }
+  ]
+ },
+ "filename": "/system/IvySE/dashboards/admin/main.cdfde"
+}

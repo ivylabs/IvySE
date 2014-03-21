@@ -1,2 +1,3 @@
-ivy-se
-======
+IvySE - Ivy Schema Editor
+=========================
+
