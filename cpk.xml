@@ -21,7 +21,7 @@
         </elementType>
     </elementTypes> 
     <info>
-        <CPK_version>4</CPK_version>
+        <CPK_version>5</CPK_version>
         <description>Ivy Information Systems - Mondrian Schema Editor Plugin</description>
         <name>IvySE</name>
         <author_email>ivylabs@ivy-is.co.uk</author_email>

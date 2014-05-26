@@ -32,11 +32,64 @@
             <description/>
         </parameter>
         <parameter>
+            <name>schema</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
             <name>transfName</name>
             <default_value/>
             <description/>
         </parameter>
     </parameters>
+  <connection>
+    <name>ABT</name>
+    <server>&#x24;&#x7b;ABT_SOURCE_HOST&#x7d;</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;ABT_SOURCE_DATABASE&#x7d;</database>
+    <port>&#x24;&#x7b;ABT_SOURCE_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;ABT_SOURCE_USERNAME&#x7d;</username>
+    <password>&#x24;&#x7b;ABT_SOURCE_PASSWORD&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;ABT_SOURCE_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>MONETDB ABT_DWH</name>
+    <server>&#x24;&#x7b;ABT_TARGET_HOSTNAME_MONETDB&#x7d;</server>
+    <type>MONETDB</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;ABT_TARGET_DATABASE_MONETDB&#x7d;</database>
+    <port>&#x24;&#x7b;ABT_TARGET_PORT_MONETDB&#x7d;</port>
+    <username>&#x24;&#x7b;ABT_TARGET_USERNAME_MONETDB&#x7d;</username>
+    <password>&#x24;&#x7b;ABT_TARGET_PASSWORD_MONETDB&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;ABT_TARGET_PORT_MONETDB&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
     </slaveservers>
 <job-log-table><connection/>
@@ -122,6 +175,17 @@
       <xloc>360</xloc>
       <yloc>72</yloc>
       </entry>
+    <entry>
+      <name>Abort job</name>
+      <description/>
+      <type>ABORT</type>
+      <message/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>216</xloc>
+      <yloc>192</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -140,6 +204,15 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Exec Transf</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
