@@ -70,6 +70,21 @@
     <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/theme-twilight.js"></script>
     <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/theme-eclipse.js"></script>
     <script language="javascript">
+
+      var pathArray = window.location.pathname.split( '/' );
+      var webAppPath;
+      if (!(typeof(CONTEXT_PATH) == 'undefined')){
+        webAppPath = CONTEXT_PATH;
+      }
+      if(webAppPath == undefined){
+        webAppPath = "/" + pathArray[1];
+      }
+
+      if(webAppPath.endsWith("/")) {
+        webAppPath = webAppPath.substr(0, webAppPath.length-1);
+      }
+
+
         var editor = new CodeEditor();
         var params = {};
         var fileName = null;
@@ -180,7 +195,7 @@
 
     <script>
         window.onload = function() {
-            params = getUrlParams();
+            params = getUrlParams()||{};
             fileName = params.path;
             params.editorOnly=true;
             
@@ -204,21 +219,25 @@
                 $('#editArea').width(window.innerWidth - 30);
             }
             
-            if(fileName == null) {
-                return;
-            }
             
 	          editor.initEditor('editArea');
             editor.setTheme("ace/theme/chrome");
             editor.setMode("xml");
-            editor.loadFile = function(schemaName){
-              var myself = this;
-              $.get("/pentaho/plugin/IvySE/api/getschema",{paramschema:schemaName},
-                function(fileContents) {
-                  myself.setContents(fileContents);
-                }
-              );
-            };
+
+            if(fileName == null) {
+              editor.loadFile = function(schemaName){
+                this.setContents('<Schema name="NewSchema"></Schema>');
+              };
+            }else{
+              editor.loadFile = function(schemaName){
+                var myself = this;
+                $.get("/pentaho/plugin/IvySE/api/getschema",{paramschema:schemaName},
+                  function(fileContents) {
+                    myself.setContents(fileContents);
+                  }
+                );
+              };
+            }
 
             editor.saveFile = function(fileName, contents, callback){
                 var myself=this;
