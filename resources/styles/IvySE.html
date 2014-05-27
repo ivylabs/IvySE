@@ -112,6 +112,10 @@
             background-color:#539100;
           }
 
+          .navbar-bright button.navbar-toggle:hover{
+            background-color:#539100;
+          }
+
           .dropdown-menu {
             min-width: 250px;
           }
@@ -231,11 +235,17 @@
       <header class="navbar navbar-bright navbar-fixed-top" role="banner">
         <div class="container">
           <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
             <a target="_blank" class="logo" href="http://www.ivy-is.co.uk">
               <img style="margin-right:25px" class="logo" src="../../../api/repos/IvySE/static/custom/img/ivy_logo.png">
             </a>
           </div>
-          <nav class="collapse navbar-collapse" role="navigation">
+          <div class="navbar-collapse collapse" id="bs-navbar-collapse">
             <ul class="nav navbar-nav">
               <li>
                 <a href="main">Ivy SE</a>
@@ -251,7 +261,7 @@
                 </a>
               </li>
             </ul>
-          </nav>
+          </div>
         </div>
       </header>
 
