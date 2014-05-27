@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>_invokeGetSchemaEndpoint</name>
+    <name>_invokeGetJndiConnEndpoint</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-        <parameter>
-            <name>ServerPassword</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>ServerUrl</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>ServerUserName</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>schemaName</name>
-            <default_value/>
-            <description/>
-        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -87,9 +66,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;05&#x2f;26 15&#x3a;40&#x3a;32.874</created_date>
+  <created_date>2014&#x2f;05&#x2f;27 15&#x3a;18&#x3a;23.579</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;05&#x2f;26 15&#x3a;40&#x3a;32.874</modified_date>
+  <modified_date>2014&#x2f;05&#x2f;27 15&#x3a;18&#x3a;23.579</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -143,7 +122,9 @@
   </connection>
   <order>
   <hop> <from>Generate Rows</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
-  <hop> <from>HTTP Client</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>HTTP Client</from><to>Parse response</to><enabled>Y</enabled> </hop>
+  <hop> <from>Parse response</from><to>Select values</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Copy rows to result</name>
@@ -158,8 +139,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>408</xloc>
-      <yloc>96</yloc>
+      <xloc>792</xloc>
+      <yloc>72</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -185,7 +166,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>144</xloc>
-      <yloc>96</yloc>
+      <yloc>72</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -201,7 +182,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <url>&#x24;&#x7b;ServerUrl&#x7d;plugin&#x2f;data-access&#x2f;api&#x2f;datasource&#x2f;analysis&#x2f;&#x24;&#x7b;schemaName&#x7d;&#x2f;download</url>
+    <url>&#x24;&#x7b;ServerUrl&#x7d;plugin&#x2f;data-access&#x2f;api&#x2f;connection&#x2f;list</url>
     <urlInField>N</urlInField>
     <urlField/>
     <encoding>UTF-8</encoding>
@@ -221,8 +202,94 @@
     </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>264</xloc>
-      <yloc>96</yloc>
+      <xloc>288</xloc>
+      <yloc>72</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>connection</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>600</xloc>
+      <yloc>72</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Parse response</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>connection</name>
+        <path>&#x24;.databaseConnections&#x5b;&#x2a;&#x5d;.name</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>408</xloc>
+      <yloc>72</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

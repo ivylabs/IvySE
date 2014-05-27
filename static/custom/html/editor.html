@@ -109,7 +109,7 @@
                 } else if($.type(result) == "string"){
                     msg = result;
                 }
-                if(msg.indexOf('saved ok') > -1){
+                if(msg.indexOf('Schema published') > -1){
                     setDirty(false);
                     notify(msg);
                 }
@@ -218,7 +218,21 @@
                   myself.setContents(fileContents);
                 }
               );
-            }, 
+            };
+
+            editor.saveFile = function(fileName, contents, callback){
+                var myself=this;
+                $.ajax({
+                    url: webAppPath+"/plugin/IvySE/api/saveschema",
+                    type: "POST",
+                    data: { paramschemaName: fileName, paramschemaXML: contents, paramschemaDataSource: params.datasource },
+                    complete: function(data){
+                        if(typeof callback == 'function'){
+                            callback(data);
+                        }
+                    }
+                });
+            };
             
             editor.loadFile(fileName);
             updateStatus();

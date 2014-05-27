@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
- <server><ServerPassword>password</ServerPassword> <ServerUrl>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;pentaho</ServerUrl> <ServerUserName>admin</ServerUserName> </server>
+ <server><ServerPassword>password</ServerPassword> <ServerUrl>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;pentaho&#x2f;</ServerUrl> <ServerUserName>admin</ServerUserName> </server>
 </config>

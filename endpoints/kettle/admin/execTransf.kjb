@@ -12,11 +12,6 @@
   <modified_date>2014&#x2f;03&#x2f;18 18&#x3a;27&#x3a;19.015</modified_date>
     <parameters>
         <parameter>
-            <name>SchemaName</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
             <name>ServerPassword</name>
             <default_value/>
             <description/>
@@ -32,7 +27,17 @@
             <description/>
         </parameter>
         <parameter>
-            <name>schema</name>
+            <name>schemaDataSource</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>schemaName</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>schemaXML</name>
             <default_value/>
             <description/>
         </parameter>
