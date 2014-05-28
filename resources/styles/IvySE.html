@@ -226,6 +226,10 @@
               text-shadow: 0 0 1px;
               width: 34px;
           }
+
+          .nav.navbar-nav.navbar-right div.popover{
+            color: #333;
+          }
         </style>
     </head>
     
@@ -260,6 +264,9 @@
                   </button>
                 </a>
               </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li id="IvyBC-Link"><a href="http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards/" target="_blank">Get the Bootstrap Componentes!</a></li>
             </ul>
           </div>
         </div>
@@ -321,6 +328,7 @@
         <div class="container" id="footer">
         <div class="row">
           <div class="col col-sm-12">
+            <h2><a href="http://www.ivy-is.co.uk" target="_blank">Ivy Information System Ltd</a></h2>
             <h3>Follow Us</h3>
             <div class="btn-group">
              <a class="btn btn-twitter btn-xs" href="https://twitter.com/ivyinfosystems" target="_blank"><i class="fa fa-twitter icon-large"></i> Twitter</a>
@@ -334,6 +342,19 @@
         </div>
       </div>
       </footer>
+
+      <script>
+        $('#IvyBC-Link').popover({
+          html: true,
+          placement: "bottom",
+          trigger: "hover",
+          title: "IvyBC - Ivy Bootstrap Components",
+          content: "<img src=\"../../../api/repos/IvySE/static/custom/img/devices_small.png\" class='img-responsive'>Create responsive mobile dashboards using  our new "+
+            "Pentaho plugin Ivy Bootstrap Components! Everything "+
+            "you need to create mobile dashboards with ease.</br /><br />"+
+            "Check out the <a href=\"http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards\" style=\"color:#b0e36f\">Ivy Labs</a> for more information!"
+        });
+      </script>
         
     </body>
 </html>
