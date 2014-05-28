@@ -10,6 +10,16 @@
     <directory>&#x2f;</directory>
     <parameters>
         <parameter>
+            <name>PREVIEW_ANALYZER</name>
+            <default_value>false</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>PREVIEW_SAIKU</name>
+            <default_value>true</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>SERVER_PASSWORD</name>
             <default_value>password</default_value>
             <description/>
@@ -93,6 +103,54 @@
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>ABT</name>
+    <server>&#x24;&#x7b;ABT_SOURCE_HOST&#x7d;</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;ABT_SOURCE_DATABASE&#x7d;</database>
+    <port>&#x24;&#x7b;ABT_SOURCE_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;ABT_SOURCE_USERNAME&#x7d;</username>
+    <password>&#x24;&#x7b;ABT_SOURCE_PASSWORD&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;ABT_SOURCE_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>MONETDB ABT_DWH</name>
+    <server>&#x24;&#x7b;ABT_TARGET_HOSTNAME_MONETDB&#x7d;</server>
+    <type>MONETDB</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;ABT_TARGET_DATABASE_MONETDB&#x7d;</database>
+    <port>&#x24;&#x7b;ABT_TARGET_PORT_MONETDB&#x7d;</port>
+    <username>&#x24;&#x7b;ABT_TARGET_USERNAME_MONETDB&#x7d;</username>
+    <password>&#x24;&#x7b;ABT_TARGET_PASSWORD_MONETDB&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;ABT_TARGET_PORT_MONETDB&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>Get Variables</from><to>XML Output</to><enabled>Y</enabled> </hop>
   <hop> <from>XML Output</from><to>Add constants</to><enabled>Y</enabled> </hop>
@@ -192,6 +250,30 @@
         <precision>-1</precision>
         <trim_type>both</trim_type>
       </field>
+      <field>
+        <name>previewSaiku</name>
+        <variable>&#x24;&#x7b;PREVIEW_SAIKU&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>previewAnalyzer</name>
+        <variable>&#x24;&#x7b;PREVIEW_ANALYZER&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -248,6 +330,14 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>ServerPassword</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>previewSaiku</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>previewAnalyzer</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -321,6 +411,32 @@
         <content_type>Element</content_type>
         <name>ServerUserName</name>
         <element/>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>250</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <content_type>Element</content_type>
+        <name>previewSaiku</name>
+        <element>preview-saiku</element>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>250</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <content_type>Element</content_type>
+        <name>previewAnalyzer</name>
+        <element>preview-analyzer</element>
         <type>String</type>
         <format/>
         <currency/>
