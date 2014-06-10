@@ -365,7 +365,7 @@
     ]
    },
    {
-    "id": "cbc8da6e-9fce-168a-3cea-1164d98f8341",
+    "id": "fc3d1d5c-f643-e82c-58e2-1b182f0c7e35",
     "type": "ComponentsParameter",
     "typeDesc": "Simple parameter",
     "parent": "GENERIC",
@@ -449,7 +449,7 @@
     ]
    },
    {
-    "id": "2361f524-6dcd-9c88-0d02-ec6721c0b1f9",
+    "id": "70a1078d-54d5-93bd-15e5-c4943731ad77",
     "type": "ComponentsJavascriptParameter",
     "typeDesc": "Custom parameter",
     "parent": "GENERIC",
@@ -1229,6 +1229,32 @@
     "meta": "CPK",
     "meta_pluginId": "IvySE",
     "meta_endpoint": "updateConfig"
+   },
+   {
+    "id": "d9062a39-b8d6-0b60-ddc2-023d6c46bb86",
+    "type": "ComponentsIvySE_GetLicenseDetails_CPKENDPOINT",
+    "typeDesc": "GetLicenseDetails Endpoint",
+    "parent": "IVYSE_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "LICENSE_DETAILS",
+      "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Json",
+      "type": "kettleOutputCustom"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "IvySE",
+    "meta_endpoint": "GetLicenseDetails"
    }
   ]
  },
