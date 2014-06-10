@@ -366,6 +366,26 @@
 
         $(function() {
             $.post( webAppPath + "/plugin/IvySE/api/checklicense", function( data ) {
+              
+              if(data.resultset == undefined){
+                $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
+                  '<div class="modal-dialog modal-lg">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<h1 class="modal-title" id="myModalLabel">IvySE - Ivy Schema Editor License</h1>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                        '<div id="alertLicense" class="alert alert-danger fade in">' +
+                          '<strong>Error</strong> IvySE cannot continue. Please restart the server again. If this error persiste, please file a bug <a href="https://github.com/ivylabs/IvySE/issues" target=""_blank>here</a>.' +
+                        '</div>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>');
+                $('body #licenseCheckModal').modal({keyboard: false, backdrop: "static"}).modal('show');
+                return;
+              }
+
               if(data.resultset.length > 0 && data.resultset[0].length > 0 && data.resultset[0][0].toLowerCase() !== "success"){
                 $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
                   '<div class="modal-dialog modal-lg">' +

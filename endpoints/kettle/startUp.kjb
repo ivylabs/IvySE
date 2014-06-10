@@ -149,8 +149,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1104</xloc>
-      <yloc>192</yloc>
+      <xloc>1248</xloc>
+      <yloc>264</yloc>
       </entry>
     <entry>
       <name>Write To Log</name>
@@ -190,7 +190,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>528</xloc>
-      <yloc>408</yloc>
+      <yloc>480</yloc>
       </entry>
     <entry>
       <name>File Compare IvyOpenLicenseManager.jar</name>
@@ -205,6 +205,30 @@
       <xloc>528</xloc>
       <yloc>240</yloc>
       </entry>
+    <entry>
+      <name>Delete current job file</name>
+      <description/>
+      <type>DELETE_FILE</type>
+      <filename>&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;endpoints&#x2f;kettle&#x2f;startUp.kjb</filename>
+      <fail_if_file_not_exists>N</fail_if_file_not_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1104</xloc>
+      <yloc>192</yloc>
+      </entry>
+    <entry>
+      <name>Delete current job file 2</name>
+      <description/>
+      <type>DELETE_FILE</type>
+      <filename>&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;endpoints&#x2f;kettle&#x2f;startUp.kjb</filename>
+      <fail_if_file_not_exists>N</fail_if_file_not_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>528</xloc>
+      <yloc>360</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -215,15 +239,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>File Compare IvyOpenLicenseManager.jar</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Set variables</from>
@@ -272,6 +287,24 @@
     </hop>
     <hop>
       <from>Copy IvyOpenLicenseManager</from>
+      <to>Write To Log</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Copy IvyOpenLicenseManager</from>
+      <to>Delete current job file</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete current job file</from>
       <to>Success 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -280,13 +313,22 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Copy IvyOpenLicenseManager</from>
-      <to>Write To Log</to>
+      <from>File Compare IvyOpenLicenseManager.jar</from>
+      <to>Delete current job file 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete current job file 2</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
