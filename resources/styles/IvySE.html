@@ -405,7 +405,7 @@
                     $("body #licenseCheckModal .modal-body").empty();
                     $("body #licenseCheckModal .modal-body").prepend("<center><img src='../../../api/repos/IvySE/static/custom/img/loading.gif'/></center>");
 
-                    $.post( webAppPath + "/plugin/IvySE/api/getlicensedetails?paramlicense_key="+licenseKey).done(function( data ) {
+                    $.post( webAppPath + "/plugin/IvySE/api/getlicensedetails?paramlicense_key="+encodeURIComponent(licenseKey)).done(function( data ) {
                       $("body #licenseCheckModal .modal-body").empty();
                       if(data.resultset.length > 0 && data.resultset[0].length > 0 && data.resultset[0][0] != null && data.resultset[0][0].toLowerCase() !== ""
                          && data.resultset[0][1] != null && data.resultset[0][1].toLowerCase() !== ""){

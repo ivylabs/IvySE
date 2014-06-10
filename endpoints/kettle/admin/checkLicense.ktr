@@ -72,54 +72,6 @@
   </info>
   <notepads>
   </notepads>
-  <connection>
-    <name>ABT</name>
-    <server>&#x24;&#x7b;ABT_SOURCE_HOST&#x7d;</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>&#x24;&#x7b;ABT_SOURCE_DATABASE&#x7d;</database>
-    <port>&#x24;&#x7b;ABT_SOURCE_PORT&#x7d;</port>
-    <username>&#x24;&#x7b;ABT_SOURCE_USERNAME&#x7d;</username>
-    <password>&#x24;&#x7b;ABT_SOURCE_PASSWORD&#x7d;</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;ABT_SOURCE_PORT&#x7d;</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>MONETDB ABT_DWH</name>
-    <server>&#x24;&#x7b;ABT_TARGET_HOSTNAME_MONETDB&#x7d;</server>
-    <type>MONETDB</type>
-    <access>Native</access>
-    <database>&#x24;&#x7b;ABT_TARGET_DATABASE_MONETDB&#x7d;</database>
-    <port>&#x24;&#x7b;ABT_TARGET_PORT_MONETDB&#x7d;</port>
-    <username>&#x24;&#x7b;ABT_TARGET_USERNAME_MONETDB&#x7d;</username>
-    <password>&#x24;&#x7b;ABT_TARGET_PASSWORD_MONETDB&#x7d;</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;ABT_TARGET_PORT_MONETDB&#x7d;</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
   <order>
   <hop> <from>Get Variables</from><to>File exists</to><enabled>Y</enabled> </hop>
   <hop> <from>File exists</from><to>Filter rows</to><enabled>Y</enabled> </hop>
@@ -129,6 +81,153 @@
   <hop> <from>Add constants</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
   <hop> <from>Check License</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Error</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Message</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>The license file doesn&#x27;t exist.</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>576</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Check License</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[import com.ivyis.opensource.license.manager.LicenseDetails;
+import com.ivyis.opensource.license.manager.LicenseManager;
+import com.ivyis.opensource.license.manager.LicenseManagerFactory;
+import java.util.Calendar;
+
+private FieldHelper customerNameOut = null;
+private FieldHelper emailOut = null;
+private FieldHelper pluginNameOut = null;
+private FieldHelper licenseKeyIn = null;
+
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+{
+	Object[] r = getRow();
+	if (r == null) {
+		setOutputDone();
+		return false;
+	}
+
+    if (first)
+    {
+        first = false;
+		licenseKeyIn = get(Fields.In, "userLicense");
+    }
+
+	try{
+		final LicenseManager lm = LicenseManagerFactory.getLicenseManager();
+		final LicenseDetails licenseDetails = lm.decodeLicense(licenseKeyIn.getString(r));
+	
+		if(("ivyse").equalsIgnoreCase(licenseDetails.getPlugin()) && 
+			licenseDetails.getCustomerName().equals(get(Fields.In, "userCustomerName").getString(r)) && 
+			licenseDetails.getEmail().equals(get(Fields.In, "userCustomerEmail").getString(r))
+		){
+			get(Fields.Out, "Type").setValue(r, "Success");
+			get(Fields.Out, "Message").setValue(r, "Valid license.");
+		}else{
+			get(Fields.Out, "Type").setValue(r, "Error");
+			get(Fields.Out, "Message").setValue(r, "The license key file is invalid.");
+		}
+
+	}catch(Exception e){
+		get(Fields.Out, "Type").setValue(r, "Error");
+		get(Fields.Out, "Message").setValue(r, "Error on processing license file.");
+	}
+
+    r = createOutputRow(r, data.outputRowMeta.size());
+
+	// Send the row on to the next step.
+    putRow(data.outputRowMeta, r);
+
+    return true;
+}
+]]></class_source>
+        </definition>
+    </definitions>
+    <fields>
+        <field>
+        <field_name>Type</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+        <field>
+        <field_name>Message</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>768</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>File exists</name>
     <type>FileExists</type>
@@ -355,153 +454,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>576</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add constants</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>Type</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Error</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>Message</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>The license file doesn&#x27;t exist.</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>576</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Check License</name>
-    <type>UserDefinedJavaClass</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-
-    <definitions>
-        <definition>
-        <class_type>TRANSFORM_CLASS</class_type>
-
-        <class_name>Processor</class_name>
-
-        <class_source><![CDATA[import com.ivyis.opensource.license.manager.LicenseDetails;
-import com.ivyis.opensource.license.manager.LicenseManager;
-import com.ivyis.opensource.license.manager.LicenseManagerFactory;
-import java.util.Calendar;
-
-private FieldHelper customerNameOut = null;
-private FieldHelper emailOut = null;
-private FieldHelper pluginNameOut = null;
-private FieldHelper licenseKeyIn = null;
-
-public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
-{
-	Object[] r = getRow();
-	if (r == null) {
-		setOutputDone();
-		return false;
-	}
-
-    if (first)
-    {
-        first = false;
-		licenseKeyIn = get(Fields.In, "userLicense");
-    }
-
-	try{
-		final LicenseManager lm = LicenseManagerFactory.getLicenseManager();
-		final LicenseDetails licenseDetails = lm.decodeLicense(licenseKeyIn.getString(r));
-	
-		if(licenseDetails.getPlugin().equals(get(Fields.In, "userPluginName").getString(r)) && 
-			licenseDetails.getCustomerName().equals(get(Fields.In, "userCustomerName").getString(r)) && 
-			licenseDetails.getEmail().equals(get(Fields.In, "userCustomerEmail").getString(r))
-		){
-			get(Fields.Out, "Type").setValue(r, "Success");
-			get(Fields.Out, "Message").setValue(r, "Valid license.");
-		}else{
-			get(Fields.Out, "Type").setValue(r, "Error");
-			get(Fields.Out, "Message").setValue(r, "The license key file is invalid.");
-		}
-
-	}catch(Exception e){
-		get(Fields.Out, "Type").setValue(r, "Error");
-		get(Fields.Out, "Message").setValue(r, "Error on processing license file.");
-	}
-
-    r = createOutputRow(r, data.outputRowMeta.size());
-
-	// Send the row on to the next step.
-    putRow(data.outputRowMeta, r);
-
-    return true;
-}
-]]></class_source>
-        </definition>
-    </definitions>
-    <fields>
-        <field>
-        <field_name>Type</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-        <field>
-        <field_name>Message</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-    </fields><clear_result_fields>N</clear_result_fields>
-<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
