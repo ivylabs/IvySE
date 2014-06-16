@@ -107,8 +107,12 @@
             text-transform: uppercase;
             letter-spacing:.08em;
           }
+          
+          .navbar-bright li > a:hover, .navbar-bright li > a:focus {
+            background-color:#539100;
+          }
 
-          .navbar-bright li > a:hover {
+          .navbar-bright button.navbar-toggle:hover{
             background-color:#539100;
           }
 
@@ -172,12 +176,14 @@
           }
               
           .btn-twitter {background-color:#4099FF;color:#fff;}
+          .btn-facebook {background-color:#4c66a4;color:#fff;}
           .btn-linkedin {background-color:#3B5998;color:#fff;}
           .btn-google-plus {background-color:#d34836;color:#fff;}
           .btn-youtube {background-color:#BA1500;color:#fff;}
           .btn-github {background-color:#808080;color:#fff;}
 
           .btn-twitter:hover {background-color:#3088FF;color:#62BBFF;}
+          .btn-facebook:hover {background-color:#486ABD;color:#6A8DDE;}
           .btn-linkedin:hover {background-color:#2A4998;color:#4C6BBA;}
           .btn-google-plus:hover {background-color:#C23836;color:#E45A58;}
           .btn-youtube:hover {background-color:#C20300;color:#E80300;}
@@ -220,6 +226,10 @@
               text-shadow: 0 0 1px;
               width: 34px;
           }
+
+          .nav.navbar-nav.navbar-right div.popover{
+            color: #333;
+          }
         </style>
     </head>
     
@@ -229,11 +239,17 @@
       <header class="navbar navbar-bright navbar-fixed-top" role="banner">
         <div class="container">
           <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
             <a target="_blank" class="logo" href="http://www.ivy-is.co.uk">
               <img style="margin-right:25px" class="logo" src="../../../api/repos/IvySE/static/custom/img/ivy_logo.png">
             </a>
           </div>
-          <nav class="collapse navbar-collapse" role="navigation">
+          <div class="navbar-collapse collapse" id="bs-navbar-collapse">
             <ul class="nav navbar-nav">
               <li>
                 <a href="main">Ivy SE</a>
@@ -241,8 +257,18 @@
               <li>
                 <a href="config">Config</a>
               </li>
+              <li>
+                <a href="new">
+                  <button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary btn-xs">
+                    New Schema
+                  </button>
+                </a>
+              </li>
             </ul>
-          </nav>
+            <ul class="nav navbar-nav navbar-right">
+              <li id="IvyBC-Link"><a href="http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards/" target="_blank">Get the Bootstrap Componentes!</a></li>
+            </ul>
+          </div>
         </div>
       </header>
 
@@ -260,7 +286,8 @@
                   <div class="col-sm-12">
                     <div class="col-md-12">
                       <h5>This plugin provide a text editor for your published mondrian schemas.</h5>
-                      <h5>Just choose one.</h5>
+                      <h5><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.ivy-is.co.uk/ivy-labs/ivy-software/" data-text="I'm using IvySE - Ivy Schema Editor for @pentaho" data-via="ivyinfosystems" data-hashtags="pentaho" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script><div class="fb-share-button" data-href="http://www.ivy-is.co.uk/ivy-labs/ivy-software/" data-type="button_count"></div></h5>
                     </div>
                   </div>
                 </div>
@@ -268,6 +295,14 @@
             </div>
           </div> 
         </div><!-- /cont -->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
         
         <div class="container">
           <div class="row">
@@ -302,18 +337,136 @@
         <div class="container" id="footer">
         <div class="row">
           <div class="col col-sm-12">
+            <h4><a href="http://www.ivy-is.co.uk" target="_blank">Copyright © 2014 Ivy Information Systems Ltd</a></h4>
             <h3>Follow Us</h3>
             <div class="btn-group">
              <a class="btn btn-twitter btn-xs" href="https://twitter.com/ivyinfosystems" target="_blank"><i class="fa fa-twitter icon-large"></i> Twitter</a>
+             <a class="btn btn-facebook btn-xs" href="https://www.facebook.com/ivyinfosystems" target="_blank"><i class="fa fa-facebook icon-large"></i> Facebook</a>
+             <a class="btn btn-google-plus btn-xs" href="https://plus.google.com/+Ivy-isCoUk" target="_blank"><i class="fa fa-google-plus icon-large"></i> Google+</a>
              <a class="btn btn-linkedin btn-xs" href="https://www.linkedin.com/company/ivy-information-systems-limited" target="_blank"><i class="fa fa-linkedin icon-large"></i> LinkedIn</a>
-             <a class="btn btn-google-plus btn-xs" href="https://plus.google.com/u/0/108452706135373305901/posts" target="_blank"><i class="fa fa-google-plus icon-large"></i> Google+</a>
-             <a class="btn btn-youtube btn-xs" href="http://www.youtube.com/channel/UCQ1LoJvl5VAZplKjCGiZPsQ" target="_blank"><i class="fa fa-youtube icon-large"></i> Youtube</a>
+             <a class="btn btn-youtube btn-xs" href="https://www.youtube.com/IvyIS" target="_blank"><i class="fa fa-youtube icon-large"></i> Youtube</a>
              <a class="btn btn-github btn-xs" href="https://github.com/ivylabs" target="_blank"><i class="fa fa-github icon-large"></i> Github</a>
             </div>
           </div>
         </div>
       </div>
       </footer>
+
+      <script>
+        $('#IvyBC-Link').popover({
+          html: true,
+          placement: "bottom",
+          trigger: "hover",
+          title: "IvyBC - Ivy Bootstrap Components",
+          content: "<img src=\"../../../api/repos/IvySE/static/custom/img/devices_small.png\" class='img-responsive'>Create responsive mobile dashboards using  our new "+
+            "Pentaho plugin Ivy Bootstrap Components! Everything "+
+            "you need to create mobile dashboards with ease.</br /><br />"+
+            "Check out the <a href=\"http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards\" style=\"color:#b0e36f\">Ivy Labs</a> for more information!"
+        });
+
+        $(function() {
+            $.post( webAppPath + "/plugin/IvySE/api/checklicense", function( data ) {
+              
+              if(data.resultset == undefined){
+                $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
+                  '<div class="modal-dialog modal-lg">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<h1 class="modal-title" id="myModalLabel">IvySE - Ivy Schema Editor License</h1>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                        '<div id="alertLicense" class="alert alert-danger fade in">' +
+                          '<strong>Error</strong> IvySE cannot continue. Please restart the server again. If this error persiste, please file a bug <a href="https://github.com/ivylabs/IvySE/issues" target="_blank">here</a>.' +
+                        '</div>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>');
+                $('body #licenseCheckModal').modal({keyboard: false, backdrop: "static"}).modal('show');
+                return;
+              }
+
+              if(data.resultset.length > 0 && data.resultset[0].length > 0 && data.resultset[0][0].toLowerCase() !== "success"){
+                $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
+                  '<div class="modal-dialog modal-lg">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<h1 class="modal-title" id="myModalLabel">IvySE - Ivy Schema Editor License</h1>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                        '<div id="alertLicense" class="alert alert-danger fade in">' +
+                          '<strong>'+data.resultset[0][0]+'</strong> '+data.resultset[0][1]+
+                        '</div>' +
+                        '<div class="row">' +
+                          '<div class="col-md-12">' +
+                            '<h2 class="page-header">Submit Ivy Schema Editor License</h2>' +
+                            '<p><center>To get your free IvySE license, please click the button below.</center></p>' +
+                            '<center><a type="button" class="btn btn-success btn-lg" href="http://www.ivy-is.co.uk/licenses" target="_blank">Get License</a></center>' +
+                            '<div class="form-group">' +
+                              '<label for="licenseKeyField">License Key</label>' +
+                              '<textarea class="form-control" id="licenseKeyField" rows="3" placeholder="Paste your license key here"></textarea>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>' +
+                      '<div class="modal-footer">' +
+                        '<button type="button" class="btn btn-default" id="apply-license-btn">Apply License</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>');
+                $("body #licenseCheckModal #apply-license-btn").on("click", function() {
+                  var licenseKey = $("body #licenseCheckModal .modal-body #licenseKeyField").val();
+                  if(licenseKey == ""){
+                    $("body #licenseCheckModal .modal-body #alertLicense").remove();
+                    $("body #licenseCheckModal .modal-body").prepend('<div id="alertLicense" class="alert alert-danger fade in">' +
+                          '<strong>Error</strong> You don\'t paste any license.</div>');
+                  }else{
+                    $("body #licenseCheckModal .modal-body").empty();
+                    $("body #licenseCheckModal .modal-body").prepend("<center><img src='../../../api/repos/IvySE/static/custom/img/loading.gif'/></center>");
+
+                    $.post( webAppPath + "/plugin/IvySE/api/getlicensedetails?paramlicense_key="+encodeURIComponent(licenseKey)).done(function( data ) {
+                      $("body #licenseCheckModal .modal-body").empty();
+                      if(data.resultset.length > 0 && data.resultset[0].length > 0 && data.resultset[0][0] != null && data.resultset[0][0].toLowerCase() !== ""
+                         && data.resultset[0][1] != null && data.resultset[0][1].toLowerCase() !== ""){
+                        $("body #licenseCheckModal .modal-body").append('<div id="alertLicense" class="alert alert-success fade in">' +
+                              '<strong>Success</strong> License accepted.</div>');
+                        $("body #licenseCheckModal .modal-body").append('<div class="row">' +
+                          '<div class="col-md-3"><strong>'+data.metadata[0].colName+':</strong></div>' +
+                            '<div class="col-md-9">'+data.resultset[0][0]+'</div>' +
+                          '</div>' + 
+                          '<div class="row">' +
+                            '<div class="col-md-3"><strong>'+data.metadata[1].colName+':</strong></div>' +
+                            '<div class="col-md-9">'+data.resultset[0][1]+'</div>' +
+                          '</div>' + 
+                          '<div class="row">' +
+                            '<div class="col-md-3"><strong>'+data.metadata[2].colName+':</strong></div>' +
+                            '<div class="col-md-9">'+data.resultset[0][2]+'</div>' +
+                          '</div>' + 
+                          '<div class="row">' +
+                            '<div class="col-md-3"><strong>'+data.metadata[3].colName+':</strong></div>' +
+                            '<div class="col-md-9">'+data.resultset[0][3]+'</div>' +
+                          '</div>'
+                        );
+                        setTimeout(function(){
+                           window.location.reload(1);
+                        }, 3000);
+                      }else{
+                        $("body #licenseCheckModal .modal-body").prepend('<div id="alertLicense" class="alert alert-danger fade in">' +
+                              '<strong>Error</strong> License invalid, please try again.</div>');
+                        setTimeout(function(){
+                           window.location.reload(1);
+                        }, 2000);
+                      }
+                    });
+
+                  }
+                });
+                $('body #licenseCheckModal').modal({keyboard: false, backdrop: "static"}).modal('show');
+              }
+            });
+        });
+      </script>
         
     </body>
 </html>

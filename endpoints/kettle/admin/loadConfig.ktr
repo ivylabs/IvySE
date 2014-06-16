@@ -158,6 +158,36 @@
         <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>PreviewSaiku</name>
+        <xpath>preview-saiku</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>PreviewAnalyzer</name>
+        <xpath>preview-analyzer</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <limit>0</limit>
     <loopxpath>&#x2f;config&#x2f;server</loopxpath>

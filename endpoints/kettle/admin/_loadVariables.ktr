@@ -129,6 +129,9 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	String inputServerUserName = serverUserNameIn.getString(r);
 	String inputServerPassword = serverPasswordIn.getString(r);
 	String inputServerUrl = serverUrlIn.getString(r);
+	if(!"/".equals(inputServerUrl.substring(inputServerUrl.length() - 1))){
+		inputServerUrl = inputServerUrl + "/";
+	}
 
     r = createOutputRow(r, data.outputRowMeta.size());
 	

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      
+      #saveBtn{
+        width:auto;
+        border: solid 2px #bbb;
+        height: 25px;
+        font-size: 12px;
+        padding: 3px 10px;
+        background-color: #eaedee;
+        color: #444;
+      }
+
+      #saveBtn:hover{
+        background-color: #bbb;
+        color: #444;
+      }
+
+      #infoArea{
+        padding-left: 10px;
+        padding-right: 10px;
+        position: relative;
+        font-size: 13px;
+        font-weight: bold;
+        color: #444;
+        border: 1px solid #bbb;
+        left: 10px;
+      }
+
+      body{
+        color: #444;
+        background-color: #eaedee;
+      }
+    
+    </style>
+    <meta charset="UTF-8">
+    <title>Editor</title>
+    <!--jquery -->
+    <!-- Using jquery v1.4.4 because of IE8. When using newer versions like v1.7.1 IE8 forces compability mode and breaks CDE -->
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/js/jquery.js"></script>
+    
+    <!-- CDF files -->
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/lib/shims.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/jquery.blockUI.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/autobox/jquery.ui.autobox.ext.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/autobox/jquery.ui.autobox.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/underscore.js"></script>  
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/mustache.js"></script>  
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/backbone.js"></script>    
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/Base.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/CoreComponents.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/OlapUtils.js"></script>
+    
+    
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/captify/captify.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/daterangepicker/daterangepicker.jQuery.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+    <link rel="stylesheet" href="../../../../../../content/pentaho-cdf/js/captify/captify.css" type="text/css"/>
+    <!-- ACE -->
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/js/cdf-dd-base.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/js/cdf-dd-aceWrapper.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/ace.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/mode-javascript.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/mode-css.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/mode-xml.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/mode-html.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/theme-twilight.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/resources/ace/src/theme-eclipse.js"></script>
+    <script language="javascript">
+
+      var pathArray = window.location.pathname.split( '/' );
+      var webAppPath;
+      if (!(typeof(CONTEXT_PATH) == 'undefined')){
+        webAppPath = CONTEXT_PATH;
+      }
+      if(webAppPath == undefined){
+        webAppPath = "/" + pathArray[1];
+      }
+
+      if(webAppPath.endsWith("/")) {
+        webAppPath = webAppPath.substr(0, webAppPath.length-1);
+      }
+
+
+        var editor = new CodeEditor();
+        var params = {};
+        var fileName = null;
+        var isDirty = false;
+        var listeners = {
+          onStatusUpdate: null,
+          onSave: null,
+          notify:null
+        };
+        
+        var getUrlParams = function() {
+          
+          var url = document.location.href;
+          var output = {};
+          var index = url.indexOf('?');
+          if (index < 0) {
+              return null;
+          } else {
+              // First we get the part of the url with the parameters in it (i.e. after the '?'), and partition
+              // it into individual 'var=value' pieces. Then we split those pieces and add them to the output object
+              args = url.slice(index + 1).split('&');
+              for(i = 0; i < args.length; i++) {
+                  pair = args[i].split('=');
+                  output[pair[0]] = unescape(pair[1]);
+              }
+              return output;
+          }
+        };
+        
+
+        var save = function(){
+          editor.saveFile(params.path, editor.getContents(),
+            function(result){
+                var msg = "";
+                if($.type(result) == "object"){
+                    msg = result.responseText;
+                } else if($.type(result) == "string"){
+                    msg = result;
+                }
+                if(msg.indexOf('Schema published') > -1){
+                    setDirty(false);
+                    notify(msg);
+                }
+                else {
+                    notify(msg,'error');
+                }
+            }
+          );
+        };
+
+        var notifyType = {
+          ERROR : 'error',
+          INFO : 'info',
+          WARN : 'warn'
+        };
+        var notify = function(msg, type){
+            if(type == null) type = notifyType.INFO;
+            if(typeof(listeners.notify) == 'function'){
+                listeners.notify(msg,type);
+            }
+        };
+
+        var updateStatus = function(){
+           var info = fileName + (editor.isReadOnly()? ' (readonly)' : '') + (isDirty? '*' : '');
+            $('#infoArea').text(info);
+           if(typeof(listeners.onStatusUpdate) == 'function'){
+            listeners.onStatusUpdate(isDirty);
+           }
+        };
+        
+        var setDirty = function(dirty){
+            var wasDirty = isDirty;
+            isDirty = dirty;
+            
+            if(isDirty != wasDirty){
+                if(!wasDirty && isDirty){
+                  setExitNotification(true);
+                }
+                else if (wasDirty && !isDirty){
+                  setExitNotification(false);
+                }
+                updateStatus();
+            }
+        };
+        
+        var setExitNotification= function(enable){
+          if(window.parent && window.parent != window){//only mess with unload if owning the window
+            return;
+          }
+          
+          if(enable){
+            window.onbeforeunload = function(e) { return 'Any unsaved changes will be lost.'; }
+          }
+          else {
+             window.onbeforeunload = function() {null};
+          }
+        };
+        
+    </script>
+    
+    
+  </head>
+  <body>
+
+    <div id="btnArea"> <button id="saveBtn" onclick ="save()" style=""> Save </button><span id="infoArea"/></div>
+    <pre style="position:relative;height:310px;width:760px;" id="editArea">
+    </pre>
+
+    <script>
+        window.onload = function() {
+            params = getUrlParams()||{};
+            fileName = params.path;
+            params.editorOnly=true;
+            
+            if(params.editorOnly){
+                $('#btnArea').css('display','none');
+                $('#editArea').css('margin-top',0);
+                $('#editArea').css('margin-bottom',0);
+            }
+            
+            if(params.height){
+                $('#editArea').height(params.height);
+            }
+            else {
+                $('#editArea').height(window.innerHeight - ( params.editorOnly? 20 : 60));
+            }
+            
+            if(params.width){
+                $('#editArea').width(params.width);
+            }
+            else{
+                $('#editArea').width(window.innerWidth - 30);
+            }
+            
+            
+	          editor.initEditor('editArea');
+            editor.setTheme("ace/theme/chrome");
+            editor.setMode("xml");
+
+            if(fileName == null) {
+              editor.loadFile = function(schemaName){
+                this.setContents('<Schema name="NewSchema"></Schema>');
+              };
+            }else{
+              editor.loadFile = function(schemaName){
+                var myself = this;
+                $.get("/pentaho/plugin/IvySE/api/getschema",{paramschema:schemaName},
+                  function(fileContents) {
+                    myself.setContents(fileContents);
+                  }
+                );
+              };
+            }
+
+            editor.saveFile = function(fileName, contents, callback){
+                var myself=this;
+                $.ajax({
+                    url: webAppPath+"/plugin/IvySE/api/saveschema",
+                    type: "POST",
+                    data: { paramschemaName: fileName, paramschemaXML: contents, paramschemaDataSource: params.datasource },
+                    complete: function(data){
+                        if(typeof callback == 'function'){
+                            callback(data);
+                        }
+                    }
+                });
+            };
+            
+            editor.loadFile(fileName);
+            updateStatus();
+            
+            editor.onChange(function(){
+               setDirty(true);
+            });
+        };
+    </script>
+
+  </body>
+</html>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin title="IvySE" loader="DEFAULT">
 <overlays>
-		<overlay id="startup.IvySE" resourcebundle="content/IvySE/resources/lang/messages">
+		<overlay id="startup.IvySE" resourcebundle="content/IvySE/resources/lang/messages" priority="3">
 			<menubar id="toolsmenu">
 	        	<menuitem id="IvySE" label="${Launcher.IvySE}" command="mantleXulHandler.openUrl('${Launcher.IvySE}','${Launcher.IvySE_TOOLTIP}','plugin/IvySE/api/default')"/>
 	      	</menubar>

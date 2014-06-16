@@ -270,7 +270,7 @@
      },
      {
       "name": "html",
-      "value": "<form class=\"form-horizontal\" role=\"form\">\n  <div class=\"form-group\">\n    <label for=\"DIV_SERVER_URL\" class=\"col-sm-2 control-label\">Server URL</label>\n    <div class=\"col-sm-10\" id=\"DIV_SERVER_URL\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"DIV_SERVER_USERNAME\" class=\"col-sm-2 control-label\">Username</label>\n    <div class=\"col-sm-10\" id=\"DIV_SERVER_USERNAME\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"DIV_SERVER_PASSWORD\" class=\"col-sm-2 control-label\">Password</label>\n    <div class=\"col-sm-10\" id=\"DIV_SERVER_PASSWORD\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <div class=\"col-sm-offset-4 col-sm-2\" id=\"BACK_BUTTON\">\n    </div>\n    <div class=\"col-sm-2\" id=\"DIV_SUBMIT_BUTTON\">\n    </div>\n  </div>\n</form> ",
+      "value": "<form class=\"form-horizontal\" role=\"form\">\n  <div class=\"form-group\">\n    <label for=\"DIV_SERVER_URL\" class=\"col-sm-2 control-label\">Server URL</label>\n    <div class=\"col-sm-10\" id=\"DIV_SERVER_URL\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"DIV_SERVER_USERNAME\" class=\"col-sm-2 control-label\">Username</label>\n    <div class=\"col-sm-10\" id=\"DIV_SERVER_USERNAME\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"DIV_SERVER_PASSWORD\" class=\"col-sm-2 control-label\">Password</label>\n    <div class=\"col-sm-10\" id=\"DIV_SERVER_PASSWORD\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"DIV_SERVER_PASSWORD\" class=\"col-sm-2 control-label\">Preview Mode</label> \n    <div class=\"col-sm-10\">\n        <div class=\"checkbox\">\n            <label>\n              <input type=\"checkbox\" id=\"saiku-preview\"> Saiku Analytics\n            </label>\n        </div>\n        <div class=\"checkbox\">\n            <label>\n              <input type=\"checkbox\" id=\"analyzer-preview\"> Pentaho Analyzer\n            </label>\n        </div>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <div class=\"col-sm-offset-4 col-sm-2\" id=\"BACK_BUTTON\">\n    </div>\n    <div class=\"col-sm-2\" id=\"DIV_SUBMIT_BUTTON\">\n    </div>\n  </div>\n</form> ",
       "type": "Html"
      },
      {
@@ -365,7 +365,7 @@
     ]
    },
    {
-    "id": "1ee1079e-8db1-96fd-26fd-2f9a7e44f1e8",
+    "id": "fc3d1d5c-f643-e82c-58e2-1b182f0c7e35",
     "type": "ComponentsParameter",
     "typeDesc": "Simple parameter",
     "parent": "GENERIC",
@@ -393,7 +393,63 @@
     ]
    },
    {
-    "id": "2361f524-6dcd-9c88-0d02-ec6721c0b1f9",
+    "id": "6de8e818-d465-422d-4118-cb7574a953d9",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "PREVIEW_SAIKU",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "1ee1079e-8db1-96fd-26fd-2f9a7e44f1e8",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "PREVIEW_ANALYZER",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "70a1078d-54d5-93bd-15e5-c4943731ad77",
     "type": "ComponentsJavascriptParameter",
     "typeDesc": "Custom parameter",
     "parent": "GENERIC",
@@ -452,7 +508,7 @@
      },
      {
       "name": "parameters",
-      "value": "[[\"SERVER_URL\",\"SERVER_URL\"],[\"SERVER_USERNAME\",\"SERVER_USERNAME\"],[\"SERVER_PASSWORD\",\"SERVER_PASSWORD\"]]",
+      "value": "[[\"SERVER_URL\",\"SERVER_URL\"],[\"SERVER_USERNAME\",\"SERVER_USERNAME\"],[\"SERVER_PASSWORD\",\"SERVER_PASSWORD\"],[\"PREVIEW_ANALYZER\",\"PREVIEW_ANALYZER\"],[\"PREVIEW_SAIKU\",\"PREVIEW_SAIKU\"]]",
       "type": "ValuesArray"
      },
      {
@@ -497,7 +553,7 @@
      },
      {
       "name": "postFetch",
-      "value": "function(data){\n    var alertCSSClass = \"alert-danger\";\n    var alertResult= \"Fail!\";\n    var alertMsgResult= \"An error occurred.\";\n    if(data.resultset.length === 1 && data.resultset[0].length === 5){\n        alertResult = data.resultset[0][0];\n        alertMsgResult = data.resultset[0][1];\n        alertCSSClass = \"alert-success\";\n        Dashboards.fireChange(\"SERVER_URL\",data.resultset[0][2]);\n        Dashboards.fireChange(\"SERVER_USERNAME\",data.resultset[0][3]);\n        Dashboards.fireChange(\"SERVER_PASSWORD\",data.resultset[0][4]);\n    }\n    $(\".alert.alert-danger, .alert.alert-success\").removeClass(\"alert-success alert-danger\");\n    $(\"#alert-result-message\").html(alertMsgResult);\n    $(\"#alert-result\").html(alertResult);\n    $(\".alert\").addClass(alertCSSClass);\n    $(\".alert\").show();\n}",
+      "value": "function(data){\n    var alertCSSClass = \"alert-danger\";\n    var alertResult= \"Fail!\";\n    var alertMsgResult= \"An error occurred.\";\n    if(data.resultset.length === 1 && data.resultset[0].length === 7){\n        alertResult = data.resultset[0][0];\n        alertMsgResult = data.resultset[0][1];\n        alertCSSClass = \"alert-success\";\n        Dashboards.fireChange(\"SERVER_URL\",data.resultset[0][2]);\n        Dashboards.fireChange(\"SERVER_USERNAME\",data.resultset[0][3]);\n        Dashboards.fireChange(\"SERVER_PASSWORD\",data.resultset[0][4]);\n        Dashboards.fireChange(\"PREVIEW_SAIKU\",data.resultset[0][5]);\n        if(eval(data.resultset[0][5])){\n            $(\"#saiku-preview\").attr(\"checked\", \"checked\");\n        }\n        Dashboards.fireChange(\"PREVIEW_ANALYZER\",data.resultset[0][6]);\n        if(eval(data.resultset[0][6])){\n            $(\"#analyzer-preview\").attr(\"checked\", \"checked\");\n        }\n    }\n    $(\".alert.alert-danger, .alert.alert-success\").removeClass(\"alert-success alert-danger\");\n    $(\"#alert-result-message\").html(alertMsgResult);\n    $(\"#alert-result\").html(alertResult);\n    $(\".alert\").addClass(alertCSSClass);\n    $(\".alert\").show();\n}",
       "type": "JavaScript"
      },
      {
@@ -580,7 +636,7 @@
      },
      {
       "name": "postFetch",
-      "value": "function(data){\n    if(data.resultset.length === 1 && data.resultset[0].length === 3){\n        Dashboards.fireChange(\"SERVER_PASSWORD\",data.resultset[0][0]);\n        Dashboards.fireChange(\"SERVER_URL\",data.resultset[0][1]);\n        Dashboards.fireChange(\"SERVER_USERNAME\",data.resultset[0][2]);\n    }else{\n        Dashboards.fireChange(\"SERVER_PASSWORD\", \"\");\n        Dashboards.fireChange(\"SERVER_URL\", \"\");\n        Dashboards.fireChange(\"SERVER_USERNAME\", \"\");\n    }\n}",
+      "value": "function(data){\n    if(data.resultset.length === 1 && data.resultset[0].length === 5){\n        Dashboards.fireChange(\"SERVER_PASSWORD\",data.resultset[0][0]);\n        Dashboards.fireChange(\"SERVER_URL\",data.resultset[0][1]);\n        Dashboards.fireChange(\"SERVER_USERNAME\",data.resultset[0][2]);\n        Dashboards.fireChange(\"PREVIEW_SAIKU\",data.resultset[0][3]);\n        if(eval(data.resultset[0][3])){\n            $(\"#saiku-preview\").attr(\"checked\", \"checked\");\n        }\n        Dashboards.fireChange(\"PREVIEW_ANALYZER\",data.resultset[0][4]);\n        if(eval(data.resultset[0][4])){\n            $(\"#analyzer-preview\").attr(\"checked\", \"checked\");\n        }\n    }else{\n        Dashboards.fireChange(\"SERVER_PASSWORD\", \"\");\n        Dashboards.fireChange(\"SERVER_URL\", \"\");\n        Dashboards.fireChange(\"SERVER_USERNAME\", \"\");\n    }\n}",
       "type": "JavaScript"
      },
      {
@@ -628,7 +684,7 @@
      },
      {
       "name": "expression",
-      "value": "function(){\n    Dashboards.fireChange(\"SUBMITTED\", ++SUBMITTED);\n}",
+      "value": "function(){\n    \n    Dashboards.fireChange(\"PREVIEW_SAIKU\", $(\"#saiku-preview\").is(\":checked\"));\n    Dashboards.fireChange(\"PREVIEW_ANALYZER\", $(\"#analyzer-preview\").is(\":checked\"));\n        \n    Dashboards.fireChange(\"SUBMITTED\", ++SUBMITTED);\n}",
       "type": "JavaScript"
      },
      {
@@ -1132,6 +1188,16 @@
       "name": "name",
       "value": "LOAD_CONFIG",
       "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Inferred",
+      "type": "kettleOutputCustom"
      }
     ],
     "meta": "CPK",
@@ -1148,11 +1214,47 @@
       "name": "name",
       "value": "UPDATE_CONFIG",
       "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Inferred",
+      "type": "kettleOutputCustom"
      }
     ],
     "meta": "CPK",
     "meta_pluginId": "IvySE",
     "meta_endpoint": "updateConfig"
+   },
+   {
+    "id": "d9062a39-b8d6-0b60-ddc2-023d6c46bb86",
+    "type": "ComponentsIvySE_GetLicenseDetails_CPKENDPOINT",
+    "typeDesc": "GetLicenseDetails Endpoint",
+    "parent": "IVYSE_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "LICENSE_DETAILS",
+      "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Json",
+      "type": "kettleOutputCustom"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "IvySE",
+    "meta_endpoint": "GetLicenseDetails"
    }
   ]
  },

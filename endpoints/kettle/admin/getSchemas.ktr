@@ -158,6 +158,7 @@
     <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
     <result_rows_target_step>OUTPUT</result_rows_target_step>
       <result_rows_field><name>schema</name><type>String</type><length>-1</length><precision>-1</precision></result_rows_field>
+      <result_rows_field><name>fake</name><type>String</type><length>-1</length><precision>-1</precision></result_rows_field>
     <result_files_target_step/>
     <result_files_file_name_field>FileName</result_files_file_name_field>
      <cluster_schema/>
@@ -220,7 +221,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>504</xloc>
+      <xloc>576</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>

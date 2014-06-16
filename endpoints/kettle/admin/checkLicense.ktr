@@ -1,44 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>_updateConfig</name>
+    <name>checkLicense</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-        <parameter>
-            <name>PREVIEW_ANALYZER</name>
-            <default_value>false</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>PREVIEW_SAIKU</name>
-            <default_value>true</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>SERVER_PASSWORD</name>
-            <default_value>password</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>SERVER_URL</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;pentaho&#x2f;</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>SERVER_USERNAME</name>
-            <default_value>admin</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>pluginDir</name>
-            <default_value>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;..&#x2f;</default_value>
-            <description/>
-        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -97,17 +66,20 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;03&#x2f;18 14&#x3a;08&#x3a;24.937</created_date>
+  <created_date>2014&#x2f;06&#x2f;09 18&#x3a;27&#x3a;54.145</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;03&#x2f;18 14&#x3a;08&#x3a;24.937</modified_date>
+  <modified_date>2014&#x2f;06&#x2f;09 18&#x3a;27&#x3a;54.145</modified_date>
   </info>
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Get Variables</from><to>XML Output</to><enabled>Y</enabled> </hop>
-  <hop> <from>XML Output</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>File exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>File exists</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>Get data from XML</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>Add constants</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get data from XML</from><to>Check License</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Check License</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -122,25 +94,25 @@
            </partitioning>
     <fields>
       <field>
-        <name>RESULT</name>
+        <name>Type</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Success&#x21;</nullif>
+        <nullif>Error</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>RESULT_MSG</name>
+        <name>Message</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Your configuration was updated.</nullif>
+        <nullif>The license file doesn&#x27;t exist.</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -148,8 +120,163 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>576</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Check License</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[import com.ivyis.opensource.license.manager.LicenseDetails;
+import com.ivyis.opensource.license.manager.LicenseManager;
+import com.ivyis.opensource.license.manager.LicenseManagerFactory;
+import java.util.Calendar;
+
+private FieldHelper customerNameOut = null;
+private FieldHelper emailOut = null;
+private FieldHelper pluginNameOut = null;
+private FieldHelper licenseKeyIn = null;
+
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+{
+	Object[] r = getRow();
+	if (r == null) {
+		setOutputDone();
+		return false;
+	}
+
+    if (first)
+    {
+        first = false;
+		licenseKeyIn = get(Fields.In, "userLicense");
+    }
+
+	try{
+		final LicenseManager lm = LicenseManagerFactory.getLicenseManager();
+		final LicenseDetails licenseDetails = lm.decodeLicense(licenseKeyIn.getString(r));
+	
+		if(("ivyse").equalsIgnoreCase(licenseDetails.getPlugin()) && 
+			licenseDetails.getCustomerName().equals(get(Fields.In, "userCustomerName").getString(r)) && 
+			licenseDetails.getEmail().equals(get(Fields.In, "userCustomerEmail").getString(r))
+		){
+			get(Fields.Out, "Type").setValue(r, "Success");
+			get(Fields.Out, "Message").setValue(r, "Valid license.");
+		}else{
+			get(Fields.Out, "Type").setValue(r, "Error");
+			get(Fields.Out, "Message").setValue(r, "The license key file is invalid.");
+		}
+
+	}catch(Exception e){
+		get(Fields.Out, "Type").setValue(r, "Error");
+		get(Fields.Out, "Message").setValue(r, "Error on processing license file.");
+	}
+
+    r = createOutputRow(r, data.outputRowMeta.size());
+
+	// Send the row on to the next step.
+    putRow(data.outputRowMeta, r);
+
+    return true;
+}
+]]></class_source>
+        </definition>
+    </definitions>
+    <fields>
+        <field>
+        <field_name>Type</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+        <field>
+        <field_name>Message</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>768</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>File exists</name>
+    <type>FileExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filenamefield>licensefile</filenamefield>
+    <resultfieldname>result</resultfieldname>
+    <includefiletype>N</includefiletype>
+    <filetypefieldname/>
+    <addresultfilenames>N</addresultfilenames>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>264</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Get data from XML</send_true_to>
+<send_false_to>Add constants</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>&#x3c;&#x3e;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>384</xloc>
-      <yloc>72</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -167,56 +294,8 @@
            </partitioning>
     <fields>
       <field>
-        <name>ServerPassword</name>
-        <variable>&#x24;&#x7b;SERVER_PASSWORD&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>ServerUrl</name>
-        <variable>&#x24;&#x7b;SERVER_URL&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>ServerUserName</name>
-        <variable>&#x24;&#x7b;SERVER_USERNAME&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>previewSaiku</name>
-        <variable>&#x24;&#x7b;PREVIEW_SAIKU&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>previewAnalyzer</name>
-        <variable>&#x24;&#x7b;PREVIEW_ANALYZER&#x7d;</variable>
+        <name>licensefile</name>
+        <variable>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;..&#x2f;LicenseKey.xml</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -230,14 +309,14 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>96</xloc>
-      <yloc>72</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>OUTPUT</name>
-    <type>Dummy</type>
+    <name>Get data from XML</name>
+    <type>getXMLData</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -246,16 +325,142 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <namespaceaware>N</namespaceaware>
+    <ignorecomments>N</ignorecomments>
+    <readurl>N</readurl>
+    <validating>N</validating>
+    <usetoken>N</usetoken>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <rownum_field/>
+    <encoding>UTF-8</encoding>
+    <file>
+      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;..&#x2f;LicenseKey.xml</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>userLicense</name>
+        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserLicense&#x27;&#x5d;</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>userPluginName</name>
+        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserPluginName&#x27;&#x5d;</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>userPluginType</name>
+        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserPluginType&#x27;&#x5d;</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>userCustomerName</name>
+        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserName&#x27;&#x5d;</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>userCustomerEmail</name>
+        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserEmail&#x27;&#x5d;</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>userLicenseDate</name>
+        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserLicenseDate&#x27;&#x5d;</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <loopxpath>&#x2f;&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;license&#x27;&#x5d;&#x2f;&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;user&#x27;&#x5d;</loopxpath>
+    <IsInFields>N</IsInFields>
+    <IsAFile>N</IsAFile>
+    <XmlField>licensefile</XmlField>
+    <prunePath/>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>672</xloc>
-      <yloc>72</yloc>
+      <xloc>576</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Select values</name>
+    <name>OUTPUT</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -265,144 +470,19 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>RESULT</name>
+    <fields>      <field>        <name>Type</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>RESULT_MSG</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ServerUrl</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ServerUserName</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ServerPassword</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>previewSaiku</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>previewAnalyzer</name>
+      </field>      <field>        <name>Message</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>528</xloc>
-      <yloc>72</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>XML Output</name>
-    <type>XMLOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <encoding>UTF-8</encoding>
-    <name_space/>
-    <xml_main_element>config</xml_main_element>
-    <xml_repeat_element>server</xml_repeat_element>
-    <file>
-      <name>&#x24;&#x7b;pluginDir&#x7d;&#x2f;config</name>
-      <extention>xml</extention>
-      <servlet_output>N</servlet_output>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <omit_null_values>N</omit_null_values>
-      <date_time_format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</date_time_format>
-      <add_to_result_filenames>N</add_to_result_filenames>
-      <zipped>N</zipped>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <content_type>Element</content_type>
-        <name>ServerPassword</name>
-        <element/>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>250</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>ServerUrl</name>
-        <element/>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>250</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>ServerUserName</name>
-        <element/>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>250</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>previewSaiku</name>
-        <element>preview-saiku</element>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>250</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>previewAnalyzer</name>
-        <element>preview-analyzer</element>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>250</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
-      <yloc>72</yloc>
+      <xloc>768</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
