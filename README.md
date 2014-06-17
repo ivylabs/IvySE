@@ -4,7 +4,7 @@ This web based mondrian schema editor is developed on the new Bootstrap framewor
 
 ![Ivy SE](https://raw.githubusercontent.com/ivylabs/ivy-se/master/static/custom/img/IvySE.png)
 
-Some of the features in this 0.0.1 release:
+Some of the features in this 0.0.2 release:
 ===========================================
 
 * Web Browser Based
