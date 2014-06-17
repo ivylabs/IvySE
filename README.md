@@ -19,3 +19,6 @@ What is the road map for the next version?
 ==========================================
 * Schema validation
 * ...
+
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/91f052df1377658712b4667d61e7a88b "githalytics.com")](http://githalytics.com/ivylabs/IvySE)
