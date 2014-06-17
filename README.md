@@ -11,10 +11,11 @@ Some of the features in this 0.0.1 release:
 * List existing Mondrian Schemas
 * Edit Mondrian Schemas
 * Based on Bootstrap
+* Create new schema
+* Live preview with Penatho Analyser and/or Saiku pluigns
 
 
 What is the road map for the next version?
 ==========================================
-* Create new schema
-* Live preview with Penatho analyser and/or Saiku pluigns
 * Schema validation
+* ...
