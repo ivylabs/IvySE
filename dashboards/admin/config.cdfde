@@ -41,8 +41,8 @@
     ]
    },
    {
-    "id": "aef6f8f6-6526-b50c-168b-c5f102ad3ed6",
-    "type": "LayoutColumn",
+    "id": "c3a02320-a70a-23f0-88ba-a8728bd2f24a",
+    "type": "LayoutBootstrapColumn",
     "typeDesc": "Column",
     "parent": "b69d06dd-85db-c91b-0ca3-54f7baaa04ae",
     "properties": [
@@ -52,39 +52,29 @@
       "type": "Id"
      },
      {
-      "name": "columnSpan",
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
       "value": "12",
-      "type": "Integer"
+      "type": "String"
      },
      {
-      "name": "columnPrepend",
+      "name": "bootstrapLarge",
       "value": "",
-      "type": "Integer"
+      "type": "String"
      },
      {
-      "name": "columnAppend",
+      "name": "bootstrapCssClass",
       "value": "",
-      "type": "Integer"
-     },
-     {
-      "name": "columnPrependTop",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnAppendBottom",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnBorder",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnBigBorder",
-      "value": "false",
-      "type": "Boolean"
+      "type": "String"
      },
      {
       "name": "height",
@@ -114,10 +104,10 @@
     ]
    },
    {
-    "id": "a7abd6ae-990a-cd3f-9d4b-6ae0ddf6c373",
+    "id": "14e43ad0-3a97-8fad-f380-16be94b45f16",
     "type": "LayoutHtml",
     "typeDesc": "Html",
-    "parent": "aef6f8f6-6526-b50c-168b-c5f102ad3ed6",
+    "parent": "c3a02320-a70a-23f0-88ba-a8728bd2f24a",
     "properties": [
      {
       "name": "name",
@@ -185,8 +175,8 @@
     ]
    },
    {
-    "id": "4769804a-8697-b221-e1cd-e3813e72780d",
-    "type": "LayoutColumn",
+    "id": "ce1acef1-2a32-6162-65df-f29008d0a894",
+    "type": "LayoutBootstrapColumn",
     "typeDesc": "Column",
     "parent": "ec0100b8-13f8-68d4-0f64-b8a912c793bb",
     "properties": [
@@ -196,39 +186,29 @@
       "type": "Id"
      },
      {
-      "name": "columnSpan",
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
       "value": "12",
-      "type": "Integer"
+      "type": "String"
      },
      {
-      "name": "columnPrepend",
+      "name": "bootstrapLarge",
       "value": "",
-      "type": "Integer"
+      "type": "String"
      },
      {
-      "name": "columnAppend",
+      "name": "bootstrapCssClass",
       "value": "",
-      "type": "Integer"
-     },
-     {
-      "name": "columnPrependTop",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnAppendBottom",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnBorder",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnBigBorder",
-      "value": "false",
-      "type": "Boolean"
+      "type": "String"
      },
      {
       "name": "height",
@@ -258,10 +238,10 @@
     ]
    },
    {
-    "id": "755565db-14db-e498-2518-2f5b0520370d",
+    "id": "530d4899-da43-8a6e-6f07-2bed72d73f7b",
     "type": "LayoutHtml",
     "typeDesc": "Html",
-    "parent": "4769804a-8697-b221-e1cd-e3813e72780d",
+    "parent": "ce1acef1-2a32-6162-65df-f29008d0a894",
     "properties": [
      {
       "name": "name",
