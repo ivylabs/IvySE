@@ -15,16 +15,6 @@
             <description/>
         </parameter>
         <parameter>
-            <name>schemaDataSource</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>schemaName</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
             <name>schemaXML</name>
             <default_value/>
             <description/>
