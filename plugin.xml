@@ -23,7 +23,7 @@
 		id="IvySE"
 		title="IvySE"
 		type="IvySE"
-		class="pt.webdetails.cpk.CpkContentGenerator"/>
+		class="com.ivyis.pentaho.ivylicense.resources.IvyContentGenerator"/>
 	<!-- Menu entry -->
 	<menu-items>
 		<!--<menu-item id="IvySE_main" anchor="tools-submenu" label="IvySE" command="content/IvySE/" type="MENU_ITEM" how="LAST_CHILD"/>-->

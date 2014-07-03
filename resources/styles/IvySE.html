@@ -366,9 +366,9 @@
         });
 
         $(function() {
-            $.post( webAppPath + "/plugin/IvySE/api/checklicense", function( data ) {
+            $.get(webAppPath+"/plugin/IvySE/api/checkLicense", function( data ) {
               
-              if(data.resultset == undefined){
+              if(data != undefined && data.status==="ok" && data.result==="false"){
                 $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
                   '<div class="modal-dialog modal-lg">' +
                     '<div class="modal-content">' +
@@ -377,26 +377,7 @@
                       '</div>' +
                       '<div class="modal-body">' +
                         '<div id="alertLicense" class="alert alert-danger fade in">' +
-                          '<strong>Error</strong> IvySE cannot continue. Please restart the server again. If this error persiste, please file a bug <a href="https://github.com/ivylabs/IvySE/issues" target="_blank">here</a>.' +
-                        '</div>' +
-                      '</div>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>');
-                $('body #licenseCheckModal').modal({keyboard: false, backdrop: "static"}).modal('show');
-                return;
-              }
-
-              if(data.resultset.length > 0 && data.resultset[0].length > 0 && data.resultset[0][0].toLowerCase() !== "success"){
-                $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
-                  '<div class="modal-dialog modal-lg">' +
-                    '<div class="modal-content">' +
-                      '<div class="modal-header">' +
-                        '<h1 class="modal-title" id="myModalLabel">IvySE - Ivy Schema Editor License</h1>' +
-                      '</div>' +
-                      '<div class="modal-body">' +
-                        '<div id="alertLicense" class="alert alert-danger fade in">' +
-                          '<strong>'+data.resultset[0][0]+'</strong> '+data.resultset[0][1]+
+                          '<strong>Error</strong> Invalid license.' +
                         '</div>' +
                         '<div class="row">' +
                           '<div class="col-md-12">' +
@@ -424,29 +405,28 @@
                           '<strong>Error</strong> You don\'t paste any license.</div>');
                   }else{
                     $("body #licenseCheckModal .modal-body").empty();
-                    $("body #licenseCheckModal .modal-body").prepend("<center><img src='../../../api/repos/IvySE/static/custom/img/loading.gif'/></center>");
+                    $("body #licenseCheckModal .modal-body").prepend("<center><img src='../../../content/IvySE/img/loading.gif'/></center>");
 
-                    $.post( webAppPath + "/plugin/IvySE/api/getlicensedetails?paramlicense_key="+encodeURIComponent(licenseKey)).done(function( data ) {
+                    $.post( webAppPath+"/plugin/IvySE/api/submitLicense?licenseKey="+encodeURIComponent(licenseKey)).done(function( data ) {
                       $("body #licenseCheckModal .modal-body").empty();
-                      if(data.resultset.length > 0 && data.resultset[0].length > 0 && data.resultset[0][0] != null && data.resultset[0][0].toLowerCase() !== ""
-                         && data.resultset[0][1] != null && data.resultset[0][1].toLowerCase() !== ""){
+                      if(data != undefined && data.status==="ok"){
                         $("body #licenseCheckModal .modal-body").append('<div id="alertLicense" class="alert alert-success fade in">' +
                               '<strong>Success</strong> License accepted.</div>');
                         $("body #licenseCheckModal .modal-body").append('<div class="row">' +
-                          '<div class="col-md-3"><strong>'+data.metadata[0].colName+':</strong></div>' +
-                            '<div class="col-md-9">'+data.resultset[0][0]+'</div>' +
+                          '<div class="col-md-3"><strong>Username:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserName+'</div>' +
                           '</div>' + 
                           '<div class="row">' +
-                            '<div class="col-md-3"><strong>'+data.metadata[1].colName+':</strong></div>' +
-                            '<div class="col-md-9">'+data.resultset[0][1]+'</div>' +
+                            '<div class="col-md-3"><strong>Email:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserEmail+'</div>' +
                           '</div>' + 
                           '<div class="row">' +
-                            '<div class="col-md-3"><strong>'+data.metadata[2].colName+':</strong></div>' +
-                            '<div class="col-md-9">'+data.resultset[0][2]+'</div>' +
+                            '<div class="col-md-3"><strong>Plugin Name:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserPluginName+'</div>' +
                           '</div>' + 
                           '<div class="row">' +
-                            '<div class="col-md-3"><strong>'+data.metadata[3].colName+':</strong></div>' +
-                            '<div class="col-md-9">'+data.resultset[0][3]+'</div>' +
+                            '<div class="col-md-3"><strong>Plugin Type:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserPluginType+'</div>' +
                           '</div>'
                         );
                         setTimeout(function(){
