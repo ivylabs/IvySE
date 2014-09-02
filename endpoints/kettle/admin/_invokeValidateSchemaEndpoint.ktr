@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>checkLicense</name>
+    <name>_invokeValidateSchemaEndpoint</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>ServerPassword</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>ServerUrl</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>ServerUserName</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>schemaDataSource</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>schemaName</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>schemaXML</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -66,24 +97,39 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;06&#x2f;09 18&#x3a;27&#x3a;54.145</created_date>
+  <created_date>2014&#x2f;06&#x2f;26 20&#x3a;54&#x3a;16.731</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;06&#x2f;09 18&#x3a;27&#x3a;54.145</modified_date>
+  <modified_date>2014&#x2f;06&#x2f;26 20&#x3a;54&#x3a;16.731</modified_date>
   </info>
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Get Variables</from><to>File exists</to><enabled>Y</enabled> </hop>
-  <hop> <from>File exists</from><to>Filter rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter rows</from><to>Get data from XML</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter rows</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get data from XML</from><to>Check License</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
-  <hop> <from>Check License</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Validate Schema</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Validate Schema</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add constants</name>
-    <type>Constant</type>
+    <name>Copy rows to result</name>
+    <type>RowsToResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>608</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -94,40 +140,28 @@
            </partitioning>
     <fields>
       <field>
-        <name>Type</name>
+        <name>schemaXML</name>
+        <variable>&#x24;&#x7b;schemaXML&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Error</nullif>
         <length>-1</length>
         <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>Message</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>The license file doesn&#x27;t exist.</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <trim_type>none</trim_type>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>576</xloc>
-      <yloc>240</yloc>
+      <xloc>128</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Check License</name>
+    <name>Validate Schema</name>
     <type>UserDefinedJavaClass</type>
     <description/>
     <distribute>Y</distribute>
@@ -144,15 +178,19 @@
 
         <class_name>Processor</class_name>
 
-        <class_source><![CDATA[import com.ivyis.opensource.license.manager.LicenseDetails;
-import com.ivyis.opensource.license.manager.LicenseManager;
-import com.ivyis.opensource.license.manager.LicenseManagerFactory;
-import java.util.Calendar;
+        <class_source><![CDATA[import java.io.StringReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
-private FieldHelper customerNameOut = null;
-private FieldHelper emailOut = null;
-private FieldHelper pluginNameOut = null;
-private FieldHelper licenseKeyIn = null;
+private FieldHelper schemaXMLIn = null;
 
 public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
 {
@@ -162,30 +200,25 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 		return false;
 	}
 
-    if (first)
-    {
+    if (first) {
         first = false;
-		licenseKeyIn = get(Fields.In, "userLicense");
+		schemaXMLIn = get(Fields.In, "schemaXML");
     }
 
 	try{
-		final LicenseManager lm = LicenseManagerFactory.getLicenseManager();
-		final LicenseDetails licenseDetails = lm.decodeLicense(licenseKeyIn.getString(r));
-	
-		if(("ivyse").equalsIgnoreCase(licenseDetails.getPlugin()) && 
-			licenseDetails.getCustomerName().equals(get(Fields.In, "userCustomerName").getString(r)) && 
-			licenseDetails.getEmail().equals(get(Fields.In, "userCustomerEmail").getString(r))
-		){
-			get(Fields.Out, "Type").setValue(r, "Success");
-			get(Fields.Out, "Message").setValue(r, "Valid license.");
-		}else{
-			get(Fields.Out, "Type").setValue(r, "Error");
-			get(Fields.Out, "Message").setValue(r, "The license key file is invalid.");
-		}
-
+    	final DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    	final InputSource is = new InputSource();
+   		is.setCharacterStream(new StringReader(schemaXMLIn.getString(r)));
+    	final Document doc = db.parse(is);
+		get(Fields.Out, "Type").setValue(r, "Success");
+		get(Fields.Out, "Message").setValue(r, "XML Schema valid.");
+		get(Fields.Out, "MessageDetails").setValue(r, "");
+		get(Fields.Out, "MessageFullDetails").setValue(r, "");
 	}catch(Exception e){
 		get(Fields.Out, "Type").setValue(r, "Error");
-		get(Fields.Out, "Message").setValue(r, "Error on processing license file.");
+		get(Fields.Out, "Message").setValue(r, "XML Schema invalid.");
+		get(Fields.Out, "MessageDetails").setValue(r, e.getMessage());
+		get(Fields.Out, "MessageFullDetails").setValue(r, getStackTrace(e));
 	}
 
     r = createOutputRow(r, data.outputRowMeta.size());
@@ -195,7 +228,13 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 
     return true;
 }
-]]></class_source>
+
+public static String getStackTrace(Throwable throwable) {
+	final StringWriter sw = new StringWriter();
+	final PrintWriter pw = new PrintWriter(sw, true);
+	throwable.printStackTrace(pw);
+	return sw.getBuffer().toString();
+}]]></class_source>
         </definition>
     </definitions>
     <fields>
@@ -219,248 +258,37 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
         <field_precision>-1</field_precision>
 
         </field>
+        <field>
+        <field_name>MessageDetails</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+        <field>
+        <field_name>MessageFullDetails</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
     </fields><clear_result_fields>N</clear_result_fields>
 <info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>48</yloc>
+      <xloc>288</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>File exists</name>
-    <type>FileExists</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filenamefield>licensefile</filenamefield>
-    <resultfieldname>result</resultfieldname>
-    <includefiletype>N</includefiletype>
-    <filetypefieldname/>
-    <addresultfilenames>N</addresultfilenames>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>264</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Get data from XML</send_true_to>
-<send_false_to>Add constants</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>result</leftvalue>
- <function>&#x3c;&#x3e;</function>
- <rightvalue/>
- <value><name>constant</name><type>Boolean</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>licensefile</name>
-        <variable>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;..&#x2f;LicenseKey.xml</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get data from XML</name>
-    <type>getXMLData</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <namespaceaware>N</namespaceaware>
-    <ignorecomments>N</ignorecomments>
-    <readurl>N</readurl>
-    <validating>N</validating>
-    <usetoken>N</usetoken>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <rownum_field/>
-    <encoding>UTF-8</encoding>
-    <file>
-      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;..&#x2f;LicenseKey.xml</name>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>userLicense</name>
-        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserLicense&#x27;&#x5d;</xpath>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>userPluginName</name>
-        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserPluginName&#x27;&#x5d;</xpath>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>userPluginType</name>
-        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserPluginType&#x27;&#x5d;</xpath>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>userCustomerName</name>
-        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserName&#x27;&#x5d;</xpath>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>userCustomerEmail</name>
-        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserEmail&#x27;&#x5d;</xpath>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>userLicenseDate</name>
-        <xpath>&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;UserLicenseDate&#x27;&#x5d;</xpath>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <loopxpath>&#x2f;&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;license&#x27;&#x5d;&#x2f;&#x2a;&#x5b;name&#x28;&#x29;&#x3d;&#x27;user&#x27;&#x5d;</loopxpath>
-    <IsInFields>N</IsInFields>
-    <IsAFile>N</IsAFile>
-    <XmlField>licensefile</XmlField>
-    <prunePath/>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>576</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>OUTPUT</name>
+    <name>Select values</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -478,11 +306,19 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>MessageDetails</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MessageFullDetails</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>240</yloc>
+      <xloc>448</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

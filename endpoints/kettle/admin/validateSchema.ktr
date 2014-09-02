@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>GetLicenseDetails</name>
+    <name>validateSchema</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -10,7 +10,12 @@
     <directory>&#x2f;</directory>
     <parameters>
         <parameter>
-            <name>license_key</name>
+            <name>pluginDir</name>
+            <default_value>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;..&#x2f;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>schemaXML</name>
             <default_value/>
             <description/>
         </parameter>
@@ -72,22 +77,21 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;06&#x2f;09 16&#x3a;46&#x3a;41.798</created_date>
+  <created_date>2014&#x2f;06&#x2f;26 20&#x3a;52&#x3a;30.374</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;06&#x2f;09 16&#x3a;46&#x3a;41.798</modified_date>
+  <modified_date>2014&#x2f;06&#x2f;26 20&#x3a;52&#x3a;30.374</modified_date>
   </info>
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Get Variables</from><to>LICENSE_KEY Log</to><enabled>Y</enabled> </hop>
-  <hop> <from>LICENSE_KEY Log</from><to>Check License</to><enabled>Y</enabled> </hop>
-  <hop> <from>Check License</from><to>LICENSE_KEY Data log</to><enabled>Y</enabled> </hop>
-  <hop> <from>LICENSE_KEY Data log</from><to>Write LicenseKey file</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write LicenseKey file</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Job Executor</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Load Variables</from><to>Transf Name</to><enabled>Y</enabled> </hop>
+  <hop> <from>Schema Props</from><to>Job Executor</to><enabled>Y</enabled> </hop>
+  <hop> <from>Transf Name</from><to>Schema Props</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Check License</name>
-    <type>UserDefinedJavaClass</type>
+    <name>Job Executor</name>
+    <type>JobExecutor</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -96,129 +100,113 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-
-    <definitions>
-        <definition>
-        <class_type>TRANSFORM_CLASS</class_type>
-
-        <class_name>Processor</class_name>
-
-        <class_source><![CDATA[import com.ivyis.opensource.license.manager.LicenseDetails;
-import com.ivyis.opensource.license.manager.LicenseManager;
-import com.ivyis.opensource.license.manager.LicenseManagerFactory;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-
-private FieldHelper customerNameOut = null;
-private FieldHelper emailOut = null;
-private FieldHelper pluginNameOut = null;
-private FieldHelper licenseKeyIn = null;
-
-public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
-{
-	Object[] r = getRow();
-	if (r == null) {
-		setOutputDone();
-		return false;
-	}
-
-    if (first)
-    {
-        first = false;
-		licenseKeyIn = get(Fields.In, "LICENSE_KEY");
-    }
-
-	try{
-		final LicenseManager lm = LicenseManagerFactory.getLicenseManager();
-		final LicenseDetails licenseDetails = lm.decodeLicense(licenseKeyIn.getString(r));
-		if(!"ivyse".equalsIgnoreCase(licenseDetails.getPlugin()) ){
-			new Exception("Invalid plugin name.");
-		}else{
-			get(Fields.Out, "pluginName").setValue(r, licenseDetails.getPlugin());
-			get(Fields.Out, "type").setValue(r, licenseDetails.getType());
-			get(Fields.Out, "customerName").setValue(r, licenseDetails.getCustomerName());
-			get(Fields.Out, "email").setValue(r, licenseDetails.getEmail());
-			get(Fields.Out, "currentDate").setValue(r, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
-		}
-	}catch(Exception e){
-		get(Fields.Out, "pluginName").setValue(r, null);
-		get(Fields.Out, "type").setValue(r, null);
-		get(Fields.Out, "customerName").setValue(r, null);
-		get(Fields.Out, "email").setValue(r, null);
-		get(Fields.Out, "currentDate").setValue(r, null);
-	}
-
-    r = createOutputRow(r, data.outputRowMeta.size());
-	// Send the row on to the next step.
-    putRow(data.outputRowMeta, r);
-
-    return true;
-}
-]]></class_source>
-        </definition>
-    </definitions>
-    <fields>
-        <field>
-        <field_name>pluginName</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-        <field>
-        <field_name>type</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-        <field>
-        <field_name>customerName</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-        <field>
-        <field_name>email</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-        <field>
-        <field_name>currentDate</field_name>
-
-        <field_type>String</field_type>
-
-        <field_length>-1</field_length>
-
-        <field_precision>-1</field_precision>
-
-        </field>
-    </fields><clear_result_fields>N</clear_result_fields>
-<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
+    <specification_method>filename</specification_method>
+    <job_object_id/>
+    <job_name/>
+    <filename>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;execTransf.kjb</filename>
+    <directory_path/>
+    <group_size>1</group_size>
+    <group_field/>
+    <group_time/>
+          <parameters>       <variablemapping><variable>ServerUserName</variable><field>ServerUserName</field><input/></variablemapping>
+       <variablemapping><variable>ServerPassword</variable><field>ServerPassword</field><input/></variablemapping>
+       <variablemapping><variable>ServerUrl</variable><field>ServerUrl</field><input/></variablemapping>
+       <variablemapping><variable>transfName</variable><field>transfName</field><input/></variablemapping>
+       <variablemapping><variable>schemaName</variable><field>schemaName</field><input/></variablemapping>
+       <variablemapping><variable>schemaXML</variable><field>schemaXML</field><input/></variablemapping>
+       <variablemapping><variable>schemaDataSource</variable><field>schemaDataSource</field><input/></variablemapping>
+    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    <execution_result_target_step/>
+    <execution_time_field>ExecutionTime</execution_time_field>
+    <execution_result_field>ExecutionResult</execution_result_field>
+    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
+    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
+    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
+    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
+    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
+    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
+    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
+    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
+    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
+    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
+    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
+    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
+    <result_rows_target_step>OUTPUT</result_rows_target_step>
+      <result_rows_field><name>Type</name><type>String</type><length>-1</length><precision>-1</precision></result_rows_field>
+      <result_rows_field><name>Message</name><type>String</type><length>-1</length><precision>-1</precision></result_rows_field>
+      <result_rows_field><name>MessageDetails</name><type>String</type><length>-1</length><precision>-1</precision></result_rows_field>
+      <result_rows_field><name>MessageFullDetails</name><type>String</type><length>-1</length><precision>-1</precision></result_rows_field>
+    <result_files_target_step/>
+    <result_files_file_name_field>FileName</result_files_file_name_field>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>432</xloc>
-      <yloc>192</yloc>
+      <xloc>576</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Variables</name>
+    <name>Load Variables</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <specification_method>filename</specification_method>
+    <trans_object_id/>
+    <trans_name/>
+    <filename>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;_loadVariables.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+      </input>
+      <output>
+    <mapping>    <input_step/>
+    <output_step/>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+    </mapping>      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+    <allow_multiple_input>N</allow_multiple_input>
+    <allow_multiple_output>N</allow_multiple_output>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>128</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>OUTPUT</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>768</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Schema Props</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -230,8 +218,32 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
            </partitioning>
     <fields>
       <field>
-        <name>LICENSE_KEY</name>
-        <variable>&#x24;&#x7b;license_key&#x7d;</variable>
+        <name>schemaName</name>
+        <variable>&#x24;&#x7b;schemaName&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>schemaXML</name>
+        <variable>&#x24;&#x7b;schemaXML&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>schemaDataSource</name>
+        <variable>&#x24;&#x7b;schemaDataSource&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -244,15 +256,15 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>144</xloc>
-      <yloc>192</yloc>
+      <xloc>416</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>LICENSE_KEY Data log</name>
-    <type>WriteToLog</type>
+    <name>Transf Name</name>
+    <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -261,215 +273,24 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage/>
     <fields>
       <field>
-        <name>LICENSE_KEY</name>
-        </field>
-      <field>
-        <name>pluginName</name>
-        </field>
-      <field>
-        <name>type</name>
-        </field>
-      <field>
-        <name>customerName</name>
-        </field>
-      <field>
-        <name>email</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>600</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>LICENSE_KEY Log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage/>
-    <fields>
-      <field>
-        <name>LICENSE_KEY</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>264</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>OUTPUT</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>pluginName</name>
-        <rename>Plugin Name</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>customerName</name>
-        <rename>Customer Name</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>type</name>
-        <rename>Plugin Type</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>currentDate</name>
-        <rename>Date</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>888</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write LicenseKey file</name>
-    <type>XMLOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <encoding>UTF-8</encoding>
-    <name_space>ivyse</name_space>
-    <xml_main_element>license</xml_main_element>
-    <xml_repeat_element>user</xml_repeat_element>
-    <file>
-      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;..&#x2f;LicenseKey</name>
-      <extention>xml</extention>
-      <servlet_output>N</servlet_output>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <omit_null_values>N</omit_null_values>
-      <date_time_format/>
-      <add_to_result_filenames>N</add_to_result_filenames>
-      <zipped>N</zipped>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <content_type>Element</content_type>
-        <name>LICENSE_KEY</name>
-        <element>UserLicense</element>
+        <name>transfName</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif/>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>pluginName</name>
-        <element>UserPluginName</element>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
+        <nullif>_invokeValidateSchemaEndpoint</nullif>
         <length>-1</length>
         <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>type</name>
-        <element>UserPluginType</element>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>customerName</name>
-        <element>UserName</element>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>email</name>
-        <element>UserEmail</element>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <content_type>Element</content_type>
-        <name>currentDate</name>
-        <element>UserLicenseDate</element>
-        <type>String</type>
-        <format>yyyy-MM-dd HH&#x3a;mm&#x3a;ss</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>192</yloc>
+      <xloc>256</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

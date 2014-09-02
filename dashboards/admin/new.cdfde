@@ -3,6 +3,29 @@
   "title": "new",
   "rows": [
    {
+    "id": "4e1ead6c-2980-b37f-8fb1-cb2b7d8456bc",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "CSS",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Css",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": ".modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
     "id": "90b9c24d-3b6f-2f69-7b6c-44dd1c6e3499",
     "type": "LayoutRow",
     "typeDesc": "Row",
@@ -41,8 +64,8 @@
     ]
    },
    {
-    "id": "839ef063-60a7-aebe-468c-b7f6fc4b84db",
-    "type": "LayoutColumn",
+    "id": "27807814-8199-c8d3-9f98-86e055d71f4c",
+    "type": "LayoutBootstrapColumn",
     "typeDesc": "Column",
     "parent": "90b9c24d-3b6f-2f69-7b6c-44dd1c6e3499",
     "properties": [
@@ -52,39 +75,29 @@
       "type": "Id"
      },
      {
-      "name": "columnSpan",
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
       "value": "12",
-      "type": "Integer"
+      "type": "String"
      },
      {
-      "name": "columnPrepend",
+      "name": "bootstrapLarge",
       "value": "",
-      "type": "Integer"
+      "type": "String"
      },
      {
-      "name": "columnAppend",
+      "name": "bootstrapCssClass",
       "value": "",
-      "type": "Integer"
-     },
-     {
-      "name": "columnPrependTop",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnAppendBottom",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnBorder",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "columnBigBorder",
-      "value": "false",
-      "type": "Boolean"
+      "type": "String"
      },
      {
       "name": "height",
@@ -164,7 +177,78 @@
      },
      {
       "name": "html",
-      "value": "\n<div class=\"modal fade\" id=\"chooseSchemaProps\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"chooseSchemaPropsLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n        <h4 class=\"modal-title\" id=\"myModalLabel\">Choose Data Source</h4>\n      </div>\n      <div class=\"modal-body\">\n        <div class=\"form-group\">\n            <label class=\"col-sm-3 control-label\" for=\"DataSourceLabel\">Data Source</label>\n            <div class=\"col-sm-9\" id=\"dataSourceSelector\">\n            \n            </div>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n        <button type=\"button\" class=\"btn btn-primary\" id=\"publishSchema\">Publish</button>\n      </div>\n    </div>\n  </div>\n</div> ",
+      "value": "\n<div class=\"modal fade\" id=\"chooseSchemaProps\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n        <h4 class=\"modal-title\" id=\"myModalLabel\">Choose Data Source</h4>\n      </div>\n      <div class=\"modal-body\">\n        <div class=\"form-group\">\n            <label class=\"col-sm-3 control-label\" for=\"DataSourceLabel\">Data Source</label>\n            <div class=\"col-sm-9\" id=\"dataSourceSelector\">\n            \n            </div>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-sm btn-default\" data-dismiss=\"modal\">Close</button>\n        <button type=\"button\" class=\"btn btn-sm btn-success\" id=\"publishSchema\">Publish</button>\n      </div>\n    </div>\n  </div>\n</div> ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "8c1eedac-fd6e-d2aa-def2-721899ea6036",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "1d121de6-fdb7-6478-d320-3cc6170ae881",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "8c1eedac-fd6e-d2aa-def2-721899ea6036",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<div id=\"notifyModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n  <div class=\"modal-dialog modal-lg\">\n  <div class=\"modal-content\">\n      <div class=\"modal-header\"></div>\n      <div class=\"modal-body\"></div>\n      <div class=\"modal-footer\">\n          <div class=\"pull-right\">\n            <button class=\"btn btn-success btn-sm btn-ok\" data-dismiss=\"modal\">OK</button>\n          </div>    \n      </div>\n  </div>\n  </div>\n</div> ",
       "type": "Html"
      },
      {
@@ -245,7 +329,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject).css(\"height\", \"600px\");\n    this.defaultButtons[0][\"label\"] = \"Publish Schema\";\n    \n    this.schemaProps={};\n    this.file=true;\n    \n    this.loadFile = function() {\n        var myself=this;\n        \n        // Disable button\n        $('button.save',this.$ph).attr('disabled', true);\n        this.externalEditor = $('iframe',this.$ph);\n        var headerHeight = $('.textEditorControls', this.$ph).height() + $('.textEditorNotification', this.$ph).height();\n        var editorHeight = this.$ph.height() - headerHeight - 5;\n        this.externalEditor.height(editorHeight);\n        this.externalEditor.load(function(){\n            var editorEnv = myself.getEditorWindow();\n            editorEnv.listeners.onStatusUpdate = myself.setDirty;\n            editorEnv.listeners.notify = function(msg, type){\n                myself.notify(msg);\n            }\n            $('#notifications').hide();\n        });\n        this.externalEditor.attr('src', webAppPath+\"/api/repos/IvySE/static/custom/html/editor.html\");\n    };\n    \n    this.save = function(){\n        var myself = this;\n        $(\"#chooseSchemaProps\").modal(\"show\");\n        \n        $(\"button#publishSchema\").click(function(){\n            $('#chooseSchemaProps').modal('hide');\n            myself.getEditorWindow().params.datasource = $(\"#dataSourceSelector select\").val();\n            myself.getEditorWindow().save();\n        })\n    };\n    \n    this.template = function(){ \n        return \"<div class='textEditorComponent'><div class='textEditorControls'>\"+\n        \"<div class='textEditorFile'><span class='fileLabel'>New Schema</span></div>\"+\n        \"<div class='textEditorButtons'>{{#buttons}}<button class='{{clazz}} btn'>{{label}}</button>{{/buttons}}</div>\" +\n        \"</div><div class='textEditorNotification'><span class='textEditorNotificationMsg'>Test</span></div>\"+\n        \"<div class='textEditorRightPanel'></div>\"+\n        \"<div class='textEditorIframeContainer'><div class='textEditorIframe'><iframe seamless='true' marginheight='0'></iframe></div>\"+\n        \"</div>\"\n    };\n    \n    this.notify = function(msg, level){\n        var result = \"Error on publishing.\"\n        if(\"Schema published\" == msg){\n            result = msg;\n            $.ajax({\n                url: \"../../saiku/api/admin/discover/refresh\",\n                type: 'get',\n                dataType: 'xml',\n                async: false\n            });\n            $.ajax({\n                url: \"../../../api/system/refresh/mondrianSchemaCache\",\n                type: 'get',\n                dataType: 'xml',\n                async: false\n            });\n            $.ajax({\n                url: \"../../cda/api/cacheMonitor/removeAll?method=removeAll\",\n                type: 'post',\n                dataType: 'xml',\n                async: false\n            });\n        }\n        var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n        $notifications.text(result);\n        $notifications.show().delay(4000).fadeOut('slow');\n    }\n}",
+      "value": "function(){\n    $(\"#\"+this.htmlObject).css(\"height\", \"600px\");\n    this.defaultButtons[0][\"label\"] = \"Publish Schema\";\n    \n    this.schemaProps={};\n    this.file=true;\n    \n    this.defaultButtons=[{\n        clazz: \"check-schema btn btn-xs btn-default\",\n        icon: \"fa fa-check\",\n        label: \" Check Schema\", \n        callback: function(){\n            this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            this.$ph.find(\".textEditorNotificationMsg\").show();\n            console.log(\"Checking schema...\");\n            this.check();\n        }\n    },{\n        clazz: \"save-schema btn btn-xs btn-default\",\n        icon: \"fa fa-floppy-o\",\n        label: \" Save\", \n        callback: function(){\n            this.save();\n            if(typeof this.saveCallback === \"function\" ){\n                this.saveCallback();\n            }\n        }\n    }];\n    \n    this.check=function(){\n        this.getEditorWindow().check();\n    };\n    \n    this.loadFile = function() {\n        var myself=this;\n        \n        // Disable button\n        $('button.save',this.$ph).attr('disabled', true);\n        this.externalEditor = $('iframe',this.$ph);\n        var headerHeight = $('.textEditorControls', this.$ph).height() + $('.textEditorNotification', this.$ph).height();\n        var editorHeight = this.$ph.height() - headerHeight - 5;\n        this.externalEditor.height(editorHeight);\n        this.externalEditor.load(function(){\n            var editorEnv = myself.getEditorWindow();\n            editorEnv.listeners.onStatusUpdate = myself.setDirty;\n            editorEnv.listeners.notify = function(action, msg, type){\n                myself.notify(action, msg);\n            }\n            $('#notifications').hide();\n        });\n        this.externalEditor.attr('src', webAppPath+\"/api/repos/IvySE/static/custom/html/editor.html\");\n    };\n    \n    this.save = function(){\n        var myself = this;\n        $( \"body\" ).off( \"click\", \"button#publishSchema\");\n        $(\"#chooseSchemaProps\").modal(\"show\");\n        \n        $(\"button#publishSchema\").on(\"click\",function(){\n            myself.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            myself.$ph.find(\".textEditorNotificationMsg\").show();\n            $('#chooseSchemaProps').modal('hide');\n            myself.getEditorWindow().params.datasource = $(\"#dataSourceSelector select\").val();\n            myself.getEditorWindow().save();\n        });\n    };\n    \n    this.template = function(){ \n        return \"<div class='textEditorComponent'><div class='textEditorControls'>\"+\n        \"<div class='textEditorFile'><span class='fileLabel'>New Schema</span></div>\"+\n        \"<div class='textEditorButtons'>{{#buttons}}<button class='{{clazz}} btn'><i class=\\\"{{icon}}\\\"></i> {{label}}</button>{{/buttons}}</div>\" +\n        \"</div><div class='textEditorNotification'><span class='textEditorNotificationMsg'>Test</span></div>\"+\n        \"<div class='textEditorRightPanel'></div>\"+\n        \"<div class='textEditorIframeContainer'><div class='textEditorIframe'><iframe seamless='true' marginheight='0'></iframe></div>\"+\n        \"</div>\"\n    };\n    \n    this.notify = function(action, msg, level){\n        $(\"#notifyModal .modal-body\").empty();\n        this.$ph.find(\".textEditorNotificationMsg\").fadeOut('slow');\n        if(action==\"save\"){\n            var result = \"Error on save schema.\"\n            if(\"Schema published\" == msg){\n                result = \"Schema published.\";\n                $.ajax({\n                    url: \"../../saiku/api/admin/discover/refresh\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../../api/system/refresh/mondrianSchemaCache\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../cda/api/cacheMonitor/removeAll?method=removeAll\",\n                    type: 'post',\n                    dataType: 'xml',\n                    async: false\n                });\n                \n                $(\"#notifyModal .modal-body\").empty().append('<div class=\"alert alert-success\" role=\"alert\">'+result+'</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(result);\n                $notifications.show().delay(4000).fadeOut('slow');\n            }else{\n                $(\"#notifyModal .modal-body\").empty().append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on save schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on save schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        \n        if(action==\"check\"){\n            try{\n                if(JSON.parse(msg).resultset[0][0].toLowerCase() == \"success\"){\n                    $(\"#notifyModal .modal-body\").empty().append('<div class=\"alert alert-success\" role=\"alert\"><strong>Success!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }else{\n                    $(\"#notifyModal .modal-body\").empty().append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    $(\"#notifyModal .modal-body\").append('<div class=\"panel-group\" id=\"accordionError\">' +\n                    '<div class=\"panel panel-default\">' +\n                        '<div class=\"panel-heading\">' +\n                          '<h4 class=\"panel-title\">' +\n                            '<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\">More details</a>' +\n                          '</h4>' +\n                        '</div>' +\n                        '<div id=\"collapseOne\" class=\"panel-collapse collapse\">' +\n                          '<div class=\"panel-body\">' +\n                          '<div class=\"col-md-12\"><strong>Message: </strong> ' + JSON.parse(msg).resultset[0][2] + '</div>' +\n                          '<div class=\"col-md-12\"><strong>Stack: </strong><br/> ' + JSON.parse(msg).resultset[0][3].replace(/\\n/g,\"<br/>\") + '</div>' +\n                          '</div>' +\n                        '</div>' +\n                      '</div>' +\n                    '</div>');\n                        \n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }\n            }catch(e){\n                $(\"#notifyModal .modal-body\").empty().append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on check schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on check schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        $('#notifyModal').modal();\n    }\n}",
       "type": "JavaScript"
      },
      {
