@@ -1,6 +1,6 @@
 IvySE - Ivy Schema Editor
 =========================
-This web based mondrian schema editor is developed on the new Bootstrap framework which means it has a responsive UI that will work on mobile devices (“take a look in your mobile”).
+This web based mondrian schema editor is developed on the new Bootstrap framework which means it has a responsive UI that will work on mobile devices (“have a look in your mobile device”).
 
 ![Ivy SE](https://raw.githubusercontent.com/ivylabs/ivy-se/master/static/custom/img/IvySE.png)
 
@@ -8,6 +8,7 @@ Some of the features in this 0.0.3 release:
 ===========================================
 
 * Schema validation
+* Delete schema
 * ...
 
 
