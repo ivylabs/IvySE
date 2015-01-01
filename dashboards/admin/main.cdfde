@@ -301,7 +301,7 @@
      },
      {
       "name": "html",
-      "value": "<div id=\"notifyModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n  <div class=\"modal-dialog modal-lg\">\n  <div class=\"modal-content\">\n      <div class=\"modal-header\"></div>\n      <div class=\"modal-body\"></div>\n      <div class=\"modal-footer\">\n          <div class=\"pull-right\">\n            <button class=\"btn btn-success btn-sm btn-ok\" data-dismiss=\"modal\">OK</button>\n          </div>    \n      </div>\n  </div>\n  </div>\n</div> ",
+      "value": "<div id=\"notifyModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n<div class=\"modal-dialog modal-lg\">\n  <div class=\"modal-content\">\n      <div class=\"modal-header\"></div>\n      <div class=\"modal-body\"></div>\n      <div class=\"modal-footer\">\n          <div class=\"pull-right\">\n            <button class=\"btn btn-success btn-sm btn-ok\" data-dismiss=\"modal\">OK</button>\n          </div>    \n      </div>\n  </div>\n  </div>\n</div> ",
       "type": "Html"
      },
      {
@@ -362,6 +362,11 @@
      },
      {
       "name": "oLanguage",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "language",
       "value": "",
       "type": "JavaScript"
      },
