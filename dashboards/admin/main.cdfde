@@ -371,11 +371,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "parameters",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "colHeaders",
       "value": "[\"Schema Name\",\"Actions\"]",
       "type": "Array"
@@ -399,6 +394,11 @@
       "name": "colSortable",
       "value": "[]",
       "type": "Array"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
      },
      {
       "name": "expandParameters",
@@ -427,7 +427,7 @@
      },
      {
       "name": "displayLength",
-      "value": "5",
+      "value": "20",
       "type": "Integer"
      },
      {
@@ -456,14 +456,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sortBy",
-      "value": "[]",
-      "type": "SortByArray"
-     },
-     {
       "name": "sDom",
       "value": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
       "type": "JavaScript"
+     },
+     {
+      "name": "sortBy",
+      "value": "[]",
+      "type": "SortByArray"
      },
      {
       "name": "priority",

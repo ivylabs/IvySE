@@ -88,11 +88,92 @@
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>Audit_Smarts</name>
+    <server>&#x24;&#x7b;SG_AUDIT_SMARTS_HOST&#x7d;</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;SG_AUDIT_SMARTS_SCHEMA&#x7d;</database>
+    <port>&#x24;&#x7b;SG_AUDIT_SMARTS_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;SG_AUDIT_SMARTS_USER&#x7d;</username>
+    <password>&#x24;&#x7b;SG_AUDIT_SMARTS_PASS&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;SG_AUDIT_SMARTS_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>BI_Audit_Cube</name>
+    <server>&#x24;&#x7b;BI_AUDIT_CUBE_HOST&#x7d;</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;BI_AUDIT_CUBE_SCHEMA&#x7d;</database>
+    <port>&#x24;&#x7b;BI_AUDIT_CUBE_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;BI_AUDIT_CUBE_USER&#x7d;</username>
+    <password>&#x24;&#x7b;BI_AUDIT_CUBE_PASS&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;BI_AUDIT_CUBE_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Production</name>
+    <server>&#x24;&#x7b;SG_PROD_HOST&#x7d;</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;SG_PROD_SCHEMA&#x7d;</database>
+    <port>&#x24;&#x7b;SG_PROD_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;SG_PROD_USER&#x7d;</username>
+    <password>&#x24;&#x7b;SG_PROD_PASS&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;SG_PROD_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>Select values</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate Rows</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>Get data from XML</to><enabled>Y</enabled> </hop>
   <hop> <from>Get data from XML</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Copy rows to result</name>
@@ -107,7 +188,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>744</xloc>
+      <xloc>864</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
@@ -215,7 +296,7 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>408</xloc>
+      <xloc>512</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
@@ -240,7 +321,7 @@
     <httpPassword>&#x24;&#x7b;ServerPassword&#x7d;</httpPassword>
     <proxyHost/>
     <proxyPort/>
-    <socketTimeout>10000</socketTimeout>
+    <socketTimeout>60000</socketTimeout>
     <connectionTimeout>10000</connectionTimeout>
     <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
     <lookup>
@@ -252,7 +333,7 @@
     </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
+      <xloc>288</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
@@ -280,7 +361,7 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>552</xloc>
+      <xloc>672</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
