@@ -109,7 +109,7 @@
      },
      {
       "name": "bootstrapMedium",
-      "value": "6",
+      "value": "12",
       "type": "String"
      },
      {
@@ -119,7 +119,7 @@
      },
      {
       "name": "bootstrapCssClass",
-      "value": "col-md-offset-3",
+      "value": "col-md-12",
       "type": "String"
      },
      {
@@ -371,23 +371,13 @@
       "type": "JavaScript"
      },
      {
-      "name": "colHeaders",
-      "value": "[\"Schema Name\",\"Actions\"]",
-      "type": "Array"
-     },
-     {
-      "name": "colTypes",
-      "value": "[\"String\",\"actionPreviewButtons\"]",
-      "type": "colTypesCustom"
-     },
-     {
       "name": "colFormats",
-      "value": "[\"%s\",\"%s\"]",
+      "value": "[\"%s\",\"%s\",\"%s\",\"%s\"]",
       "type": "Array"
      },
      {
       "name": "colWidths",
-      "value": "[\"80%\",\"20%\"]",
+      "value": "[\"35%\",\"35%\",\"20%\",\"10%\"]",
       "type": "Array"
      },
      {
@@ -399,6 +389,16 @@
       "name": "parameters",
       "value": "[]",
       "type": "ValuesArray"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[\"Schema Name\",\"Cube\",\"Cube Type\",\"Actions\"]",
+      "type": "Array"
+     },
+     {
+      "name": "colTypes",
+      "value": "[\"String\",\"String\",\"String\",\"actionPreviewButtons\"]",
+      "type": "colTypesCustom"
      },
      {
       "name": "expandParameters",
@@ -502,7 +502,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function f(){\n    \n    // Options\n    var optsLib = {\n        dashboard: {\n            buttons: [\n                {\n                    cssClass: \"removeSchema\",\n                    title: \" \",\n                    tooltip: \"Remove Schema\",\n                    action: function (v, st) {\n                        $.post( Dashboards.getWebAppPath() + '/plugin/data-access/api/datasource/analysis/'+encodeURIComponent(st.series)+'/remove', function( data ) {\n                            if(st.series==SCHEMA_NAME){\n                                $(\"#\"+render_TEXT_EDITOR.htmlObject).removeAttr('style');\n                                render_TEXT_EDITOR.clear()\n                            }\n                            Dashboards.fireChange(\"REFRESH_TABLE\",0);\n                        });\n                    }\n                },\n                {\n                    cssClass: \"previewSaiku\",\n                    title: \" \",\n                    tooltip: \"Saiku Analytics Preview\",\n                    action: function (v, st) {\n                        window.open(Dashboards.getWebAppPath() + '/content/saiku-ui/index.html?biplugin5=true', true);\n                    }\n                },\n                {\n                    cssClass: \"previewAnalyzer\",\n                    title: \" \",\n                    tooltip: \"Pentaho Analyzer Preview\",\n                    action: function (v, st) {\n                       window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/service/selectSchema', true);\n                    }\n                }              \n            ]\n        }\n    };\n\n    var opts = function (st){\n        var type = st.tableData[st.rowIdx][1].toLowerCase();\n        return optsLib[type] || {}\n    };\n    this.setAddInOptions(\"colType\",\"actionPreviewButtons\",opts);\n    \n}",
+      "value": "function f(){\n    \n    // Options\n    var optsLib = {\n        dashboard: {\n            buttons: [\n                {\n                    cssClass: \"removeSchema\",\n                    title: \" \",\n                    tooltip: \"Remove Schema\",\n                    action: function (v, st) {\n                        $.post( Dashboards.getWebAppPath() + '/plugin/data-access/api/datasource/analysis/'+encodeURIComponent(st.series)+'/remove', function( data ) {\n                            if(st.series==SCHEMA_NAME){\n                                $(\"#\"+render_TEXT_EDITOR.htmlObject).removeAttr('style');\n                                render_TEXT_EDITOR.clear()\n                            }\n                            Dashboards.fireChange(\"REFRESH_TABLE\",0);\n                        });\n                    }\n                },\n                {\n                    cssClass: \"previewSaiku\",\n                    title: \" \",\n                    tooltip: \"Saiku Analytics Preview\",\n                    action: function (v, st) {\n                        window.open(Dashboards.getWebAppPath() + '/content/saiku-ui/index.html?biplugin5=true', true);\n                    }\n                },\n                {\n                    cssClass: \"previewAnalyzer\",\n                    title: \" \",\n                    tooltip: \"Pentaho Analyzer Preview\",\n                    action: function (v, st) {\n                       window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/service/selectSchema', true);\n                    }\n                }              \n            ]\n        }\n    };\n\n    var opts = function (st){\n        var type = st.tableData[st.rowIdx][1].toLowerCase();\n        return optsLib[type] || {}\n    };\n    this.setAddInOptions(\"colType\",\"actionPreviewButtons\",opts);\n    \n} ",
       "type": "JavaScript"
      },
      {
@@ -512,7 +512,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n      $(\"#\"+this.htmlObject).find(\"table\").wrap( document.createElement( \"div\" ) );\n      $(\"#\"+this.htmlObject).find(\"table\").addClass(\"table table-striped table-hover table-bordered\");\n      $(\"#\"+this.htmlObject).find(\"table\").css(\"margin-bottom\", \"5px\");\n      $(\"#\"+this.htmlObject).css(\"margin-bottom\", \"10px\");\n      $(\"#\"+this.htmlObject).find(\"table\").parent().addClass(\"table-responsive\");\n      $(\"#\"+this.htmlObject).find(\"table tr\").removeClass(\"odd even\");\n      $(\"#\"+this.htmlObject+\" div:first\").css(\"min-height\",\"inherit\");\n}",
+      "value": "function(){\n      $(\"#\"+this.htmlObject).find(\"table\").wrap( document.createElement( \"div\" ) );\n      $(\"#\"+this.htmlObject).find(\"table\").addClass(\"table table-striped table-hover table-bordered\");\n      $(\"#\"+this.htmlObject).find(\"table\").css(\"margin-bottom\", \"5px\");\n      $(\"#\"+this.htmlObject).css(\"margin-bottom\", \"10px\");\n      $(\"#\"+this.htmlObject).find(\"table\").parent().addClass(\"table-responsive\");\n      $(\"#\"+this.htmlObject).find(\"table tr\").removeClass(\"odd even\");\n      $(\"#\"+this.htmlObject+\" div:first\").css(\"min-height\",\"inherit\");\n} ",
       "type": "JavaScript"
      },
      {
