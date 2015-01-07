@@ -507,7 +507,7 @@
      },
      {
       "name": "postFetch",
-      "value": "",
+      "value": "function(data) { console.log(data); } ",
       "type": "JavaScript"
      },
      {
@@ -537,7 +537,7 @@
      },
      {
       "name": "clickAction",
-      "value": "function(elem){\n    if(elem.colIdx==1)return;\n    Dashboards.fireChange(\"SCHEMA_NAME\", elem.series);\n}",
+      "value": "function(elem){\n    if(elem.colIdx > 0)return;\n    Dashboards.fireChange(\"SCHEMA_NAME\", elem.series);\n} ",
       "type": "JavaScript"
      }
     ]

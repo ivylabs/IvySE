@@ -159,19 +159,25 @@
     <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
     <result_rows_target_step>OUTPUT</result_rows_target_step>
     <result_rows_field>
-      <name>schema</name>
+      <name>SCHEMA</name>
       <type>String</type>
       <length>-1</length>
       <precision>-1</precision>
     </result_rows_field>
     <result_rows_field>
-      <name>cube</name>
+      <name>CUBE</name>
       <type>String</type>
       <length>-1</length>
       <precision>-1</precision>
     </result_rows_field>
     <result_rows_field>
-      <name>cubetype</name>
+      <name>CUBE_TYPE</name>
+      <type>String</type>
+      <length>-1</length>
+      <precision>-1</precision>
+    </result_rows_field>
+    <result_rows_field>
+      <name>ACTIONBUTTONS</name>
       <type>String</type>
       <length>-1</length>
       <precision>-1</precision>
