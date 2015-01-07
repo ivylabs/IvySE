@@ -43,7 +43,7 @@
      },
      {
       "name": "resourceCode",
-      "value": "table.tableComponent tr td.column0{\n    cursor: pointer;\n} \n\ndiv.textEditorComponent div.textEditorControls{\n    background-color: #8CC63F;\n} \n.removeSchema{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/delete_icon.gif\");\n    background-repeat: no-repeat;\n} \n.previewSaiku{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/saiku_16x16.png\");\n    background-repeat: no-repeat;\n} \n.previewAnalyzer{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/analysis_report_file_icon.png\");\n    background-repeat: no-repeat;\n} \n\ntbody td.actionPreviewButtons button {\n    background-color: transparent;\n}\ntbody td.actionPreviewButtons button:last-child {\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: medium;\n}\n\ntbody tr td.actionPreviewButtons div.buttonContainer{\n    text-align: center;\n}\n\ntbody tr td.actionPreviewButtons button {\n    transition-delay: 0s;\n    transition-duration: 0.2s;\n    transition-property: opacity;\n    transition-timing-function: ease;\n}\ntbody td.actionPreviewButtons button {\n    -moz-border-bottom-colors: none;\n    -moz-border-left-colors: none;\n    -moz-border-right-colors: none;\n    -moz-border-top-colors: none;\n    border-bottom-color: -moz-use-text-color;\n    border-bottom-style: none;\n    border-bottom-width: 0;\n    border-image-outset: 0 0 0 0;\n    border-image-repeat: stretch stretch;\n    border-image-slice: 100% 100% 100% 100%;\n    border-image-source: none;\n    border-image-width: 1 1 1 1;\n    border-left-color-ltr-source: physical;\n    border-left-color-rtl-source: physical;\n    border-left-color-value: -moz-use-text-color;\n    border-left-style-ltr-source: physical;\n    border-left-style-rtl-source: physical;\n    border-left-style-value: none;\n    border-left-width-ltr-source: physical;\n    border-left-width-rtl-source: physical;\n    border-left-width-value: 0;\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: 0;\n    border-top-color: -moz-use-text-color;\n    border-top-style: none;\n    border-top-width: 0;\n    box-shadow: none;\n    color: #333333;\n    font-size: 13px;\n    height: 16px;\n    margin-left: 5px;\n    vertical-align: baseline;\n    width: 21px;\n    border-style: none;\n} \n\n.modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} \n\n\n/* Adapted from SpinKit by @tobiasahlin (http://tobiasahlin.com/spinkit) */\n.spinner {\n    margin: 0;\n    width: 50px;\n    height: 50px;\n    position: absolute;\n    top: calc(50% - 25px);\n    left: calc(50% - 25px);\n    z-index: 999;\n}\n\n.cube1, .cube2 {\n  background-color: #333;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  \n  -webkit-animation: cubemove 1.8s infinite ease-in-out;\n  animation: cubemove 1.8s infinite ease-in-out;\n}\n\n.cube2 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n\n@-webkit-keyframes cubemove {\n  25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }\n  50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }\n  75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }\n  100% { -webkit-transform: rotate(-360deg) }\n}\n\n@keyframes cubemove {\n  25% { \n    transform: translateX(42px) rotate(-90deg) scale(0.5);\n    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);\n  } 50% { \n    transform: translateX(42px) translateY(42px) rotate(-179deg);\n    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);\n  } 50.1% { \n    transform: translateX(42px) translateY(42px) rotate(-180deg);\n    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);\n  } 75% { \n    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);\n    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);\n  } 100% { \n    transform: rotate(-360deg);\n    -webkit-transform: rotate(-360deg);\n  }\n} ",
+      "value": "table.tableComponent tr td.column0:hover,\ntable.tableComponent tr td.column1:hover {\n    cursor: pointer;\n    background: #f5f5f5;\n}\n\ndiv.textEditorComponent div.textEditorControls{\n    background-color: #8CC63F;\n} \n.removeSchema{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/delete_icon.gif\");\n    background-repeat: no-repeat;\n} \n.previewSaiku{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/saiku_16x16.png\");\n    background-repeat: no-repeat;\n} \n.previewAnalyzer{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/analysis_report_file_icon.png\");\n    background-repeat: no-repeat;\n} \n\ntbody td.actionPreviewButtons button {\n    background-color: transparent;\n}\ntbody td.actionPreviewButtons button:last-child {\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: medium;\n}\n\ntbody tr td.actionPreviewButtons div.buttonContainer{\n    text-align: center;\n}\n\ntbody tr td.actionPreviewButtons button {\n    transition-delay: 0s;\n    transition-duration: 0.2s;\n    transition-property: opacity;\n    transition-timing-function: ease;\n}\ntbody td.actionPreviewButtons button {\n    -moz-border-bottom-colors: none;\n    -moz-border-left-colors: none;\n    -moz-border-right-colors: none;\n    -moz-border-top-colors: none;\n    border-bottom-color: -moz-use-text-color;\n    border-bottom-style: none;\n    border-bottom-width: 0;\n    border-image-outset: 0 0 0 0;\n    border-image-repeat: stretch stretch;\n    border-image-slice: 100% 100% 100% 100%;\n    border-image-source: none;\n    border-image-width: 1 1 1 1;\n    border-left-color-ltr-source: physical;\n    border-left-color-rtl-source: physical;\n    border-left-color-value: -moz-use-text-color;\n    border-left-style-ltr-source: physical;\n    border-left-style-rtl-source: physical;\n    border-left-style-value: none;\n    border-left-width-ltr-source: physical;\n    border-left-width-rtl-source: physical;\n    border-left-width-value: 0;\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: 0;\n    border-top-color: -moz-use-text-color;\n    border-top-style: none;\n    border-top-width: 0;\n    box-shadow: none;\n    color: #333333;\n    font-size: 13px;\n    height: 16px;\n    margin-left: 5px;\n    vertical-align: baseline;\n    width: 21px;\n    border-style: none;\n} \n\n.modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} ",
       "type": "Resource"
      }
     ]
@@ -119,7 +119,7 @@
      },
      {
       "name": "bootstrapCssClass",
-      "value": "col-md-12",
+      "value": "",
       "type": "String"
      },
      {
@@ -320,90 +320,6 @@
       "type": "String"
      }
     ]
-   },
-   {
-    "id": "778bde23-0197-b927-f938-29d7c0f4d41e",
-    "type": "LayoutFreeForm",
-    "typeDesc": "FreeForm",
-    "parent": "UnIqEiD",
-    "properties": [
-     {
-      "name": "name",
-      "value": "spinner",
-      "type": "Id"
-     },
-     {
-      "name": "cssClass",
-      "value": "spinner hidden",
-      "type": "String"
-     },
-     {
-      "name": "elementTag",
-      "value": "div",
-      "type": "String"
-     },
-     {
-      "name": "otherAttributes",
-      "value": "[]",
-      "type": "OptionArray"
-     }
-    ]
-   },
-   {
-    "id": "4a866d0e-4915-a25d-649d-d7c2aa8f8557",
-    "type": "LayoutFreeForm",
-    "typeDesc": "FreeForm",
-    "parent": "778bde23-0197-b927-f938-29d7c0f4d41e",
-    "properties": [
-     {
-      "name": "name",
-      "value": "cube1",
-      "type": "Id"
-     },
-     {
-      "name": "cssClass",
-      "value": "cube1",
-      "type": "String"
-     },
-     {
-      "name": "elementTag",
-      "value": "div",
-      "type": "String"
-     },
-     {
-      "name": "otherAttributes",
-      "value": "[]",
-      "type": "OptionArray"
-     }
-    ]
-   },
-   {
-    "id": "5e5295a3-020f-1a68-d9fb-3c7726de5cfa",
-    "type": "LayoutFreeForm",
-    "typeDesc": "FreeForm",
-    "parent": "778bde23-0197-b927-f938-29d7c0f4d41e",
-    "properties": [
-     {
-      "name": "name",
-      "value": "cube2",
-      "type": "Id"
-     },
-     {
-      "name": "cssClass",
-      "value": "cube2",
-      "type": "String"
-     },
-     {
-      "name": "elementTag",
-      "value": "div",
-      "type": "String"
-     },
-     {
-      "name": "otherAttributes",
-      "value": "[]",
-      "type": "OptionArray"
-     }
-    ]
    }
   ]
  },
@@ -496,7 +412,7 @@
      },
      {
       "name": "filter",
-      "value": "false",
+      "value": "true",
       "type": "Boolean"
      },
      {
@@ -586,7 +502,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function f() {    \n    // Options\n    var optsLib = {\n        dashboard: {\n            buttons: [\n                {\n                    cssClass: \"removeSchema\",\n                    title: \" \",\n                    tooltip: \"Remove Schema\",\n                    action: function (v, st) {\n                        $.post( Dashboards.getWebAppPath() + '/plugin/data-access/api/datasource/analysis/'+encodeURIComponent(st.series)+'/remove', function( data ) {\n                            if(st.series==SCHEMA_NAME){\n                                $(\"#\"+render_TEXT_EDITOR.htmlObject).removeAttr('style');\n                                render_TEXT_EDITOR.clear()\n                            }\n                            Dashboards.fireChange(\"REFRESH_TABLE\",0);\n                        });\n                    }\n                },\n                {\n                    cssClass: \"previewSaiku\",\n                    title: \" \",\n                    tooltip: \"Saiku Analytics Preview\",\n                    action: function (v, st) {\n                        window.open(Dashboards.getWebAppPath() + '/content/saiku-ui/index.html?biplugin5=true', true);\n                    }\n                },\n                {\n                    cssClass: \"previewAnalyzer\",\n                    title: \" \",\n                    tooltip: \"Pentaho Analyzer Preview\",\n                    action: function (v, st) {\n                       window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/service/selectSchema', true);\n                    }\n                }              \n            ]\n        }\n    };\n\n    //Define options to pass in to the Action Buttons table addin\n    var opts = function (st) {\n        //Get the key value from the \"Actions\" column to look up in optsLib\n        var type = st.tableData[st.rowIdx][3].toLowerCase();\n        \n        //Return the buttons object from optsLib at the specified key\n        return optsLib[type] || {}\n    };\n    \n    this.setAddInOptions(\"colType\", \"actionPreviewButtons\", opts);\n} ",
+      "value": "function f() {    \n    // Options\n    var optsLib = {\n        dashboard: {\n            buttons: [\n                {\n                    cssClass: \"removeSchema\",\n                    title: \" \",\n                    tooltip: \"Remove Schema\",\n                    action: function (v, st) {\n                        $.post( Dashboards.getWebAppPath() + '/plugin/data-access/api/datasource/analysis/'+encodeURIComponent(st.series)+'/remove', function( data ) {\n                            if(st.series==SCHEMA_NAME){\n                                $(\"#\"+render_TEXT_EDITOR.htmlObject).removeAttr('style');\n                                render_TEXT_EDITOR.clear()\n                            }\n                            Dashboards.fireChange(\"REFRESH_TABLE\",0);\n                        });\n                    }\n                },\n                {\n                    cssClass: \"previewSaiku\",\n                    title: \" \",\n                    tooltip: \"Saiku Analytics Preview\",\n                    action: function (v, st) {\n                        window.open(Dashboards.getWebAppPath() + '/content/saiku-ui/index.html?biplugin5=true', true);\n                    }\n                },\n                {\n                    cssClass: \"previewAnalyzer\",\n                    title: \" \",\n                    tooltip: \"Pentaho Analyzer Preview\",\n                    action: function (v, st) {\n                        console.log(st);\n                        var row = st.tableData[st.rowIdx];\n                        var schema = encodeURIComponent(row[0]);\n                        var cube = encodeURIComponent(row[1]);\n                        \n                        if (!schema || !cube) {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/service/selectSchema', true);\n                        } else {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/editor?showFieldList=true&showFieldLayout=true&catalog=' + schema + '&cube=' + cube + '&showRepositoryButtons=true', true);\n                        }\n                    }\n                }              \n            ]\n        }\n    };\n\n    //Define options to pass in to the Action Buttons table addin\n    var opts = function (st) {\n        //Get the key value from the \"Actions\" column to look up in optsLib\n        var type = st.tableData[st.rowIdx][3].toLowerCase();\n        \n        //Return the buttons object from optsLib at the specified key\n        return optsLib[type] || {}\n    };\n    \n    this.setAddInOptions(\"colType\", \"actionPreviewButtons\", opts);\n} ",
       "type": "JavaScript"
      },
      {
@@ -596,7 +512,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n      $(\"#\"+this.htmlObject).find(\"table\").wrap( document.createElement( \"div\" ) );\n      $(\"#\"+this.htmlObject).find(\"table\").addClass(\"table table-striped table-hover table-bordered\");\n      $(\"#\"+this.htmlObject).find(\"table\").css(\"margin-bottom\", \"5px\");\n      $(\"#\"+this.htmlObject).css(\"margin-bottom\", \"10px\");\n      $(\"#\"+this.htmlObject).find(\"table\").parent().addClass(\"table-responsive\");\n      $(\"#\"+this.htmlObject).find(\"table tr\").removeClass(\"odd even\");\n      $(\"#\"+this.htmlObject+\" div:first\").css(\"min-height\",\"inherit\");\n} ",
+      "value": "function(){\n      $(\"#\"+this.htmlObject).find(\"table\").wrap( document.createElement( \"div\" ) );\n      $(\"#\"+this.htmlObject).find(\"table\").addClass(\"table table-striped table-bordered\");\n      $(\"#\"+this.htmlObject).find(\"table\").css(\"margin-bottom\", \"5px\");\n      $(\"#\"+this.htmlObject).css(\"margin-bottom\", \"10px\");\n      $(\"#\"+this.htmlObject).find(\"table\").parent().addClass(\"table-responsive\");\n      $(\"#\"+this.htmlObject).find(\"table tr\").removeClass(\"odd even\");\n      $(\"#\"+this.htmlObject+\" div:first\").css(\"min-height\",\"inherit\");\n} ",
       "type": "JavaScript"
      },
      {
@@ -621,7 +537,7 @@
      },
      {
       "name": "clickAction",
-      "value": "function(elem){\n    if(elem.colIdx > 0)return;\n    Dashboards.fireChange(\"SCHEMA_NAME\", elem.series);\n} ",
+      "value": "function(elem) {\n    console.log(elem);\n    if (elem.colIdx > 1) return;\n    \n    //Get the row we clicked on\n    var row = elem.tableData[elem.rowIdx];\n    \n    console.log(row);\n    \n    //Check which column we clicked\n    if (elem.colIdx == 0) {\n        //Clicked on the schema\n        Dashboards.fireChange(\"CUBE_NAME\", null);\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[1]);\n    } else if (elem.colIdx == 1) {\n        //Clicked on the cube\n        Dashboards.fireChange(\"CUBE_NAME\", row[1]);\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[0]);\n    }\n} ",
       "type": "JavaScript"
      }
     ]
@@ -669,7 +585,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject).css(\"height\", \"600px\");\n    this.defaultButtons[0][\"label\"] = \"Update Schema\";\n    \n    this.schemaProps={};\n    \n    this.defaultButtons=[{\n        clazz: \"check-schema btn btn-xs btn-default\",\n        icon: \"fa fa-check\",\n        label: \" Check Schema\", \n        callback: function(){\n            this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            this.$ph.find(\".textEditorNotificationMsg\").show();\n            console.log(\"Checking schema...\");\n            this.check();\n        }\n    },{\n        clazz: \"save-schema btn btn-xs btn-default\",\n        icon: \"fa fa-floppy-o\",\n        label: \" Save\", \n        callback: function(){\n            this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            this.$ph.find(\".textEditorNotificationMsg\").show();\n            this.save();\n            if(typeof this.saveCallback === \"function\" ){\n                this.saveCallback();\n            }\n        }\n    }];\n    \n    this.check=function(){\n        this.getEditorWindow().check();\n    };\n    \n    this.loadFile = function() {\n        var myself=this;\n        \n        this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n        this.$ph.find(\".textEditorNotificationMsg\").show();\n        \n        $.ajax({\n            url: webAppPath+\"/plugin/data-access/api/datasource/\"+this.file+\"/getAnalysisDatasourceInfo\",\n            type: \"GET\",\n            complete: function(data) {\n                var dataProps = data.responseText.split(\";\");\n                for(var i=0;i<dataProps.length;i++){\n                    myself.schemaProps[dataProps[i].split(\"=\")[0]]=dataProps[i].split(\"=\")[1];\n                }\n                myself.$ph.find(\".textEditorNotificationMsg\").fadeOut('slow');\n            }\n        });\n        \n        // Disable button\n        $('button.save',this.$ph).attr('disabled', true);\n        this.externalEditor = $('iframe',this.$ph);\n        var headerHeight = $('.textEditorControls', this.$ph).height() + $('.textEditorNotification', this.$ph).height();\n        var editorHeight = this.$ph.height() - headerHeight - 5;\n        this.externalEditor.height(editorHeight);\n        this.externalEditor.load(function(){\n            var editorEnv = myself.getEditorWindow();\n            editorEnv.listeners.onStatusUpdate = myself.setDirty;\n            editorEnv.listeners.notify = function(action, msg, type){\n                myself.notify(action, msg);\n                console.log(\"Notify of action\", action);\n            }\n            myself.$ph.find(\".textEditorNotificationMsg\").empty();\n        });\n        this.externalEditor.attr('src',webAppPath+\"/api/repos/IvySE/static/custom/html/editor.html?\"+'path=' + encodeURIComponent(encodeURIComponent(this.file)) + \"&datasource=\" + myself.schemaProps[\"DataSource\"] );\n        console.log(this.externalEditor);\n    };\n    \n    this.template = function(){ \n        return \"<div class='textEditorComponent'><div class='textEditorControls'>\"+\n        \"<div class='textEditorFile'><span class='fileLabel'>Schema: </span>\"+SCHEMA_NAME+\"</div>\"+\n        \"<div class='textEditorButtons'>{{#buttons}}<button class='{{clazz}} btn'><i class=\\\"{{icon}}\\\"></i> {{label}}</button>{{/buttons}}</div>\" +\n        \"</div><div class='textEditorNotification'><span class='textEditorNotificationMsg'>Test</span></div>\"+\n        \"<div class='textEditorRightPanel'></div>\"+\n        \"<div class='textEditorIframeContainer'><div class='textEditorIframe'><iframe seamless='true' marginheight='0'></iframe></div>\"+\n        \"</div>\"\n    };\n    \n    this.notify = function(action, msg, level){\n        $(\"#notifyModal .modal-body\").empty();\n        if(action==\"save\"){\n            var result = \"Error on save \" + SCHEMA_NAME + \" schema.\"\n            if(\"Schema published\" == msg){\n                result = SCHEMA_NAME + \" schema saved.\";\n                $.ajax({\n                    url: \"../../saiku/api/admin/discover/refresh\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../../api/system/refresh/mondrianSchemaCache\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../cda/api/cacheMonitor/removeAll?method=removeAll\",\n                    type: 'post',\n                    dataType: 'xml',\n                    async: false\n                });\n                \n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-success\" role=\"alert\">'+result+'</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(result);\n                $notifications.show().delay(4000).fadeOut('slow');\n            }else{\n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on save schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on save schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        \n        if(action==\"check\"){\n            try{\n                if(JSON.parse(msg).resultset[0][0].toLowerCase() == \"success\"){\n                    $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-success\" role=\"alert\"><strong>Success!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }else{\n                    $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    $(\"#notifyModal .modal-body\").append('<div class=\"panel-group\" id=\"accordionError\">' +\n                    '<div class=\"panel panel-default\">' +\n                        '<div class=\"panel-heading\">' +\n                          '<h4 class=\"panel-title\">' +\n                            '<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\">More details</a>' +\n                          '</h4>' +\n                        '</div>' +\n                        '<div id=\"collapseOne\" class=\"panel-collapse collapse\">' +\n                          '<div class=\"panel-body\">' +\n                          '<div class=\"col-md-12\"><strong>Message: </strong> ' + JSON.parse(msg).resultset[0][2] + '</div>' +\n                          '<div class=\"col-md-12\"><strong>Stack: </strong><br/> ' + JSON.parse(msg).resultset[0][3].replace(/\\n/g,\"<br/>\") + '</div>' +\n                          '</div>' +\n                        '</div>' +\n                      '</div>' +\n                    '</div>');\n                        \n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }\n            }catch(e){\n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on check schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on check schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        $('#notifyModal').modal();\n    }\n} ",
+      "value": "function(){\n    $(\"#\"+this.htmlObject).css(\"height\", \"600px\");\n    this.defaultButtons[0][\"label\"] = \"Update Schema\";\n    \n    this.schemaProps={};\n    \n    this.defaultButtons=[{\n        clazz: \"check-schema btn btn-xs btn-default\",\n        icon: \"fa fa-check\",\n        label: \" Check Schema\", \n        callback: function(){\n            this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            this.$ph.find(\".textEditorNotificationMsg\").show();\n            console.log(\"Checking schema...\");\n            this.check();\n        }\n    },{\n        clazz: \"save-schema btn btn-xs btn-default\",\n        icon: \"fa fa-floppy-o\",\n        label: \" Save\", \n        callback: function(){\n            this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            this.$ph.find(\".textEditorNotificationMsg\").show();\n            this.save();\n            if(typeof this.saveCallback === \"function\" ){\n                this.saveCallback();\n            }\n        }\n    }];\n    \n    this.check=function(){\n        this.getEditorWindow().check();\n    };\n    \n    this.loadFile = function() {\n        var myself=this;\n        \n        this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n        this.$ph.find(\".textEditorNotificationMsg\").show();\n        \n        $.ajax({\n            url: webAppPath+\"/plugin/data-access/api/datasource/\"+this.file+\"/getAnalysisDatasourceInfo\",\n            type: \"GET\",\n            complete: function(data) {\n                var dataProps = data.responseText.split(\";\");\n                for(var i=0;i<dataProps.length;i++){\n                    myself.schemaProps[dataProps[i].split(\"=\")[0]]=dataProps[i].split(\"=\")[1];\n                }\n                myself.$ph.find(\".textEditorNotificationMsg\").fadeOut('slow');\n            }\n        });\n        \n        // Disable button\n        $('button.save',this.$ph).attr('disabled', true);\n        this.externalEditor = $('iframe',this.$ph);\n        var headerHeight = $('.textEditorControls', this.$ph).height() + $('.textEditorNotification', this.$ph).height();\n        var editorHeight = this.$ph.height() - headerHeight - 5;\n        this.externalEditor.height(editorHeight);\n        this.externalEditor.load(function(){\n            var editorEnv = myself.getEditorWindow();\n            editorEnv.listeners.onStatusUpdate = myself.setDirty;\n            editorEnv.listeners.notify = function(action, msg, type){\n                myself.notify(action, msg);\n                console.log(\"Notify of action\", action);\n            }\n            myself.$ph.find(\".textEditorNotificationMsg\").empty();\n        });\n        var cube = CUBE_NAME ? \"&cube=\" + encodeURIComponent(CUBE_NAME) : \"\";\n        \n        this.externalEditor.attr('src',webAppPath+\"/api/repos/IvySE/static/custom/html/editor.html?\"+'path=' + encodeURIComponent(encodeURIComponent(this.file)) + \"&datasource=\" + myself.schemaProps[\"DataSource\"] + cube);\n        console.log(this.externalEditor);\n    };\n    \n    this.template = function(){ \n        return \"<div class='textEditorComponent'><div class='textEditorControls'>\"+\n        \"<div class='textEditorFile'><span class='fileLabel'>Schema: </span>\"+SCHEMA_NAME+\"</div>\"+\n        \"<div class='textEditorButtons'>{{#buttons}}<button class='{{clazz}} btn'><i class=\\\"{{icon}}\\\"></i> {{label}}</button>{{/buttons}}</div>\" +\n        \"</div><div class='textEditorNotification'><span class='textEditorNotificationMsg'>Test</span></div>\"+\n        \"<div class='textEditorRightPanel'></div>\"+\n        \"<div class='textEditorIframeContainer'><div class='textEditorIframe'><iframe seamless='true' marginheight='0'></iframe></div>\"+\n        \"</div>\"\n    };\n    \n    this.notify = function(action, msg, level){\n        $(\"#notifyModal .modal-body\").empty();\n        if(action==\"save\"){\n            var result = \"Error on save \" + SCHEMA_NAME + \" schema.\"\n            if(\"Schema published\" == msg){\n                result = SCHEMA_NAME + \" schema saved.\";\n                $.ajax({\n                    url: \"../../saiku/api/admin/discover/refresh\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../../api/system/refresh/mondrianSchemaCache\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../cda/api/cacheMonitor/removeAll?method=removeAll\",\n                    type: 'post',\n                    dataType: 'xml',\n                    async: false\n                });\n                \n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-success\" role=\"alert\">'+result+'</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(result);\n                $notifications.show().delay(4000).fadeOut('slow');\n            }else{\n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on save schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on save schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        \n        if(action==\"check\"){\n            try{\n                if(JSON.parse(msg).resultset[0][0].toLowerCase() == \"success\"){\n                    $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-success\" role=\"alert\"><strong>Success!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }else{\n                    $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    $(\"#notifyModal .modal-body\").append('<div class=\"panel-group\" id=\"accordionError\">' +\n                    '<div class=\"panel panel-default\">' +\n                        '<div class=\"panel-heading\">' +\n                          '<h4 class=\"panel-title\">' +\n                            '<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\">More details</a>' +\n                          '</h4>' +\n                        '</div>' +\n                        '<div id=\"collapseOne\" class=\"panel-collapse collapse\">' +\n                          '<div class=\"panel-body\">' +\n                          '<div class=\"col-md-12\"><strong>Message: </strong> ' + JSON.parse(msg).resultset[0][2] + '</div>' +\n                          '<div class=\"col-md-12\"><strong>Stack: </strong><br/> ' + JSON.parse(msg).resultset[0][3].replace(/\\n/g,\"<br/>\") + '</div>' +\n                          '</div>' +\n                        '</div>' +\n                      '</div>' +\n                    '</div>');\n                        \n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }\n            }catch(e){\n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on check schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on check schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        $('#notifyModal').modal();\n    }\n} ",
       "type": "JavaScript"
      },
      {
@@ -805,6 +721,34 @@
      {
       "name": "name",
       "value": "SCHEMA_NAME",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "19adc8a3-41eb-5efc-f3dd-cc382d365467",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "CUBE_NAME",
       "type": "Id"
      },
      {
