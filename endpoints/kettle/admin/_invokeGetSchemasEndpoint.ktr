@@ -133,7 +133,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>buttonshere</nullif>
+        <nullif>dashboard</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
