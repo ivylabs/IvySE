@@ -112,7 +112,10 @@
   <hop> <from>Write to log 2</from><to>Get data from XML</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Replace &#x25;20 with space in SCHEMA</to><enabled>Y</enabled> </hop>
   <hop> <from>Replace &#x25;20 with space in SCHEMA</from><to>Add ActionButtonColumn</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add ActionButtonColumn</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Reorder the fields to match the table component</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Decode VISIBILITY</from><to>Reorder the fields to match the table component</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add ActionButtonColumn</from><to>Visibility null is &#x22;Yes&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Visibility null is &#x22;Yes&#x22;</from><to>Decode VISIBILITY</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add ActionButtonColumn</name>
@@ -141,7 +144,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
+      <xloc>672</xloc>
       <yloc>576</yloc>
       <draw>Y</draw>
       </GUI>
@@ -377,7 +380,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
+      <xloc>96</xloc>
       <yloc>576</yloc>
       <draw>Y</draw>
       </GUI>
@@ -608,6 +611,21 @@
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>VISIBILITY</name>
+        <xpath>&#x40;visible</xpath>
+        <element_type>attribut</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <limit>0</limit>
     <loopxpath>&#x2f;Schema&#x2f;Cube</loopxpath>
@@ -666,6 +684,21 @@
       <field>
         <name>CUBE</name>
         <xpath>&#x40;name</xpath>
+        <element_type>attribut</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>VISIBILITY</name>
+        <xpath>&#x40;visible</xpath>
         <element_type>attribut</element_type>
         <result_type>valueof</result_type>
         <type>String</type>
@@ -782,6 +815,46 @@
     </step>
 
   <step>
+    <name>Reorder the fields to match the table component</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>SCHEMA</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CUBE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CUBE_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>VISIBILITY</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ACTIONBUTTONS</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>288</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Replace &#x25;20 with space in SCHEMA</name>
     <type>ReplaceString</type>
     <description/>
@@ -807,7 +880,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>672</xloc>
+      <xloc>864</xloc>
       <yloc>576</yloc>
       <draw>Y</draw>
       </GUI>
@@ -885,7 +958,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
+      <xloc>1056</xloc>
       <yloc>576</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1073,6 +1146,72 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>288</xloc>
       <yloc>288</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Visibility null is &#x22;Yes&#x22;</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue>Yes</replaceAllByValue>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+      <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>VISIBILITY</name>
+        <value>Yes</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Decode VISIBILITY</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>VISIBILITY</field_to_use>
+    <target_field/>
+    <non_match_default>Yes</non_match_default>
+    <fields>
+      <field>
+        <source_value>false</source_value>
+        <target_value>No</target_value>
+      </field>
+      <field>
+        <source_value>true</source_value>
+        <target_value>Yes</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

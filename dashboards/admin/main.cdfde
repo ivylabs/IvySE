@@ -43,7 +43,7 @@
      },
      {
       "name": "resourceCode",
-      "value": "table.tableComponent tr td.column0:hover,\ntable.tableComponent tr td.column1:hover {\n    cursor: pointer;\n    background: #f5f5f5;\n}\n\ndiv.textEditorComponent div.textEditorControls{\n    background-color: #8CC63F;\n} \n.removeSchema{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/delete_icon.gif\");\n    background-repeat: no-repeat;\n} \n.previewSaiku{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/saiku_16x16.png\");\n    background-repeat: no-repeat;\n} \n.previewAnalyzer{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/analysis_report_file_icon.png\");\n    background-repeat: no-repeat;\n} \n\ntbody td.actionPreviewButtons button {\n    background-color: transparent;\n}\ntbody td.actionPreviewButtons button:last-child {\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: medium;\n}\n\ntbody tr td.actionPreviewButtons div.buttonContainer{\n    text-align: center;\n}\n\ntbody tr td.actionPreviewButtons button {\n    transition-delay: 0s;\n    transition-duration: 0.2s;\n    transition-property: opacity;\n    transition-timing-function: ease;\n}\ntbody td.actionPreviewButtons button {\n    -moz-border-bottom-colors: none;\n    -moz-border-left-colors: none;\n    -moz-border-right-colors: none;\n    -moz-border-top-colors: none;\n    border-bottom-color: -moz-use-text-color;\n    border-bottom-style: none;\n    border-bottom-width: 0;\n    border-image-outset: 0 0 0 0;\n    border-image-repeat: stretch stretch;\n    border-image-slice: 100% 100% 100% 100%;\n    border-image-source: none;\n    border-image-width: 1 1 1 1;\n    border-left-color-ltr-source: physical;\n    border-left-color-rtl-source: physical;\n    border-left-color-value: -moz-use-text-color;\n    border-left-style-ltr-source: physical;\n    border-left-style-rtl-source: physical;\n    border-left-style-value: none;\n    border-left-width-ltr-source: physical;\n    border-left-width-rtl-source: physical;\n    border-left-width-value: 0;\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: 0;\n    border-top-color: -moz-use-text-color;\n    border-top-style: none;\n    border-top-width: 0;\n    box-shadow: none;\n    color: #333333;\n    font-size: 13px;\n    height: 16px;\n    margin-left: 5px;\n    vertical-align: baseline;\n    width: 21px;\n    border-style: none;\n} \n\n.modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} ",
+      "value": "table.tableComponent tr td.column0:hover,\ntable.tableComponent tr td.column1:hover {\n    cursor: pointer;\n    background: #f5f5f5;\n}\n\ntable.tableComponent th td.column0 { \n    text-align: left;\n}\n\ndiv.textEditorComponent div.textEditorControls{\n    background-color: #8CC63F;\n} \n.removeSchema{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/delete_icon.gif\");\n    background-repeat: no-repeat;\n} \n.previewSaiku{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/saiku_16x16.png\");\n    background-repeat: no-repeat;\n} \n.previewAnalyzer{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/analysis_report_file_icon.png\");\n    background-repeat: no-repeat;\n} \n\ntbody td.actionPreviewButtons button {\n    background-color: transparent;\n}\ntbody td.actionPreviewButtons button:last-child {\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: medium;\n}\n\ntbody tr td.actionPreviewButtons div.buttonContainer{\n    text-align: center;\n}\n\ntbody tr td.actionPreviewButtons button {\n    transition-delay: 0s;\n    transition-duration: 0.2s;\n    transition-property: opacity;\n    transition-timing-function: ease;\n}\ntbody td.actionPreviewButtons button {\n    -moz-border-bottom-colors: none;\n    -moz-border-left-colors: none;\n    -moz-border-right-colors: none;\n    -moz-border-top-colors: none;\n    border-bottom-color: -moz-use-text-color;\n    border-bottom-style: none;\n    border-bottom-width: 0;\n    border-image-outset: 0 0 0 0;\n    border-image-repeat: stretch stretch;\n    border-image-slice: 100% 100% 100% 100%;\n    border-image-source: none;\n    border-image-width: 1 1 1 1;\n    border-left-color-ltr-source: physical;\n    border-left-color-rtl-source: physical;\n    border-left-color-value: -moz-use-text-color;\n    border-left-style-ltr-source: physical;\n    border-left-style-rtl-source: physical;\n    border-left-style-value: none;\n    border-left-width-ltr-source: physical;\n    border-left-width-rtl-source: physical;\n    border-left-width-value: 0;\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: 0;\n    border-top-color: -moz-use-text-color;\n    border-top-style: none;\n    border-top-width: 0;\n    box-shadow: none;\n    color: #333333;\n    font-size: 13px;\n    height: 16px;\n    margin-left: 5px;\n    vertical-align: baseline;\n    width: 21px;\n    border-style: none;\n} \n\n.modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} ",
       "type": "Resource"
      }
     ]
@@ -371,33 +371,33 @@
       "type": "JavaScript"
      },
      {
-      "name": "colSortable",
-      "value": "[]",
-      "type": "Array"
-     },
-     {
       "name": "parameters",
       "value": "[]",
       "type": "ValuesArray"
      },
      {
       "name": "colHeaders",
-      "value": "[\"Schema Name\",\"Cube\",\"Cube Type\",\"Actions\"]",
+      "value": "[\"Schema Name\",\"Cube\",\"Cube Type\",\"Visible\",\"Actions\"]",
       "type": "Array"
      },
      {
       "name": "colTypes",
-      "value": "[\"String\",\"String\",\"String\",\"actionPreviewButtons\"]",
+      "value": "[\"String\",\"String\",\"String\",\"String\",\"actionPreviewButtons\"]",
       "type": "colTypesCustom"
      },
      {
       "name": "colFormats",
-      "value": "[\"%s\",\"%s\",\"%s\",\"%s\"]",
+      "value": "[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"]",
       "type": "Array"
      },
      {
       "name": "colWidths",
-      "value": "[\"35%\",\"35%\",\"20%\",\"10%\"]",
+      "value": "[\"35%\",\"35%\",\"10%\",\"10%\",\"10%\"]",
+      "type": "Array"
+     },
+     {
+      "name": "colSortable",
+      "value": "[]",
       "type": "Array"
      },
      {
@@ -417,12 +417,12 @@
      },
      {
       "name": "info",
-      "value": "false",
+      "value": "true",
       "type": "Boolean"
      },
      {
       "name": "sort",
-      "value": "false",
+      "value": "true",
       "type": "Boolean"
      },
      {
@@ -456,14 +456,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sDom",
-      "value": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-      "type": "JavaScript"
-     },
-     {
       "name": "sortBy",
       "value": "[]",
       "type": "SortByArray"
+     },
+     {
+      "name": "sDom",
+      "value": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+      "type": "JavaScript"
      },
      {
       "name": "priority",
@@ -502,7 +502,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function f() {    \n    // Options\n    var optsLib = {\n        dashboard: {\n            buttons: [\n                {\n                    cssClass: \"removeSchema\",\n                    title: \" \",\n                    tooltip: \"Remove Schema\",\n                    action: function (v, st) {\n                        $.post( Dashboards.getWebAppPath() + '/plugin/data-access/api/datasource/analysis/'+encodeURIComponent(st.series)+'/remove', function( data ) {\n                            if(st.series==SCHEMA_NAME){\n                                $(\"#\"+render_TEXT_EDITOR.htmlObject).removeAttr('style');\n                                render_TEXT_EDITOR.clear()\n                            }\n                            Dashboards.fireChange(\"REFRESH_TABLE\",0);\n                        });\n                    }\n                },\n                {\n                    cssClass: \"previewSaiku\",\n                    title: \" \",\n                    tooltip: \"Saiku Analytics Preview\",\n                    action: function (v, st) {\n                        window.open(Dashboards.getWebAppPath() + '/content/saiku-ui/index.html?biplugin5=true', true);\n                    }\n                },\n                {\n                    cssClass: \"previewAnalyzer\",\n                    title: \" \",\n                    tooltip: \"Pentaho Analyzer Preview\",\n                    action: function (v, st) {\n                        console.log(st);\n                        var row = st.tableData[st.rowIdx];\n                        var schema = encodeURIComponent(row[0]);\n                        var cube = encodeURIComponent(row[1]);\n                        \n                        if (!schema || !cube) {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/service/selectSchema', true);\n                        } else {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/editor?showFieldList=true&showFieldLayout=true&catalog=' + schema + '&cube=' + cube + '&showRepositoryButtons=true', true);\n                        }\n                    }\n                }              \n            ]\n        }\n    };\n\n    //Define options to pass in to the Action Buttons table addin\n    var opts = function (st) {\n        //Get the key value from the \"Actions\" column to look up in optsLib\n        var type = st.tableData[st.rowIdx][3].toLowerCase();\n        \n        //Return the buttons object from optsLib at the specified key\n        return optsLib[type] || {}\n    };\n    \n    this.setAddInOptions(\"colType\", \"actionPreviewButtons\", opts);\n} ",
+      "value": "function f() {    \n    // Options\n    var optsLib = {\n        dashboard: {\n            buttons: [\n                {\n                    cssClass: \"removeSchema\",\n                    title: \" \",\n                    tooltip: \"Remove Schema\",\n                    action: function (v, st) {\n                        $.post( Dashboards.getWebAppPath() + '/plugin/data-access/api/datasource/analysis/'+encodeURIComponent(st.series)+'/remove', function( data ) {\n                            if(st.series==SCHEMA_NAME){\n                                $(\"#\"+render_TEXT_EDITOR.htmlObject).removeAttr('style');\n                                render_TEXT_EDITOR.clear()\n                            }\n                            Dashboards.fireChange(\"REFRESH_TABLE\",0);\n                        });\n                    }\n                },\n                {\n                    cssClass: \"previewSaiku\",\n                    title: \" \",\n                    tooltip: \"Saiku Analytics Preview\",\n                    action: function (v, st) {\n                        window.open(Dashboards.getWebAppPath() + '/content/saiku-ui/index.html?biplugin5=true', true);\n                    }\n                },\n                {\n                    cssClass: \"previewAnalyzer\",\n                    title: \" \",\n                    tooltip: \"Pentaho Analyzer Preview\",\n                    action: function (v, st) {\n                        console.log(st);\n                        var row = st.tableData[st.rowIdx];\n                        var schema = encodeURIComponent(row[0]);\n                        var cube = encodeURIComponent(row[1]);\n                        \n                        if (!schema || !cube) {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/service/selectSchema', true);\n                        } else {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/editor?showFieldList=true&showFieldLayout=true&catalog=' + schema + '&cube=' + cube + '&showRepositoryButtons=true', true);\n                        }\n                    }\n                }              \n            ]\n        }\n    };\n\n    //Define options to pass in to the Action Buttons table addin\n    var opts = function (st) {\n        //Get the key value from the \"Actions\" column to look up in optsLib\n        var type = st.tableData[st.rowIdx][4].toLowerCase();\n        \n        //Return the buttons object from optsLib at the specified key\n        return optsLib[type] || {}\n    };\n    \n    this.setAddInOptions(\"colType\", \"actionPreviewButtons\", opts);\n} ",
       "type": "JavaScript"
      },
      {
@@ -537,7 +537,7 @@
      },
      {
       "name": "clickAction",
-      "value": "function(elem) {\n    console.log(elem);\n    if (elem.colIdx > 1) return;\n    \n    //Get the row we clicked on\n    var row = elem.tableData[elem.rowIdx];\n    \n    console.log(row);\n    \n    //Check which column we clicked\n    if (elem.colIdx == 0) {\n        //Clicked on the schema\n        Dashboards.fireChange(\"CUBE_NAME\", null);\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[1]);\n    } else if (elem.colIdx == 1) {\n        //Clicked on the cube\n        Dashboards.fireChange(\"CUBE_NAME\", row[1]);\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[0]);\n    }\n} ",
+      "value": "function(elem) {\n    console.log(elem);\n    if (elem.colIdx > 1) return;\n    \n    //Get the row we clicked on\n    var row = elem.tableData[elem.rowIdx];\n    \n    console.log(row);\n    \n    //Check which column we clicked\n    if (elem.colIdx == 0) {\n        //Clicked on the schema\n        Dashboards.fireChange(\"CUBE_NAME\", null);\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[0]);\n    } else if (elem.colIdx == 1) {\n        //Clicked on the cube\n        Dashboards.fireChange(\"CUBE_NAME\", row[1]);\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[0]);\n    }\n} ",
       "type": "JavaScript"
      }
     ]
