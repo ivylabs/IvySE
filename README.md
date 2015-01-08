@@ -2,7 +2,7 @@ IvySE - Ivy Schema Editor
 =========================
 This web based mondrian schema editor is developed on the new Bootstrap framework which means it has a responsive UI that will work on mobile devices (“have a look in your mobile device”).
 
-![Ivy SE](https://raw.githubusercontent.com/usbrandon/ivy-se/master/static/custom/img/IvySE.png)
+![Ivy SE](https://raw.githubusercontent.com/usbrandon/IvySE/master/static/custom/img/IvySE.png)
 
 
 Some of the features in this 0.0.4 release:
@@ -21,6 +21,7 @@ Some of the features in this 0.0.4 release:
 What is the road map for the next version?
 ==========================================
 
+* Directly opening cubes in Saiku
 * ...
 
 
