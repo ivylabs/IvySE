@@ -28,7 +28,7 @@ What is the road map for the next version?
 
 
 
-#Old Realeases
+#Old Releases
 
 
 ###0.0.3
