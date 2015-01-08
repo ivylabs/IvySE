@@ -230,6 +230,46 @@
           .nav.navbar-nav.navbar-right div.popover{
             color: #333;
           }
+
+          .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+            background-color: #539100 !important;
+          }
+
+          .about .left {
+            float: left;
+          }
+
+          .about ul.right {
+            list-style: none;
+            padding: 10px 0 0 0;
+          }
+
+          .about .img.profile {
+            height: 80px;
+            padding: 10px;
+          }
+
+          .about a {
+            color: #000;
+            font-size: 14px;
+            text-transform: none;
+            letter-spacing: .01em;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+          }
+
+          .about a:hover {
+            background-color: transparent !important;
+            color: #539100;
+          }
+
+          .about a.linkedin {
+            font-family: "Oswald", arial narrow, sans-serif;
+            letter-spacing: .08em;
+          }
+
+          .about a.twitter {
+            color: #539100;
+          }
         </style>
     </head>
     
@@ -265,7 +305,62 @@
                 </a>
               </li>
             </ul>
+            <!-- -->
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">About <span class="caret"></span></a>
+
+                <ul class="dropdown-menu about" role="menu">
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/hward.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="https://linkedin.com/in/usbandon">Harris Ward</a></li>
+                      <li><a class="twitter" href="https://twitter.com/hazamonzo">@hazamonzo</a></li>
+                      <li><a class="blog" href="https://www.ivy-is.co.uk/blog">ivy-is.co.uk/blog</a></li>
+                    </ul>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/jlatino.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="https://linkedin.com/in/usbandon">Joel Latino</a></li>
+                      <li><a class="twitter" href="https://twitter.com/latinojoel">@latinojoel</a></li>
+                      <li><a class="blog" href="https://joel-latino.blogspot.com">joel-latino.blogspot.com</a></li>
+                    </ul>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/bjackson.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="https://linkedin.com/in/usbandon">Brandon Jackson</a></li>
+                      <li><a class="twitter" href="https://twitter.com/usbrandon">@usbrandon</a></li>
+                      <li><a class="blog" href="#"></a></li>
+                    </ul>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/rsimpson.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="https://linkedin.com/in/richardleesimpson">Richard Simpson</a></li>
+                      <li><a class="twitter" href="https://twitter.com/richardlsimpson">@richardlsimpson</a></li>
+                      <li><a class="blog" href="#"></a></li>
+                    </ul>
+                  </li>
+                  
+                </ul>
+              </li>
+            </ul>
+            <!-- -->
           </div>
+
         </div>
       </header>
 
