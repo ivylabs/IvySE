@@ -15,7 +15,9 @@ Some of the features in this 0.0.4 release:
 * Sorting by anything
 * Wait indicators in the Ace editor so you know that loading or saving is really taking place.
 * See which cubes are visible and which are hidden.
-
+* The plugin returns to "Sparkl" so the community can hack and add to it easily
+* It is possible to show and hide the schema files once a user opens a schema. It cleans up the work space.
+* About - drop down lets you get in touch with the contributors to the plugin.
 
 
 What is the road map for the next version?
