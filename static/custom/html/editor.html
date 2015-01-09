@@ -33,14 +33,74 @@
         color: #444;
         background-color: #eaedee;
       }
+
+      /* Adapted from SpinKit by @tobiasahlin (http://tobiasahlin.com/spinkit) */
+      .hidden {
+        display: none;
+      }
+
+      .spinner {
+          margin: 0;
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          top: calc(50% - 25px);
+          left: calc(50% - 25px);
+          z-index: 999;
+      }
+
+      .cube1, .cube2 {
+        background-color: #333;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        -webkit-animation: cubemove 1.8s infinite ease-in-out;
+        animation: cubemove 1.8s infinite ease-in-out;
+      }
+
+      .cube2 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+      }
+
+      @-webkit-keyframes cubemove {
+        25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
+        50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
+        75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
+        100% { -webkit-transform: rotate(-360deg) }
+      }
+
+      @keyframes cubemove {
+        25% { 
+          transform: translateX(42px) rotate(-90deg) scale(0.5);
+          -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+        } 50% { 
+          transform: translateX(42px) translateY(42px) rotate(-179deg);
+          -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+        } 50.1% { 
+          transform: translateX(42px) translateY(42px) rotate(-180deg);
+          -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+        } 75% { 
+          transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+          -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+        } 100% { 
+          transform: rotate(-360deg);
+          -webkit-transform: rotate(-360deg);
+        }
+      } 
     
     </style>
     <meta charset="UTF-8">
     <title>Editor</title>
     <!--jquery -->
     <!-- Using jquery v1.4.4 because of IE8. When using newer versions like v1.7.1 IE8 forces compability mode and breaks CDE -->
-    <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/js/jquery.js"></script>
+    <!-- <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/js/jquery.js"></script> -->
+    <!-- Not sure the above applies anymore. Referencing the jquery.js file in pentaho-cdf instead, which seems to be the only one now -->
     
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/jquery.js"></script>
     <!-- CDF files -->
     <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/lib/shims.js"></script>
     <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/jquery.blockUI.js"></script>
@@ -56,7 +116,7 @@
     
     <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/captify/captify.js"></script>
     <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/daterangepicker/daterangepicker.jQuery.js"></script>
-    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../../../../content/pentaho-cdf/js/fancybox/jquery.fancybox.js"></script>
     <link rel="stylesheet" href="../../../../../../content/pentaho-cdf/js/captify/captify.css" type="text/css"/>
     <!-- ACE -->
     <script language="javascript" type="text/javascript" src="../../../../../../plugin/pentaho-cdf-dd/api/resources/get?resource=/js/cdf-dd-base.js"></script>
@@ -87,6 +147,7 @@
         var editor = new CodeEditor();
         var params = {};
         var fileName = null;
+        var cubeName = null;
         var isDirty = false;
         var listeners = {
           onStatusUpdate: null,
@@ -213,7 +274,10 @@
     
   </head>
   <body>
-
+    <div id="spinner" class="spinner editor-spinner hidden">
+      <div id="cube1" class="cube1"></div>
+      <div id="cube2" class="cube2"></div>
+    </div>
     <div id="btnArea"> <button id="saveBtn" onclick ="save()" style=""> Save </button><span id="infoArea"/></div>
     <pre style="position:relative;height:310px;width:760px;" id="editArea">
     </pre>
@@ -222,6 +286,7 @@
         window.onload = function() {
             params = getUrlParams()||{};
             fileName = params.path;
+            cubeName = params.cube;
             params.editorOnly=true;
             
             if(params.editorOnly){
@@ -249,16 +314,26 @@
             editor.setTheme("ace/theme/chrome");
             editor.setMode("xml");
 
-            if(fileName == null) {
-              editor.loadFile = function(schemaName){
-                this.setContents('<Schema name="NewSchema"></Schema>');
+            if (fileName == null) {
+              editor.loadFile = function(schemaName) {
+                this.setContents('<Schema name="NewSchema"></Schema>'); 
               };
-            }else{
-              editor.loadFile = function(schemaName){
+            } else {
+              editor.loadFile = function(schemaName) {
                 var myself = this;
-                $.get("/pentaho/plugin/IvySE/api/getschema",{paramschema:schemaName},
+
+                $(".spinner.editor-spinner").removeClass("hidden");
+
+                $.get("/pentaho/plugin/IvySE/api/getschema", {paramschema:schemaName},
                   function(fileContents) {
                     myself.setContents(fileContents);
+                    $(".spinner.editor-spinner").addClass("hidden");
+
+                    //If we have been passed a cube to load into, find the cube and focus on it
+                    if (cubeName) {
+                      console.log("Find " + cubeName);
+                      editor.editor.find(cubeName);
+                    }
                   }
                 );
               };
@@ -266,14 +341,19 @@
 
             editor.saveFile = function(fileName, contents, callback){
                 var myself=this;
+                
+                $(".spinner.editor-spinner").removeClass("hidden");
+
                 $.ajax({
                     url: webAppPath+"/plugin/IvySE/api/saveschema",
                     type: "POST",
                     data: { paramschemaName: fileName, paramschemaXML: contents, paramschemaDataSource: params.datasource },
                     complete: function(data){
-                        if(typeof callback == 'function'){
-                            callback(data);
-                        }
+                      $(".spinner.editor-spinner").addClass("hidden");
+
+                      if(typeof callback == 'function'){
+                        callback(data);
+                      }
                     }
                 });
             };
@@ -291,10 +371,12 @@
                     }
                 });
             };
-            
+
             editor.loadFile(fileName);
+            
             updateStatus();
             
+
             editor.onChange(function(){
                setDirty(true);
             });

@@ -161,7 +161,7 @@
     <httpPassword>&#x24;&#x7b;ServerPassword&#x7d;</httpPassword>
     <proxyHost/>
     <proxyPort/>
-    <socketTimeout>10000</socketTimeout>
+    <socketTimeout>60000</socketTimeout>
     <connectionTimeout>10000</connectionTimeout>
     <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
     <lookup>

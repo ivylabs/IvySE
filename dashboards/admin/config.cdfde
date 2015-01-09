@@ -844,7 +844,7 @@
      },
      {
       "name": "listeners",
-      "value": "['${p:SERVER_URL}']",
+      "value": "[]",
       "type": "Listeners"
      },
      {
@@ -922,7 +922,7 @@
      },
      {
       "name": "listeners",
-      "value": "['${p:SERVER_USERNAME}']",
+      "value": "[]",
       "type": "Listeners"
      },
      {
@@ -1000,7 +1000,7 @@
      },
      {
       "name": "listeners",
-      "value": "['${p:SERVER_PASSWORD}']",
+      "value": "[]",
       "type": "Listeners"
      },
      {
@@ -1213,7 +1213,7 @@
    {
     "id": "d9062a39-b8d6-0b60-ddc2-023d6c46bb86",
     "type": "ComponentsIvySE_GetLicenseDetails_CPKENDPOINT",
-    "typeDesc": "GetLicenseDetails Endpoint",
+    "typeDesc": "? ComponentsIvySE_GetLicenseDetails_CPKENDPOINT",
     "parent": "IVYSE_CPKENDPOINTS",
     "properties": [
      {

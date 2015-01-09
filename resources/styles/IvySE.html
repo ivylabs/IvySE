@@ -230,6 +230,46 @@
           .nav.navbar-nav.navbar-right div.popover{
             color: #333;
           }
+
+          .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+            background-color: #539100 !important;
+          }
+
+          .about .left {
+            float: left;
+          }
+
+          .about ul.right {
+            list-style: none;
+            padding: 10px 0 0 0;
+          }
+
+          .about .img.profile {
+            height: 80px;
+            padding: 10px;
+          }
+
+          .about a {
+            color: #000;
+            font-size: 14px;
+            text-transform: none;
+            letter-spacing: .01em;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+          }
+
+          .about a:hover {
+            background-color: transparent !important;
+            color: #539100;
+          }
+
+          .about a.linkedin {
+            font-family: "Oswald", arial narrow, sans-serif;
+            letter-spacing: .08em;
+          }
+
+          .about a.twitter {
+            color: #539100;
+          }
         </style>
     </head>
     
@@ -265,10 +305,62 @@
                 </a>
               </li>
             </ul>
+            <!-- -->
             <ul class="nav navbar-nav navbar-right">
-              <li id="IvyBC-Link"><a href="http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards/" target="_blank">Get the Bootstrap Componentes!</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">About <span class="caret"></span></a>
+
+                <ul class="dropdown-menu about" role="menu">
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/hward.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="http://uk.linkedin.com/pub/harris-ward/a/192/86b" target="_blank">Harris Ward</a></li>
+                      <li><a class="twitter" href="https://twitter.com/hazamonzo" target="_blank">@hazamonzo</a></li>
+                      <li><a class="blog" href="http://www.ivy-is.co.uk/blog" target="_blank">ivy-is.co.uk/blog</a></li>
+                    </ul>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/jlatino.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="http://uk.linkedin.com/in/latinojoel/en" target="_blank">Joel Latino</a></li>
+                      <li><a class="twitter" href="https://twitter.com/latinojoel" target="_blank">@latinojoel</a></li>
+                      <li><a class="blog" href="https://joel-latino.blogspot.com" target="_blank">joel-latino.blogspot.com</a></li>
+                    </ul>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/bjackson.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="http://linkedin.com/in/usbrandon" target="_blank">Brandon Jackson</a></li>
+                      <li><a class="twitter" href="https://twitter.com/usbrandon" target="_blank">@usbrandon</a></li>
+                      <li><a class="blog" href="#"></a></li>
+                    </ul>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="clearfix">
+                    <div class="left">
+                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/rsimpson.jpg">
+                    </div>
+                    <ul class="right">
+                      <li><a class="linkedin" href="http://linkedin.com/in/richardleesimpson" target="_blank">Richard Simpson</a></li>
+                      <li><a class="twitter" href="https://twitter.com/richardlsimpson" target="_blank">@richardlsimpson</a></li>
+                      <li><a class="blog" href="#"></a></li>
+                    </ul>
+                  </li>
+                  
+                </ul>
+              </li>
             </ul>
+            <!-- -->
           </div>
+
         </div>
       </header>
 
@@ -338,7 +430,7 @@
         <div class="container" id="footer">
         <div class="row">
           <div class="col col-sm-12">
-            <h4><a href="http://www.ivy-is.co.uk" target="_blank">Copyright © 2014 Ivy Information Systems Ltd</a></h4>
+            <h4><a href="http://www.ivy-is.co.uk" target="_blank">Copyright © 2015 Ivy Information Systems Ltd</a></h4>
             <h3>Follow Us</h3>
             <div class="btn-group">
              <a class="btn btn-twitter btn-xs" href="https://twitter.com/ivyinfosystems" target="_blank"><i class="fa fa-twitter icon-large"></i> Twitter</a>
@@ -364,7 +456,7 @@
             "you need to create mobile dashboards with ease.</br /><br />"+
             "Check out the <a href=\"http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards\" style=\"color:#b0e36f\">Ivy Labs</a> for more information!"
         });
-
+/*
         $(function() {
             $.get(webAppPath+"/plugin/IvySE/api/checkLicense", function( data ) {
               
@@ -447,16 +539,7 @@
               }
             });
         });
+	*/
       </script>
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        
-          ga('create', 'UA-47483249-6', 'github.com');
-          ga('send', 'pageview');
-        
-        </script>
     </body>
 </html>
