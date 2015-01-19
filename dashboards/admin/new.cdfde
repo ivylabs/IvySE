@@ -3,6 +3,29 @@
   "title": "new",
   "rows": [
    {
+    "id": "fc923b6d-05b9-8aab-f963-1a2c6435b261",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "opts",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": "var dashboardProperties = {\n    name: \"New\",\n    mainTitle: \"New OLAP Schema\"\n}; ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
     "id": "4e1ead6c-2980-b37f-8fb1-cb2b7d8456bc",
     "type": "LayoutResourceCode",
     "typeDesc": "Resource",
@@ -20,8 +43,109 @@
      },
      {
       "name": "resourceCode",
-      "value": ".modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} ",
+      "value": ".modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} \n\ndiv.textEditorComponent div.textEditorControls {\n    background-color: #B0E36F;\n} \n\n#EDITOR .textEditorFile {\n    color: #333;\n} ",
       "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "b4470b66-cdea-eed7-59e0-7078fe870182",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "32852283-76b9-54b8-42d2-a73103324290",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "b4470b66-cdea-eed7-59e0-7078fe870182",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "basic-login",
+      "type": "String"
      }
     ]
    },
@@ -29,7 +153,7 @@
     "id": "90b9c24d-3b6f-2f69-7b6c-44dd1c6e3499",
     "type": "LayoutRow",
     "typeDesc": "Row",
-    "parent": "UnIqEiD",
+    "parent": "32852283-76b9-54b8-42d2-a73103324290",
     "properties": [
      {
       "name": "name",
@@ -130,7 +254,7 @@
     "id": "1c4a8795-3395-a8a8-d10b-b08f2f3b57ed",
     "type": "LayoutRow",
     "typeDesc": "Row",
-    "parent": "UnIqEiD",
+    "parent": "32852283-76b9-54b8-42d2-a73103324290",
     "properties": [
      {
       "name": "name",
@@ -201,7 +325,7 @@
     "id": "8c1eedac-fd6e-d2aa-def2-721899ea6036",
     "type": "LayoutRow",
     "typeDesc": "Row",
-    "parent": "UnIqEiD",
+    "parent": "32852283-76b9-54b8-42d2-a73103324290",
     "properties": [
      {
       "name": "name",

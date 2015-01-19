@@ -54,8 +54,11 @@
               menuItemsHTML = "<li class='logo-wrapper'><h1 style='margin-bottom:0;margin-top:10px;'><span style='color:#8cc63f;font-weight:600;'>Ivy</span><span>SE</span></h1></li>";
 
               $.each(data.resultset,function(idx, val){
-                menuItemsHTML += "<li><a href='"+val[1]+"'>"+val[0]+"</a></li>"
+                menuItemsHTML += "<li><a href='"+val[1]+"'>"+val[0]+"</a></li>";
               });
+
+              // New Schema
+              menuItemsHTML += '<li><div style="padding-top:18px;"><a href="new" class="btn btn-xs btn-default btn" role="button">New Schema</a></div></li>';
 
               $('#mainMenuList').html(menuItemsHTML);
             },
