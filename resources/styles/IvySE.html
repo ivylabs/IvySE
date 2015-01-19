@@ -1,18 +1,76 @@
+ 
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Ivy Schema Editor</title>
-        <meta name="author" content="Ivy Information Systems">
+        <meta name="author" content="Ivy Information Systems Ltd">
         <link rel="shortcut icon" href="../../../api/repos/IvySE/static/custom/img/favicon.ico">
         <link rel="icon" type="image/x-icon" href="../../../api/repos/IvySE/static/custom/img/favicon.ico">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
 
-        @HEADER@        
+        @HEADER@   
+        
+        <link rel="stylesheet" href="../../../api/repos/IvySE/static/custom/css/icomoon-social.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <!--[if lt IE 9]>
-          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <link rel="stylesheet" href="../../../api/repos/IvySE/static/custom/css/main.css">
+
+        <script src="../../../api/repos/IvySE/static/custom/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-47483249-3', 'github.com');
+          ga('send', 'pageview');
+        </script>
+        
+        <script language="javascript" type="text/javascript">
+        
+          var dashboardProperties = {
+            name: "IvySE",
+            mainTitle: "IvySE - Ivy Schema Editor"
+          }; 
+
+
+          var render_getMenuItemsComponent = {
+            type: "Query",
+            name: "render_getMenuItemsComponent",
+            priority: 5,
+            parameters: [],
+            executeAtStart: true,
+            listeners: [],
+            postFetch: function d(data){
+            
+              Dashboards.log("Loading Style Menu Items");
+
+              menuItemsHTML = "<li class='logo-wrapper'><h1 style='margin-bottom:0;margin-top:10px;'><span style='color:#8cc63f;font-weight:600;'>Ivy</span><span>SE</span></h1></li>";
+
+              $.each(data.resultset,function(idx, val){
+                menuItemsHTML += "<li><a href='"+val[1]+"'>"+val[0]+"</a></li>"
+              });
+
+              $('#mainMenuList').html(menuItemsHTML);
+            },
+            queryDefinition:  {
+              endpoint: "getMenuItems",
+              pluginId: "IvySE",
+              stepName: "OUTPUT",
+              kettleOutput: "Json",
+              queryType: "cpk"
+            }
+          };
+
+          Dashboards.addComponents([render_getMenuItemsComponent]);
+
+        </script>
         
         <style type="text/css">
             /* override bootstrap styles */
@@ -22,41 +80,8 @@
             width:auto;
           }
 
-          body {
-            padding-top:50px;
-            color:#646464;
-            background-color:#efefef;
-          }
-
           h1,h2,h3,.highlight,.navbar a,#masthead h4 {
             font-family:'Oswald',arial narrow,sans-serif;
-          }
-
-          footer {
-            margin-top:40px;
-            padding-top:40px;
-            padding-bottom:40px;
-            background-color:#cecece;
-          }
-
-
-          #masthead {
-            min-height:178px;
-            background-color:#B0E36F;
-            color:#aaaacc;
-          }
-
-          #masthead h1 {
-            font-size: 55px;
-            line-height: 1;
-            color:#fefeff;
-            margin-top:45px;
-          }
-
-          #masthead .well {
-            margin-top:31px;
-            padding-bottom: 5px;
-            padding-top: 5px;
           }
 
           #topPanel {
@@ -79,60 +104,9 @@
             height:40px;
           }
 
-          a,a:hover {
-            color:#223344;
-            text-decoration:none;
-          }
-
           .icon-bar {
             background-color:#fff;
           }
-
-          @media screen and (min-width: 768px) {
-            #masthead h1 {
-              font-size: 60px;
-            }
-          }
-
-          .navbar-bright {
-            background-color:#8CC63F;
-            color:#fff;
-            margin-bottom: 0;
-            border-width: 0;
-          }
-
-          .navbar-bright a, .navbar-bright .navbar-brand, #masthead h4 {
-            color:#fff;
-            font-size:14px;
-            text-transform: uppercase;
-            letter-spacing:.08em;
-          }
-          
-          .navbar-bright li > a:hover, .navbar-bright li > a:focus {
-            background-color:#539100;
-          }
-
-          .navbar-bright button.navbar-toggle:hover{
-            background-color:#539100;
-          }
-
-          .dropdown-menu {
-            min-width: 250px;
-          }
-
-          .caret {
-            color:#fff;
-          }
-
-          .navbar-toggle {
-            color:#fff;
-            border-width:0;
-          }
-
-          .navbar-toggle:hover {
-            background-color:#fff;
-          }
-
           .panel {
             border-color:transparent;
             border-radius:0;
@@ -174,65 +148,9 @@
             padding:6px;
             color:#fff;
           }
-              
-          .btn-twitter {background-color:#4099FF;color:#fff;}
-          .btn-facebook {background-color:#4c66a4;color:#fff;}
-          .btn-linkedin {background-color:#3B5998;color:#fff;}
-          .btn-google-plus {background-color:#d34836;color:#fff;}
-          .btn-youtube {background-color:#BA1500;color:#fff;}
-          .btn-github {background-color:#808080;color:#fff;}
 
-          .btn-twitter:hover {background-color:#3088FF;color:#62BBFF;}
-          .btn-facebook:hover {background-color:#486ABD;color:#6A8DDE;}
-          .btn-linkedin:hover {background-color:#2A4998;color:#4C6BBA;}
-          .btn-google-plus:hover {background-color:#C23836;color:#E45A58;}
-          .btn-youtube:hover {background-color:#C20300;color:#E80300;}
-          .btn-github:hover {background-color:#A6A6A6;color:#BFBFBF;}
-
-          a.logo {
-              background-attachment: scroll;
-              background-clip: border-box;
-              background-color: rgba(0, 0, 0, 0);
-              background-origin: padding-box;
-              background-position: 0 50%;
-              background-repeat: no-repeat;
-              background-size: auto auto;
-              display: block;
-              height: 30px;
-              width: 60px;
-          }
-
-          .logo {
-              -moz-text-decoration-color: -moz-use-text-color;
-              -moz-text-decoration-line: none;
-              -moz-text-decoration-style: solid;
-              background-color: #FFFFFF;
-              border-bottom-left-radius: 2px;
-              border-bottom-right-radius: 2px;
-              border-top-left-radius: 2px;
-              border-top-right-radius: 2px;
-              color: #80CC28;
-              display: block;
-              font-size: 20px;
-              font-weight: 700;
-              margin-bottom: 9px;
-              margin-left: 10px;
-              margin-top: 5px;
-              padding-bottom: 3px;
-              padding-left: 3px;
-              padding-right: 3px;
-              padding-top: 3px;
-              text-align: center;
-              text-shadow: 0 0 1px;
-              width: 34px;
-          }
-
-          .nav.navbar-nav.navbar-right div.popover{
-            color: #333;
-          }
-
-          .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
-            background-color: #539100 !important;
+          .mainmenu ul.about {
+              width: 250px;
           }
 
           .about .left {
@@ -271,275 +189,149 @@
             color: #539100;
           }
         </style>
+
+        <script language="javascript" type="text/javascript">
+
+          $(function(){
+
+
+            $("#pageTitle").text(dashboardProperties.mainTitle);
+
+            var d = new Date();
+            $('.footer-copyright').html("&copy; "+d.getFullYear()+" Ivy Information Systems. All rights reserved.");
+            
+            $('#submitDetails, #declineDetails').click(function(){
+              render_setOptions.update();
+              $('#myModal').modal('hide');
+            });
+
+          });
+
+        </script>
     </head>
     
-    
     <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
         
-      <header class="navbar navbar-bright navbar-fixed-top" role="banner">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a target="_blank" class="logo" href="http://www.ivy-is.co.uk">
-              <img style="margin-right:25px" class="logo" src="../../../api/repos/IvySE/static/custom/img/ivy_logo.png">
-            </a>
-          </div>
-          <div class="navbar-collapse collapse" id="bs-navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="main">Ivy SE</a>
-              </li>
-              <li>
-                <a href="config">Config</a>
-              </li>
-              <li>
-                <a href="new">
-                  <button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary btn-xs">
-                    New Schema
-                  </button>
-                </a>
-              </li>
-            </ul>
-            <!-- -->
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">About <span class="caret"></span></a>
 
-                <ul class="dropdown-menu about" role="menu">
-                  <li class="clearfix">
-                    <div class="left">
-                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/hward.jpg">
-                    </div>
-                    <ul class="right">
-                      <li><a class="linkedin" href="http://uk.linkedin.com/pub/harris-ward/a/192/86b" target="_blank">Harris Ward</a></li>
-                      <li><a class="twitter" href="https://twitter.com/hazamonzo" target="_blank">@hazamonzo</a></li>
-                      <li><a class="blog" href="http://www.ivy-is.co.uk/blog" target="_blank">ivy-is.co.uk/blog</a></li>
+        <!-- Navigation & Logo-->
+        <div class="mainmenu-wrapper">
+          <div class="container">
+            <nav id="mainmenu" class="mainmenu">
+              <ul id="mainMenuList" class="nav navbar-nav"></ul>
+              <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">About <span class="caret"></span></a>
+
+                    <ul class="dropdown-menu about" role="menu">
+                      <li class="clearfix">
+                        <div class="left">
+                          <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/hward.jpg">
+                        </div>
+                        <ul class="right">
+                          <li><a class="linkedin" href="http://uk.linkedin.com/pub/harris-ward/a/192/86b" target="_blank">Harris Ward</a></li>
+                          <li><a class="twitter" href="https://twitter.com/hazamonzo" target="_blank">@hazamonzo</a></li>
+                          <li><a class="blog" href="http://www.ivy-is.co.uk/blog" target="_blank">ivy-is.co.uk/blog</a></li>
+                        </ul>
+                      </li>
+                      <li class="divider"></li>
+                      <li class="clearfix">
+                        <div class="left">
+                          <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/jlatino.jpg">
+                        </div>
+                        <ul class="right">
+                          <li><a class="linkedin" href="http://uk.linkedin.com/in/latinojoel/en" target="_blank">Joel Latino</a></li>
+                          <li><a class="twitter" href="https://twitter.com/latinojoel" target="_blank">@latinojoel</a></li>
+                          <li><a class="blog" href="https://joel-latino.blogspot.com" target="_blank">joel-latino.blogspot.com</a></li>
+                        </ul>
+                      </li>
+                      <li class="divider"></li>
+                      <li class="clearfix">
+                        <div class="left">
+                          <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/bjackson.jpg">
+                        </div>
+                        <ul class="right">
+                          <li><a class="linkedin" href="http://linkedin.com/in/usbrandon" target="_blank">Brandon Jackson</a></li>
+                          <li><a class="twitter" href="https://twitter.com/usbrandon" target="_blank">@usbrandon</a></li>
+                          <li><a class="blog" href="#"></a></li>
+                        </ul>
+                      </li>
+                      <li class="divider"></li>
+                      <li class="clearfix">
+                        <div class="left">
+                          <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/rsimpson.jpg">
+                        </div>
+                        <ul class="right">
+                          <li><a class="linkedin" href="http://linkedin.com/in/richardleesimpson" target="_blank">Richard Simpson</a></li>
+                          <li><a class="twitter" href="https://twitter.com/richardlsimpson" target="_blank">@richardlsimpson</a></li>
+                          <li><a class="blog" href="#"></a></li>
+                        </ul>
+                      </li>
                     </ul>
                   </li>
-                  <li class="divider"></li>
-                  <li class="clearfix">
-                    <div class="left">
-                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/jlatino.jpg">
-                    </div>
-                    <ul class="right">
-                      <li><a class="linkedin" href="http://uk.linkedin.com/in/latinojoel/en" target="_blank">Joel Latino</a></li>
-                      <li><a class="twitter" href="https://twitter.com/latinojoel" target="_blank">@latinojoel</a></li>
-                      <li><a class="blog" href="https://joel-latino.blogspot.com" target="_blank">joel-latino.blogspot.com</a></li>
-                    </ul>
-                  </li>
-                  <li class="divider"></li>
-                  <li class="clearfix">
-                    <div class="left">
-                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/bjackson.jpg">
-                    </div>
-                    <ul class="right">
-                      <li><a class="linkedin" href="http://linkedin.com/in/usbrandon" target="_blank">Brandon Jackson</a></li>
-                      <li><a class="twitter" href="https://twitter.com/usbrandon" target="_blank">@usbrandon</a></li>
-                      <li><a class="blog" href="#"></a></li>
-                    </ul>
-                  </li>
-                  <li class="divider"></li>
-                  <li class="clearfix">
-                    <div class="left">
-                      <img class="img img-circle profile" src="../../../api/repos/IvySE/static/custom/img/rsimpson.jpg">
-                    </div>
-                    <ul class="right">
-                      <li><a class="linkedin" href="http://linkedin.com/in/richardleesimpson" target="_blank">Richard Simpson</a></li>
-                      <li><a class="twitter" href="https://twitter.com/richardlsimpson" target="_blank">@richardlsimpson</a></li>
-                      <li><a class="blog" href="#"></a></li>
-                    </ul>
-                  </li>
-                  
                 </ul>
-              </li>
-            </ul>
-            <!-- -->
-          </div>
-
+            </nav>
         </div>
-      </header>
+    </div>
+    
+    <div id="dashboardBreadcrumbs" class="section section-breadcrumbs">
+        <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 id="pageTitle">Title</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container" style="padding:20px;">
 
-      <div id="masthead">  
+    @CONTENT@
+    
+    </div>
+
+      <!-- Footer -->
+      <div class="footer">
         <div class="container">
           <div class="row">
-            <div class="col-md-7">
-              <h1>Ivy Schema Editor
-                <p class="lead"></p>
-              </h1>
+            <div class="col-footer col-md-4 col-xs-12">
+              <h3>Useful Links</h3>
+              <ul class="no-list-style footer-navigate-section">
+                <li><a href="http://www.ivy-is.co.uk" target="_blank">Website</a></li>
+                <li><a href="http://www.ivy-is.co.uk/blog" target="_blank">Blog</a></li>
+                <li><a href="http://www.ivy-is.co.uk/ivy-labs/ivy-software/" target="_blank">Plugins</a></li>
+                <li><a href="http://www.ivy-is.co.uk/services/pentaho-solutions/" target="_blank">Services</a></li>
+              </ul>
             </div>
-            <div class="col-md-5">
-              <div class="well"> 
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="col-md-12">
-                      <h5>This plugin provide a text editor for your published mondrian schemas. Share your thoughts.</h5>
-                      <div class="col-md-6"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.ivy-is.co.uk/ivy-labs/ivy-software/" data-text="I'm using IvySE - Ivy Schema Editor for @pentaho" data-via="ivyinfosystems" data-hashtags="pentaho" data-dnt="true">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div class="col-md-6"><div class="fb-like" data-href="http://www.ivy-is.co.uk/ivy-labs/ivy-software/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            
+            <div class="col-footer col-md-4 col-xs-12">
+              <h3>Contacts</h3>
+              <p class="contact-us-details">
+                  <b>Address:</b> 10 York Place Edinburgh, Scotland, EH1 3EP<br/>
+                  <b>Phone:</b> +44 (0)131 524 8144<br/>
+                  <b>Email:</b> <a href="mailto:enquiries@ivy-is.com">enquiries@ivy-is.com</a>
+                </p>
             </div>
-          </div> 
-        </div><!-- /cont -->
-        <div id="fb-root"></div>
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        
-        <div class="container">
+            <div class="col-footer col-md-4 col-xs-12">
+              <h3>Stay Connected</h3>
+              <ul class="footer-stay-connected no-list-style">
+                <li><a href="https://www.facebook.com/ivyinfosystems" target="_blank" class="facebook"></a></li>
+                <li><a href="https://twitter.com/ivyinfosystems" target="_blank" class="twitter"></a></li>
+              </ul>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="top-spacer"> </div>
-            </div>
-          </div> 
-        </div><!-- /cont -->
-        
-      </div>
-
-
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12"> 
-            <div class="panel">
-              <div class="panel-body">
-                @CONTENT@                                                                                                         
-              </div>
-            </div>
-         	</div><!--/col-12-->
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="IvySE-Footer">
-          @FOOTER@
-      </div>
-
-      <footer>
-        <div class="container" id="footer">
-        <div class="row">
-          <div class="col col-sm-12">
-            <h4><a href="http://www.ivy-is.co.uk" target="_blank">Copyright © 2015 Ivy Information Systems Ltd</a></h4>
-            <h3>Follow Us</h3>
-            <div class="btn-group">
-             <a class="btn btn-twitter btn-xs" href="https://twitter.com/ivyinfosystems" target="_blank"><i class="fa fa-twitter icon-large"></i> Twitter</a>
-             <a class="btn btn-facebook btn-xs" href="https://www.facebook.com/ivyinfosystems" target="_blank"><i class="fa fa-facebook icon-large"></i> Facebook</a>
-             <a class="btn btn-google-plus btn-xs" href="https://plus.google.com/+Ivy-isCoUk" target="_blank"><i class="fa fa-google-plus icon-large"></i> Google+</a>
-             <a class="btn btn-linkedin btn-xs" href="https://www.linkedin.com/company/ivy-information-systems-limited" target="_blank"><i class="fa fa-linkedin icon-large"></i> LinkedIn</a>
-             <a class="btn btn-youtube btn-xs" href="https://www.youtube.com/IvyIS" target="_blank"><i class="fa fa-youtube icon-large"></i> Youtube</a>
-             <a class="btn btn-github btn-xs" href="https://github.com/ivylabs" target="_blank"><i class="fa fa-github icon-large"></i> Github</a>
+              <div class="footer-copyright">&copy; 2014 Ivy Information Systems. All rights reserved.</div>
             </div>
           </div>
         </div>
       </div>
-      </footer>
+      
+      
+      @FOOTER@
 
-      <script>
-        $('#IvyBC-Link').popover({
-          html: true,
-          placement: "bottom",
-          trigger: "hover",
-          title: "IvyBC - Ivy Bootstrap Components",
-          content: "<img src=\"../../../api/repos/IvySE/static/custom/img/devices_small.png\" class='img-responsive'>Create responsive mobile dashboards using  our new "+
-            "Pentaho plugin Ivy Bootstrap Components! Everything "+
-            "you need to create mobile dashboards with ease.</br /><br />"+
-            "Check out the <a href=\"http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards\" style=\"color:#b0e36f\">Ivy Labs</a> for more information!"
-        });
-/*
-        $(function() {
-            $.get(webAppPath+"/plugin/IvySE/api/checkLicense", function( data ) {
-              
-              if(data != undefined && data.status==="ok" && data.result==="false"){
-                $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
-                  '<div class="modal-dialog modal-lg">' +
-                    '<div class="modal-content">' +
-                      '<div class="modal-header">' +
-                        '<h1 class="modal-title" id="myModalLabel">IvySE - Ivy Schema Editor License</h1>' +
-                      '</div>' +
-                      '<div class="modal-body">' +
-                        '<div id="alertLicense" class="alert alert-danger fade in">' +
-                          '<strong>Error</strong> Invalid license.' +
-                        '</div>' +
-                        '<div class="row">' +
-                          '<div class="col-md-12">' +
-                            '<h2 class="page-header">Submit Ivy Schema Editor License</h2>' +
-                            '<p><center>To get your free IvySE license, please click the button below.</center></p>' +
-                            '<center><a type="button" class="btn btn-success btn-lg" href="http://www.ivy-is.co.uk/licenses" target="_blank">Get License</a></center>' +
-                            '<div class="form-group">' +
-                              '<label for="licenseKeyField">License Key</label>' +
-                              '<textarea class="form-control" id="licenseKeyField" rows="3" placeholder="Paste your license key here"></textarea>' +
-                            '</div>' +
-                          '</div>' +
-                        '</div>' +
-                      '</div>' +
-                      '<div class="modal-footer">' +
-                        '<button type="button" class="btn btn-default" id="apply-license-btn">Apply License</button>' +
-                      '</div>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>');
-                $("body #licenseCheckModal #apply-license-btn").on("click", function() {
-                  var licenseKey = $("body #licenseCheckModal .modal-body #licenseKeyField").val();
-                  if(licenseKey == ""){
-                    $("body #licenseCheckModal .modal-body #alertLicense").remove();
-                    $("body #licenseCheckModal .modal-body").prepend('<div id="alertLicense" class="alert alert-danger fade in">' +
-                          '<strong>Error</strong> You don\'t paste any license.</div>');
-                  }else{
-                    $("body #licenseCheckModal .modal-body").empty();
-                    $("body #licenseCheckModal .modal-body").prepend("<center><img src='../../../content/IvySE/img/loading.gif'/></center>");
-
-                    $.post( webAppPath+"/plugin/IvySE/api/submitLicense?licenseKey="+encodeURIComponent(licenseKey)).done(function( data ) {
-                      $("body #licenseCheckModal .modal-body").empty();
-                      if(data != undefined && data.status==="ok"){
-                        $("body #licenseCheckModal .modal-body").append('<div id="alertLicense" class="alert alert-success fade in">' +
-                              '<strong>Success</strong> License accepted.</div>');
-                        $("body #licenseCheckModal .modal-body").append('<div class="row">' +
-                          '<div class="col-md-3"><strong>Username:</strong></div>' +
-                            '<div class="col-md-9">'+JSON.parse(data.result).UserName+'</div>' +
-                          '</div>' + 
-                          '<div class="row">' +
-                            '<div class="col-md-3"><strong>Email:</strong></div>' +
-                            '<div class="col-md-9">'+JSON.parse(data.result).UserEmail+'</div>' +
-                          '</div>' + 
-                          '<div class="row">' +
-                            '<div class="col-md-3"><strong>Plugin Name:</strong></div>' +
-                            '<div class="col-md-9">'+JSON.parse(data.result).UserPluginName+'</div>' +
-                          '</div>' + 
-                          '<div class="row">' +
-                            '<div class="col-md-3"><strong>Plugin Type:</strong></div>' +
-                            '<div class="col-md-9">'+JSON.parse(data.result).UserPluginType+'</div>' +
-                          '</div>'
-                        );
-                        setTimeout(function(){
-                           window.location.reload(1);
-                        }, 3000);
-                      }else{
-                        $("body #licenseCheckModal .modal-body").prepend('<div id="alertLicense" class="alert alert-danger fade in">' +
-                              '<strong>Error</strong> License invalid, please try again.</div>');
-                        setTimeout(function(){
-                           window.location.reload(1);
-                        }, 2000);
-                      }
-                    });
-
-                  }
-                });
-                $('body #licenseCheckModal').modal({keyboard: false, backdrop: "static"}).modal('show');
-              }
-            });
-        });
-	*/
-      </script>
     </body>
 </html>

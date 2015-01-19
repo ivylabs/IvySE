@@ -1,0 +1,1156 @@
+{
+ "layout": {
+  "title": "main",
+  "rows": [
+   {
+    "id": "440fc1c7-fc5e-595f-39e8-7e8cb4669f0b",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "JS",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": ";(function (){\n    /**\n    //Disable the blockUI loading indicator (default with CDF)\n    $.blockUI_Disabled = $.blockUI;\n    $.blockUI = function(){};\n    /**/\n    \n    window.showHidden = false;\n    window.previewSaiku = false;\n    window.previewAnalyzer = false;\n\n  var actionButtonsOpts = {\n    name: \"actionPreviewButtons\",\n    label: \"Action Preview Buttons\",\n    defaults: {\n      buttons:[\n        {\n          cssClass: \"viewButton\",\n          title: \"View\",\n          tooltip: \"View\",\n            action: function(v, st) {\n              Dashboards.log(v);\n            }\n        }\n      ]\n    },\n\n    init: function(){\n        $.fn.dataTableExt.oSort[this.name+'-asc'] = $.fn.dataTableExt.oSort['string-asc'];\n        $.fn.dataTableExt.oSort[this.name+'-desc'] = $.fn.dataTableExt.oSort['string-desc'];\n    },\n    \n    implementation: function(tgt, st, opt){\n      var $buttonContainer = $('<div/>').addClass('buttonContainer').addClass(\"btn-group\")\n        .addClass('numButtons-' + opt.buttons.length).append(\"<center/>\").find(\"center\");\n      _.each(opt.buttons, function(el,idx){\n          if((!window.previewSaiku && el.cssClass==\"previewSaiku\") || (!window.previewAnalyzer && el.cssClass==\"previewAnalyzer\")){\n              return;\n          }\n        var $button = $(\"<button/>\").addClass(el.cssClass||\"\").html(el.title||\"\").attr('title', el.tooltip||\"\");\n        $button.click(function(){\n          if (el.action) {\n            el.action(st.value, st);\n          }\n        });\n        $buttonContainer.append($button);\n      });\n      $(tgt).empty().append($buttonContainer);\n\n    }\n\n    };\n    Dashboards.registerAddIn(\"Table\", \"colType\", new AddIn(actionButtonsOpts));\n  \n  \n/* edit data of table  */\n  var editable = {\n  name: \"editable\",\n  label: \"Editable\",\n  defaults: {\n    action: function (v, st) {\n      Dashboards.log(v);\n    }\n  },\n  init: function(){\n    \n    // Register this for datatables sort\n    var myself = this;\n    $.fn.dataTableExt.oSort[this.name+'-asc'] = function(a,b){\n    return myself.sort(a,b)\n    };\n    $.fn.dataTableExt.oSort[this.name+'-desc'] = function(a,b){\n    return myself.sort(b,a)\n    };   \n  }, \n  sort: function(a,b){\n    return this.sumStrArray(a) - this.sumStrArray(b);\n  }, \n\n  implementation: function (tgt, st, opt) {\n    var t = $(tgt);\n    var value = st.value;\n    var text = $(\"<input/>\").attr({value:value, type:'text', class:'editBox'})\n    .keyup(function(event){\n      if (event.keyCode == 13) {\n        opt.action( $(this).val(), st );\n      }\n      /*var idx = this.parentNode.parentNode.rowIndex;\n      metadataParam[idx-1][1] = $(this).val();*/\n      var obj = this.parentNode.parentNode.children[0].textContent;\n      metadataParam[obj.toString()] = $(this).val();\n    });\n    \n    t.empty();\n    t.append(text);\n  }\n  };\n  Dashboards.registerAddIn(\"Table\", \"colType\", new AddIn(editable));\n  \n})();\n\nfunction toggleShowHidden() {\n    console.log(\"Toggle show hidden\");\n    //Toggle show hidden\n    showHidden = showHidden ? false : true;\n    \n    //Update the table\n    filterHidden();\n} \n\nfunction filterHidden() {\n    if (showHidden) {\n        $(\"table tbody tr\").removeClass(\"hidden\");\n    } else {\n        //Search the table for hidden cubes\n        $(\"table tbody tr\").each(function(index, value) {\n            var visible = $($(this).find(\"td\")[3]).text() == \"Yes\" ? true : false;\n            \n            if (!visible) {\n                $(this).addClass(\"hidden\");\n            } else {\n                $(this).removeClass(\"hidden\");\n            }\n        });\n    }\n} \n\nfunction toggleSchemas() {\n    if ($(\"#TABLE\").hasClass(\"hidden\")) {\n        $(\"#TABLE\").removeClass(\"hidden\");\n        $(\".toggle-schemas\").text(\"Hide schemas\");\n    } else {\n        $(\"#TABLE\").addClass(\"hidden\");\n        $(\".toggle-schemas\").text(\"Show schemas\");\n    }\n} ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "d561f44c-6e75-603d-e6a1-aa77882dece1",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "CSS",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Css",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": ".toggle-schemas {\n    width: 100%;\n    max-width: 150px;\n    margin-bottom: 15px;\n    font-weight: bold;\n    color: #333;\n    background: #B0E36F;\n    border-color: #8CC63F;\n}\n\n.toggle-schemas:hover, .toggle-schemas:focus {\n    background: #8CC63F;\n}\n\n#checkbox .checkbox input {\n    margin: 0;\n}\n\n#TABLE table thead th {\n    text-align: left;\n    background: #B0E36F;\n    border-color: #B0E36F;\n    color: #333;\n    padding-left: 5px;\n}\n\n#TABLE .dataTables_paginate .paginate_button:not(.disabled):hover {\n    background: #B0E36F;\n    border-color: #8CC63F;\n    color: #333 !important;\n}\n\n#TABLE .viewButton {\n    display: none;\n}\n\ntable.tableComponent tr td.column0:hover,\ntable.tableComponent tr td.column1:hover {\n    cursor: pointer;\n    background: #f5f5f5;\n}\n\ntable.tableComponent th td.column0 { \n    text-align: left;\n}\n\ndiv.textEditorComponent div.textEditorControls {\n    background-color: #B0E36F;\n} \n\n#EDITOR {\n    height: 600px;\n    margin-bottom: 30px;\n}\n\n#EDITOR .textEditorFile {\n    color: #333;\n}\n\n#EDITOR iframe {\n    border: 1px solid #ddd;\n}\n\n.removeSchema{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/delete_icon.gif\");\n    background-repeat: no-repeat;\n} \n.previewSaiku{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/saiku_16x16.png\");\n    background-repeat: no-repeat;\n} \n.previewAnalyzer{\n    background-image: url(\"../../../api/repos/IvySE/static/custom/img/analysis_report_file_icon.png\");\n    background-repeat: no-repeat;\n} \n\ntbody td.actionPreviewButtons button {\n    background-color: transparent;\n}\ntbody td.actionPreviewButtons button:last-child {\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: medium;\n}\n\ntbody tr td.actionPreviewButtons div.buttonContainer{\n    text-align: center;\n}\n\ntbody tr td.actionPreviewButtons button {\n    transition-delay: 0s;\n    transition-duration: 0.2s;\n    transition-property: opacity;\n    transition-timing-function: ease;\n}\ntbody td.actionPreviewButtons button {\n    -moz-border-bottom-colors: none;\n    -moz-border-left-colors: none;\n    -moz-border-right-colors: none;\n    -moz-border-top-colors: none;\n    border-bottom-color: -moz-use-text-color;\n    border-bottom-style: none;\n    border-bottom-width: 0;\n    border-image-outset: 0 0 0 0;\n    border-image-repeat: stretch stretch;\n    border-image-slice: 100% 100% 100% 100%;\n    border-image-source: none;\n    border-image-width: 1 1 1 1;\n    border-left-color-ltr-source: physical;\n    border-left-color-rtl-source: physical;\n    border-left-color-value: -moz-use-text-color;\n    border-left-style-ltr-source: physical;\n    border-left-style-rtl-source: physical;\n    border-left-style-value: none;\n    border-left-width-ltr-source: physical;\n    border-left-width-rtl-source: physical;\n    border-left-width-value: 0;\n    border-right-color-ltr-source: physical;\n    border-right-color-rtl-source: physical;\n    border-right-color-value: -moz-use-text-color;\n    border-right-style-ltr-source: physical;\n    border-right-style-rtl-source: physical;\n    border-right-style-value: none;\n    border-right-width-ltr-source: physical;\n    border-right-width-rtl-source: physical;\n    border-right-width-value: 0;\n    border-top-color: -moz-use-text-color;\n    border-top-style: none;\n    border-top-width: 0;\n    box-shadow: none;\n    color: #333333;\n    font-size: 13px;\n    height: 16px;\n    margin-left: 5px;\n    vertical-align: baseline;\n    width: 21px;\n    border-style: none;\n} \n\n.modal-header, .modal-footer {\n  background-color:#f2f2f2;\n  font-weight:800;\n  font-size:12px;\n}\n\n.modal-footer i, .well i {\n  font-size:20px;\n  color:#c0c0c0;\n} ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "8eacda62-14e9-c82d-59e1-ad11638063c1",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "3e6e643b-68c3-e2d5-22ea-5fe900057fa3",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "8eacda62-14e9-c82d-59e1-ad11638063c1",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "b6d56e6b-b685-2a2e-f052-d8d43755c6aa",
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm",
+    "parent": "3e6e643b-68c3-e2d5-22ea-5fe900057fa3",
+    "properties": [
+     {
+      "name": "name",
+      "value": "toggleSchemas",
+      "type": "Id"
+     },
+     {
+      "name": "cssClass",
+      "value": "btn btn-default toggle-schemas hidden",
+      "type": "String"
+     },
+     {
+      "name": "elementTag",
+      "value": "button",
+      "type": "String"
+     },
+     {
+      "name": "otherAttributes",
+      "value": "[[\"onclick\",\"toggleSchemas()\"]]",
+      "type": "OptionArray"
+     }
+    ]
+   },
+   {
+    "id": "2e5b00e1-c92e-fcac-a943-fdd6b74769ad",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "b6d56e6b-b685-2a2e-f052-d8d43755c6aa",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "Hide schemas ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "696720de-c948-b857-87e1-2a646cd5b640",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "c31cda16-f2bc-5a0a-2778-55933cb40410",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "696720de-c948-b857-87e1-2a646cd5b640",
+    "properties": [
+     {
+      "name": "name",
+      "value": "checkboxHolder",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "ec6898da-a284-5aa2-72b2-ecb7925129b1",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "c31cda16-f2bc-5a0a-2778-55933cb40410",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<div class=\"hidden checkbox\">\n    <label>\n        <input type=\"checkbox\" class=\"toggle-show-hidden\" onclick=\"toggleShowHidden()\"> Show hidden cubes\n    </label>\n</div> ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "93aebc54-c7bf-22ee-38c2-0a9f9dae150b",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "696720de-c948-b857-87e1-2a646cd5b640",
+    "properties": [
+     {
+      "name": "name",
+      "value": "TABLE",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "b20b4993-69b5-21d8-f487-f2d00150e044",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "8cd41c1c-a0de-6edd-bb96-46c76642bb89",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "b20b4993-69b5-21d8-f487-f2d00150e044",
+    "properties": [
+     {
+      "name": "name",
+      "value": "EDITOR",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "c439dbfb-7f1d-1d9c-6108-ea9df4f9a46b",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "106379ae-fafa-bed9-3b3f-802c34a176ab",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "c439dbfb-7f1d-1d9c-6108-ea9df4f9a46b",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<div id=\"notifyModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n<div class=\"modal-dialog modal-lg\">\n  <div class=\"modal-content\">\n      <div class=\"modal-header\"></div>\n      <div class=\"modal-body\"></div>\n      <div class=\"modal-footer\">\n          <div class=\"pull-right\">\n            <button class=\"btn btn-success btn-sm btn-ok\" data-dismiss=\"modal\">OK</button>\n          </div>    \n      </div>\n  </div>\n  </div>\n</div> ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   }
+  ]
+ },
+ "components": {
+  "rows": [
+   {
+    "id": "OTHERCOMPONENTS",
+    "name": "Others",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Others",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "9a0baab0-ea7f-db86-a5d8-f6939362ba9d",
+    "type": "ComponentsTable",
+    "typeDesc": "table Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "SCHEMA_TABLES",
+      "type": "Id"
+     },
+     {
+      "name": "expandContainerObject",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "listeners",
+      "value": "['${p:REFRESH_TABLE}']",
+      "type": "Listeners"
+     },
+     {
+      "name": "oLanguage",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "language",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "colTypes",
+      "value": "[\"String\",\"String\",\"String\",\"String\",\"actionPreviewButtons\"]",
+      "type": "colTypesCustom"
+     },
+     {
+      "name": "colFormats",
+      "value": "[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"]",
+      "type": "Array"
+     },
+     {
+      "name": "colWidths",
+      "value": "[\"35%\",\"35%\",\"10%\",\"10%\",\"10%\"]",
+      "type": "Array"
+     },
+     {
+      "name": "colSortable",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[\"Schema Name\",\"Cube\",\"Cube Type\",\"Visible\",\"Actions\"]",
+      "type": "Array"
+     },
+     {
+      "name": "expandParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "paginate",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "filter",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "info",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "sort",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "displayLength",
+      "value": "20",
+      "type": "Integer"
+     },
+     {
+      "name": "lengthChange",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "expandOnClick",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "colSearchable",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "drawCallback",
+      "value": "function () {\n    //Make sure the hidden cubes are shown/hidden as intended\n    filterHidden();\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "dataSource",
+      "value": "GET_SCHEMAS",
+      "type": "Datasource"
+     },
+     {
+      "name": "sortBy",
+      "value": "[]",
+      "type": "SortByArray"
+     },
+     {
+      "name": "sDom",
+      "value": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+      "type": "JavaScript"
+     },
+     {
+      "name": "priority",
+      "value": "2",
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "paginationType",
+      "value": "simple_numbers",
+      "type": "PaginationType"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:TABLE}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "paginateServerside",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "function f() {    \n    // Options\n    var optsLib = {\n        dashboard: {\n            buttons: [\n                {\n                    cssClass: \"removeSchema\",\n                    title: \" \",\n                    tooltip: \"Remove Schema\",\n                    action: function (v, st) {\n                        $.post( Dashboards.getWebAppPath() + '/plugin/data-access/api/datasource/analysis/'+encodeURIComponent(st.series)+'/remove', function( data ) {\n                            if(st.series==SCHEMA_NAME){\n                                $(\"#\"+render_TEXT_EDITOR.htmlObject).removeAttr('style');\n                                render_TEXT_EDITOR.clear()\n                            }\n                            Dashboards.fireChange(\"REFRESH_TABLE\",0);\n                        });\n                    }\n                },\n                {\n                    cssClass: \"previewSaiku\",\n                    title: \" \",\n                    tooltip: \"Saiku Analytics Preview\",\n                    action: function (v, st) {\n                        window.open(Dashboards.getWebAppPath() + '/content/saiku-ui/index.html?biplugin5=true', true);\n                    }\n                },\n                {\n                    cssClass: \"previewAnalyzer\",\n                    title: \" \",\n                    tooltip: \"Pentaho Analyzer Preview\",\n                    action: function (v, st) {\n                        console.log(st);\n                        var row = st.tableData[st.rowIdx];\n                        var schema = encodeURIComponent(row[0]);\n                        var cube = encodeURIComponent(row[1]);\n                        \n                        if (!schema || !cube) {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/service/selectSchema', true);\n                        } else {\n                            window.open(Dashboards.getWebAppPath() + '/api/repos/xanalyzer/editor?showFieldList=true&showFieldLayout=true&catalog=' + schema + '&cube=' + cube + '&showRepositoryButtons=true', true);\n                        }\n                    }\n                }              \n            ]\n        }\n    };\n\n    //Define options to pass in to the Action Buttons table addin\n    var opts = function (st) {\n        //Check to see if the cube is visible\n        var visible = st.tableData[st.rowIdx][3] == \"Yes\" ? true : false;\n        \n        //Get the key value from the \"Actions\" column to look up in optsLib\n        var type = st.tableData[st.rowIdx][4].toLowerCase();\n        \n        //Return the buttons object from optsLib at the specified key\n        return visible ? optsLib[type] || {} : {};\n    };\n    \n    this.setAddInOptions(\"colType\", \"actionPreviewButtons\", opts);\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "function(data) { console.log(data); } ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function() {\n    $(\"#\"+this.htmlObject).find(\"table\").wrap( document.createElement( \"div\" ) );\n    $(\"#\"+this.htmlObject).find(\"table\").addClass(\"table table-striped table-bordered\");\n    $(\"#\"+this.htmlObject).find(\"table\").css(\"margin-bottom\", \"5px\");\n    $(\"#\"+this.htmlObject).css(\"margin-bottom\", \"10px\");\n    $(\"#\"+this.htmlObject).find(\"table\").parent().addClass(\"table-responsive\");\n    $(\"#\"+this.htmlObject).find(\"table tr\").removeClass(\"odd even\");\n    $(\"#\"+this.htmlObject+\" div:first\").css(\"min-height\",\"inherit\");\n    \n    //Find the datatable header\n    var dataTableHeader = $(\"#\" + this.htmlObject).find(\".dataTables_filter\").parents(\".row\")\n    var leftColumn = $(dataTableHeader).find(\".col-md-6\")[0];\n    \n    //Clone the checkbox and move it into the header's left column\n    $(leftColumn).append($(\".checkbox\").clone(true).removeClass(\"hidden\"));\n    \n    //Make sure our hidden cubes are shown/hidden as desired\n    filterHidden();\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "function f() {\n    console.log(\"Changed. DOES THIS WOWWWWWWOWOWOWOWOWORK?\");\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     },
+     {
+      "name": "extraOptions",
+      "value": "[]",
+      "type": "OptionArray"
+     },
+     {
+      "name": "clickAction",
+      "value": "function(elem) {\n    if (elem.colIdx > 1) return;\n    \n    //On first click, show the toggle-schemas button from now on\n    $(\".toggle-schemas\").removeClass(\"hidden\");\n    \n    //Get the row we clicked on\n    var row = elem.tableData[elem.rowIdx];\n    \n    //Check which column we clicked\n    if (elem.colIdx == 0) {\n        //Clicked on the schema\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[0]);\n        Dashboards.fireChange(\"CUBE_NAME\", null);\n    } else if (elem.colIdx == 1) {\n        //Clicked on the cube\n        Dashboards.fireChange(\"SCHEMA_NAME\", row[0]);\n        Dashboards.fireChange(\"CUBE_NAME\", row[1]);\n    }\n} ",
+      "type": "JavaScript"
+     }
+    ]
+   },
+   {
+    "id": "51fe6cb8-efb6-efec-2800-de3016511197",
+    "type": "ComponentsTextEditorComponent",
+    "typeDesc": "Text Editor",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "TEXT_EDITOR",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:SCHEMA_NAME}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "['${p:SCHEMA_NAME}']",
+      "type": "Listeners"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "priority",
+      "value": "3",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:EDITOR}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "function() {\n    $(\"#\"+this.htmlObject).css(\"height\", \"600px\");\n    this.defaultButtons[0][\"label\"] = \"Update Schema\";\n    \n    this.schemaProps={};\n    \n    this.defaultButtons=[{\n        clazz: \"check-schema btn btn-xs btn-default\",\n        icon: \"fa fa-check\",\n        label: \" Check Schema\", \n        callback: function(){\n            this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            this.$ph.find(\".textEditorNotificationMsg\").show();\n            console.log(\"Checking schema...\");\n            this.check();\n        }\n    },{\n        clazz: \"save-schema btn btn-xs btn-default\",\n        icon: \"fa fa-floppy-o\",\n        label: \" Save\", \n        callback: function(){\n            this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n            this.$ph.find(\".textEditorNotificationMsg\").show();\n            this.save();\n            if(typeof this.saveCallback === \"function\" ){\n                this.saveCallback();\n            }\n        }\n    }];\n    \n    this.check=function(){\n        this.getEditorWindow().check();\n    };\n    \n    this.loadFile = function() {\n        var myself=this;\n        \n        this.$ph.find(\".textEditorNotificationMsg\").empty().append(\"<div id='img-loading'><center><img src='../../../api/repos/IvySE/static/custom/img/loading_small.gif'></center></div>\")\n        this.$ph.find(\".textEditorNotificationMsg\").show();\n        \n        $.ajax({\n            url: webAppPath+\"/plugin/data-access/api/datasource/\"+this.file+\"/getAnalysisDatasourceInfo\",\n            type: \"GET\",\n            complete: function(data) {\n                var dataProps = data.responseText.split(\";\");\n                for(var i=0;i<dataProps.length;i++){\n                    myself.schemaProps[dataProps[i].split(\"=\")[0]]=dataProps[i].split(\"=\")[1];\n                }\n                myself.$ph.find(\".textEditorNotificationMsg\").fadeOut('slow');\n            }\n        });\n        \n        // Disable button\n        $('button.save',this.$ph).attr('disabled', true);\n        this.externalEditor = $('iframe',this.$ph);\n        var headerHeight = $('.textEditorControls', this.$ph).height() + $('.textEditorNotification', this.$ph).height();\n        var editorHeight = this.$ph.height() - headerHeight - 5;\n        this.externalEditor.height(editorHeight);\n        this.externalEditor.load(function(){\n            var editorEnv = myself.getEditorWindow();\n            editorEnv.listeners.onStatusUpdate = myself.setDirty;\n            editorEnv.listeners.notify = function(action, msg, type){\n                myself.notify(action, msg);\n                console.log(\"Notify of action\", action);\n            }\n            myself.$ph.find(\".textEditorNotificationMsg\").empty();\n        });\n        var cube = CUBE_NAME ? \"&cube=\" + encodeURIComponent(CUBE_NAME) : \"\";\n        \n        this.externalEditor.attr('src',webAppPath+\"/api/repos/IvySE/static/custom/html/editor.html?\"+'path=' + encodeURIComponent(encodeURIComponent(this.file)) + \"&datasource=\" + myself.schemaProps[\"DataSource\"] + cube);\n        console.log(this.externalEditor);\n    };\n    \n    this.template = function(){ \n        return \"<div class='textEditorComponent'><div class='textEditorControls'>\"+\n        \"<div class='textEditorFile'><span class='fileLabel'>Schema: </span>\"+SCHEMA_NAME+\"</div>\"+\n        \"<div class='textEditorButtons'>{{#buttons}}<button class='{{clazz}} btn'><i class=\\\"{{icon}}\\\"></i> {{label}}</button>{{/buttons}}</div>\" +\n        \"</div><div class='textEditorNotification'><span class='textEditorNotificationMsg'>Test</span></div>\"+\n        \"<div class='textEditorRightPanel'></div>\"+\n        \"<div class='textEditorIframeContainer'><div class='textEditorIframe'><iframe seamless='true' marginheight='0'></iframe></div>\"+\n        \"</div>\"\n    };\n    \n    this.notify = function(action, msg, level){\n        $(\"#notifyModal .modal-body\").empty();\n        if(action==\"save\"){\n            var result = \"Error on save \" + SCHEMA_NAME + \" schema.\"\n            if(\"Schema published\" == msg){\n                result = SCHEMA_NAME + \" schema saved.\";\n                $.ajax({\n                    url: \"../../saiku/api/admin/discover/refresh\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../../api/system/refresh/mondrianSchemaCache\",\n                    type: 'get',\n                    dataType: 'xml',\n                    async: false\n                });\n                $.ajax({\n                    url: \"../../cda/api/cacheMonitor/removeAll?method=removeAll\",\n                    type: 'post',\n                    dataType: 'xml',\n                    async: false\n                });\n                \n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-success\" role=\"alert\">'+result+'</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(result);\n                $notifications.show().delay(4000).fadeOut('slow');\n            }else{\n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on save schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on save schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        \n        if(action==\"check\"){\n            try{\n                if(JSON.parse(msg).resultset[0][0].toLowerCase() == \"success\"){\n                    $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-success\" role=\"alert\"><strong>Success!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }else{\n                    $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error!</strong> '+JSON.parse(msg).resultset[0][1]+'</div>');\n                    $(\"#notifyModal .modal-body\").append('<div class=\"panel-group\" id=\"accordionError\">' +\n                    '<div class=\"panel panel-default\">' +\n                        '<div class=\"panel-heading\">' +\n                          '<h4 class=\"panel-title\">' +\n                            '<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\">More details</a>' +\n                          '</h4>' +\n                        '</div>' +\n                        '<div id=\"collapseOne\" class=\"panel-collapse collapse\">' +\n                          '<div class=\"panel-body\">' +\n                          '<div class=\"col-md-12\"><strong>Message: </strong> ' + JSON.parse(msg).resultset[0][2] + '</div>' +\n                          '<div class=\"col-md-12\"><strong>Stack: </strong><br/> ' + JSON.parse(msg).resultset[0][3].replace(/\\n/g,\"<br/>\") + '</div>' +\n                          '</div>' +\n                        '</div>' +\n                      '</div>' +\n                    '</div>');\n                        \n                    var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                    $notifications.text(JSON.parse(msg).resultset[0][0] + \" - \" +JSON.parse(msg).resultset[0][1]);\n                    $notifications.show().delay(4000).fadeOut('slow');\n                }\n            }catch(e){\n                $(\"#notifyModal .modal-body\").append('<div class=\"alert alert-danger\" role=\"alert\"><strong>Error</strong> on check schema.</div>');\n                var $notifications = this.$ph.find(\".textEditorNotificationMsg\");\n                $notifications.text(\"Error on check schema.\");\n                $notifications.show().delay(4000).fadeOut('slow');\n            }\n        }\n        $('#notifyModal').modal();\n    }\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "852cc593-0ffa-e690-086d-45a2c4444289",
+    "type": "ComponentsQuery",
+    "typeDesc": "Query Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "LOAD_PREF",
+      "type": "Id"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "resultvar",
+      "value": "",
+      "type": "Result"
+     },
+     {
+      "name": "dataSource",
+      "value": "GET_CONFIG",
+      "type": "Datasource"
+     },
+     {
+      "name": "priority",
+      "value": "1",
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "function(data){\n    try{\n        window.previewSaiku = eval(data.resultset[0][3]);\n        window.previewAnalyzer = eval(data.resultset[0][4]);\n    }catch(e){\n        window.previewSaiku = false;\n        window.previewAnalyzer = false;\n    }\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "GENERIC",
+    "name": "Generic",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Generic",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "1552fcbd-abd6-eb36-d9be-7bb466656d73",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "SCHEMA_NAME",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "19adc8a3-41eb-5efc-f3dd-cc382d365467",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "CUBE_NAME",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "a7c1058e-8095-6bc1-e5ea-89937000f491",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "REFRESH_TABLE",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   }
+  ]
+ },
+ "datasources": {
+  "rows": [
+   {
+    "id": "IVYSE_CPKENDPOINTS",
+    "name": "IVYSE Endpoints",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "IVYSE Endpoints",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "103405ae-7591-60c7-7eee-6440f57a514b",
+    "type": "ComponentsIvySE_getSchemas_CPKENDPOINT",
+    "typeDesc": "getSchemas Endpoint",
+    "parent": "IVYSE_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "GET_SCHEMAS",
+      "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Inferred",
+      "type": "kettleOutputCustom"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "IvySE",
+    "meta_endpoint": "getSchemas"
+   },
+   {
+    "id": "de56262d-bd78-e49e-7d08-0e5f038a59d1",
+    "type": "ComponentsIvySE_getSchema_CPKENDPOINT",
+    "typeDesc": "getSchema Endpoint",
+    "parent": "IVYSE_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "GET_SCHEMA_CONTENT",
+      "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Json",
+      "type": "kettleOutputCustom"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "IvySE",
+    "meta_endpoint": "getSchema"
+   },
+   {
+    "id": "30995014-43ff-c7a6-8835-f145ecb0ad5c",
+    "type": "ComponentsIvySE_loadConfig_CPKENDPOINT",
+    "typeDesc": "loadConfig Endpoint",
+    "parent": "IVYSE_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "GET_CONFIG",
+      "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Json",
+      "type": "kettleOutputCustom"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "IvySE",
+    "meta_endpoint": "loadConfig"
+   }
+  ]
+ },
+ "filename": "/system/IvySE/dashboards/admin/main.cdfde"
+}

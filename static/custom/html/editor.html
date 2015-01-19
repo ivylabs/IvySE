@@ -324,9 +324,9 @@
 
                 $(".spinner.editor-spinner").removeClass("hidden");
 
-                $.get("/pentaho/plugin/IvySE/api/getschema", {paramschema:schemaName},
+                $.get("/pentaho/plugin/IvySE/api/getschema", {stepName:'OUTPUT',kettleOutput:'Json',paramschema:schemaName},
                   function(fileContents) {
-                    myself.setContents(fileContents);
+                    myself.setContents(fileContents.resultset[0][0]);
                     $(".spinner.editor-spinner").addClass("hidden");
 
                     //If we have been passed a cube to load into, find the cube and focus on it

@@ -1,0 +1,298 @@
+ 
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Ivy Dashboard Components</title>
+        <meta name="author" content="Ivy Information Systems">
+        <link rel="shortcut icon" href="../../../api/repos/IvyDC/static/custom/img/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="../../../api/repos/IvyDC/static/custom/img/favicon.ico">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        @HEADER@   
+        
+        <link rel="stylesheet" href="../../../api/repos/IvyDC/static/custom/css/icomoon-social.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../api/repos/IvyDC/static/custom/css/main.css">
+
+        <script src="../../../api/repos/IvyDC/static/custom/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-47483249-3', 'github.com');
+			ga('send', 'pageview');
+		</script>
+        
+        <script language="javascript" type="text/javascript">
+        
+			var dashboardProperties = {
+				name: "IvyDC",
+				mainTitle: "IvyDC - Ivy Dashboard Components"
+			}; 
+
+
+			var render_getMenuItemsComponent = {
+				type: "Query",
+				name: "render_getMenuItemsComponent",
+				priority: 5,
+				parameters: [],
+				executeAtStart: true,
+				listeners: [],
+				postFetch: function d(data){
+				
+					Dashboards.log("Loading Style Menu Items");
+
+					menuItemsHTML = "<li class='logo-wrapper'><h1 style='margin-bottom:0;margin-top:10px;'><span style='color:#8cc63f;font-weight:600;'>Ivy</span><span>DC</span></h1></li>";
+
+					$.each(data.resultset,function(idx, val){
+						menuItemsHTML += "<li><a href='"+val[1]+"'>"+val[0]+"</a></li>"
+					});
+
+					$('#mainMenuList').html(menuItemsHTML);
+				},
+				queryDefinition:  {
+					endpoint: "getMenuItems",
+					pluginId: "IvyDC",
+					stepName: "OUTPUT",
+					kettleOutput: "Json",
+					queryType: "cpk"
+				}
+			};
+
+			Dashboards.addComponents([render_getMenuItemsComponent]);
+
+		</script>
+
+		<style type="text/css">
+
+			h4 {
+				padding-left:15px;
+				margin-top:25px;
+				margin-bottom:15px;
+			} 
+
+			.h4p {
+				padding-left:25px;
+			} 
+			.affix{
+				top: 0px;
+			}
+		</style>
+
+		<script language="javascript" type="text/javascript">
+
+		$(function(){
+
+
+			$("#pageTitle").text(dashboardProperties.mainTitle);
+
+			var d = new Date();
+			$('.footer-copyright').html("&copy; "+d.getFullYear()+" Ivy Information Systems. All rights reserved.");
+			
+			$('#submitDetails, #declineDetails').click(function(){
+				render_setOptions.update();
+				$('#myModal').modal('hide');
+			});
+
+		});
+
+		</script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        
+
+        <!-- Navigation & Logo-->
+        <div class="mainmenu-wrapper">
+	        <div class="container">
+		        <nav id="mainmenu" class="mainmenu">
+					<ul id="mainMenuList">
+
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		<div id="dashboardBreadcrumbs" class="section section-breadcrumbs">
+    		<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 id="pageTitle">Title</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container" style="padding:20px;">
+
+		@CONTENT@
+		
+		</div>
+
+	    <!-- Footer -->
+	    <div class="footer">
+	    	<div class="container">
+		    	<div class="row">
+		    		<div class="col-footer col-md-4 col-xs-12">
+		    			<h3>Useful Links</h3>
+		    			<ul class="no-list-style footer-navigate-section">
+		    				<li><a href="http://www.ivy-is.co.uk" target="_blank">Website</a></li>
+		    				<li><a href="http://www.ivy-is.co.uk/blog" target="_blank">Blog</a></li>
+		    				<li><a href="http://www.ivy-is.co.uk/ivy-labs/ivy-software/" target="_blank">Plugins</a></li>
+		    				<li><a href="http://www.ivy-is.co.uk/services/pentaho-solutions/" target="_blank">Services</a></li>
+		    			</ul>
+		    		</div>
+		    		
+		    		<div class="col-footer col-md-4 col-xs-12">
+		    			<h3>Contacts</h3>
+		    			<p class="contact-us-details">
+	        				<b>Address:</b> 10 York Place Edinburgh, Scotland, EH1 3EP<br/>
+	        				<b>Phone:</b> +44 (0)131 524 8144<br/>
+	        				<b>Email:</b> <a href="mailto:enquiries@ivy-is.com">enquiries@ivy-is.com</a>
+	        			</p>
+		    		</div>
+		    		<div class="col-footer col-md-4 col-xs-12">
+		    			<h3>Stay Connected</h3>
+		    			<ul class="footer-stay-connected no-list-style">
+		    				<li><a href="https://www.facebook.com/ivyinfosystems" target="_blank" class="facebook"></a></li>
+		    				<li><a href="https://twitter.com/ivyinfosystems" target="_blank" class="twitter"></a></li>
+		    			</ul>
+		    		</div>
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-12">
+		    			<div class="footer-copyright">&copy; 2014 Ivy Information Systems. All rights reserved.</div>
+		    		</div>
+		    	</div>
+		    </div>
+	    </div>
+	    
+	    
+	    @FOOTER@
+
+        <script src="/pentaho/api/repos/IvyDC/static/custom/js/jquery.fitvids.js"></script>
+        <script src="/pentaho/api/repos/IvyDC/static/custom/js/jquery.sequence-min.js"></script>
+        <script src="/pentaho/api/repos/IvyDC/static/custom/js/jquery.bxslider.js"></script>
+        <script src="/pentaho/api/repos/IvyDC/static/custom/js/main-menu.js"></script>
+        <script src="/pentaho/api/repos/IvyDC/static/custom/js/template.js"></script>
+
+
+
+
+      <script>
+        $('#IvyBC-Link').popover({
+          html: true,
+          placement: "bottom",
+          trigger: "hover",
+          title: "IvyBC - Ivy Bootstrap Components",
+          content: "<img src=\"../../../api/repos/IvyDC/static/custom/img/devices_small.png\" class='img-responsive'>Create responsive mobile dashboards using  our new "+
+            "Pentaho plugin Ivy Bootstrap Components! Everything "+
+            "you need to create mobile dashboards with ease.</br /><br />"+
+            "Check out the <a href=\"http://www.ivy-is.co.uk/ivy-labs/pentaho-bootstrap-dashboards\" style=\"color:#b0e36f\">Ivy Labs</a> for more information!"
+        });
+
+        $(function() {
+
+        	$('#menuAffix').affix({
+			  offset: {
+			    top: 200,
+			  }
+			});
+
+
+            $.get(webAppPath+"/plugin/IvyDC/api/checkLicense", function( data ) {
+              
+              if(data != undefined && data.status==="ok" && data.result==="false"){
+                $("body").append('<div class="modal fade" id="licenseCheckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">' +
+                  '<div class="modal-dialog modal-lg">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<h1 class="modal-title" id="myModalLabel">IvyDC - Ivy Dashboard Components License</h1>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                        '<div id="alertLicense" class="alert alert-danger fade in">' +
+                          '<strong>Error</strong> Invalid license.' +
+                        '</div>' +
+                        '<div class="row">' +
+                          '<div class="col-md-12">' +
+                            '<h2 class="page-header">Submit Ivy Dashboard Components License</h2>' +
+                            '<p><center>To get your free IvyDC license, please click the button below.</center></p>' +
+                            '<center><a type="button" class="btn btn-success btn-lg" href="http://www.ivy-is.co.uk/licenses" target="_blank">Get License</a></center>' +
+                            '<div class="form-group">' +
+                              '<label for="licenseKeyField">License Key</label>' +
+                              '<textarea class="form-control" id="licenseKeyField" rows="3" placeholder="Paste your license key here"></textarea>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>' +
+                      '<div class="modal-footer">' +
+                        '<button type="button" class="btn btn-default" id="apply-license-btn">Apply License</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>');
+                $("body #licenseCheckModal #apply-license-btn").on("click", function() {
+                  var licenseKey = $("body #licenseCheckModal .modal-body #licenseKeyField").val();
+                  if(licenseKey == ""){
+                    $("body #licenseCheckModal .modal-body #alertLicense").remove();
+                    $("body #licenseCheckModal .modal-body").prepend('<div id="alertLicense" class="alert alert-danger fade in">' +
+                          '<strong>Error</strong> You don\'t paste any license.</div>');
+                  }else{
+                    $("body #licenseCheckModal .modal-body").empty();
+                    $("body #licenseCheckModal .modal-body").prepend("<center><img src='../../../content/IvyDC/img/loading.gif'/></center>");
+
+                    $.post( webAppPath+"/plugin/IvyDC/api/submitLicense?licenseKey="+encodeURIComponent(licenseKey)).done(function( data ) {
+                      $("body #licenseCheckModal .modal-body").empty();
+                      if(data != undefined && data.status==="ok"){
+                        $("body #licenseCheckModal .modal-body").append('<div id="alertLicense" class="alert alert-success fade in">' +
+                              '<strong>Success</strong> License accepted.</div>');
+                        $("body #licenseCheckModal .modal-body").append('<div class="row">' +
+                          '<div class="col-md-3"><strong>Username:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserName+'</div>' +
+                          '</div>' + 
+                          '<div class="row">' +
+                            '<div class="col-md-3"><strong>Email:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserEmail+'</div>' +
+                          '</div>' + 
+                          '<div class="row">' +
+                            '<div class="col-md-3"><strong>Plugin Name:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserPluginName+'</div>' +
+                          '</div>' + 
+                          '<div class="row">' +
+                            '<div class="col-md-3"><strong>Plugin Type:</strong></div>' +
+                            '<div class="col-md-9">'+JSON.parse(data.result).UserPluginType+'</div>' +
+                          '</div>'
+                        );
+                        setTimeout(function(){
+                           window.location.reload(1);
+                        }, 3000);
+                      }else{
+                        $("body #licenseCheckModal .modal-body").prepend('<div id="alertLicense" class="alert alert-danger fade in">' +
+                              '<strong>Error</strong> License invalid, please try again.</div>');
+                        setTimeout(function(){
+                           window.location.reload(1);
+                        }, 2000);
+                      }
+                    });
+
+                  }
+                });
+                $('body #licenseCheckModal').modal({keyboard: false, backdrop: "static"}).modal('show');
+              }
+            });
+        });
+      </script>
+
+    </body>
+</html>

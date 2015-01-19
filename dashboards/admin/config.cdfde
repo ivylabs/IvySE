@@ -3,10 +3,134 @@
   "title": "config",
   "rows": [
    {
-    "id": "b69d06dd-85db-c91b-0ca3-54f7baaa04ae",
+    "id": "8a154ae9-5bc8-fa64-9aee-4c2a399d799e",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "opts",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": "var dashboardProperties = {\n    name: \"Config\",\n    mainTitle: \"IvySE Configuration\"\n}; ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "bc9dd06d-8a32-6995-2a0e-1baa707cca42",
     "type": "LayoutRow",
     "typeDesc": "Row",
     "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "c8c4e68b-deef-71ec-8e53-ba788cd7443b",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "bc9dd06d-8a32-6995-2a0e-1baa707cca42",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "basic-login",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "b69d06dd-85db-c91b-0ca3-54f7baaa04ae",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "c8c4e68b-deef-71ec-8e53-ba788cd7443b",
     "properties": [
      {
       "name": "name",
@@ -140,7 +264,7 @@
     "id": "ec0100b8-13f8-68d4-0f64-b8a912c793bb",
     "type": "LayoutRow",
     "typeDesc": "Row",
-    "parent": "UnIqEiD",
+    "parent": "c8c4e68b-deef-71ec-8e53-ba788cd7443b",
     "properties": [
      {
       "name": "name",

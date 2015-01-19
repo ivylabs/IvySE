@@ -5,19 +5,9 @@ This web based mondrian schema editor is developed on the new Bootstrap framewor
 ![Ivy SE](https://raw.githubusercontent.com/ivylabs/IvySE/master/static/custom/img/IvySE.png)
 
 
-Some of the features in this 0.0.4 release:
+Some of the features in this 0.0.5 release:
 ===========================================
-
-* See cubes within your schema files
-* Click on cube names to open the schema file and jump to the cube for editing
-* Previewing any of your schema / cube combinations within Analyzer instead of going to Penthao's tiny selection dialog and hunting through a list.
-* You can use the search box to shrink the list down to the ones you want to edit
-* Sorting by anything
-* Wait indicators in the Ace editor so you know that loading or saving is really taking place.
-* See which cubes are visible and which are hidden.
-* The plugin returns to "Sparkl" so the community can hack and add to it easily
-* It is possible to show and hide the schema files once a user opens a schema. It cleans up the work space.
-* About - drop down lets you get in touch with the contributors to the plugin.
+* New plugin template
 
 
 What is the road map for the next version?
@@ -30,6 +20,17 @@ What is the road map for the next version?
 
 #Old Releases
 
+###0.0.4
+* See cubes within your schema files
+* Click on cube names to open the schema file and jump to the cube for editing
+* Previewing any of your schema / cube combinations within Analyzer instead of going to Penthao's tiny selection dialog and hunting through a list.
+* You can use the search box to shrink the list down to the ones you want to edit
+* Sorting by anything
+* Wait indicators in the Ace editor so you know that loading or saving is really taking place.
+* See which cubes are visible and which are hidden.
+* The plugin returns to "Sparkl" so the community can hack and add to it easily
+* It is possible to show and hide the schema files once a user opens a schema. It cleans up the work space.
+* About - drop down lets you get in touch with the contributors to the plugin.
 
 ###0.0.3
 * Schema validation
