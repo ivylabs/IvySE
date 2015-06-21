@@ -5,9 +5,9 @@ This web based mondrian schema editor is developed on the new Bootstrap framewor
 ![Ivy SE](https://raw.githubusercontent.com/ivylabs/IvySE/master/static/custom/img/IvySE.png)
 
 
-Some of the features in this 0.0.5 release:
+Some of the features in this 0.0.6 release:
 ===========================================
-* New plugin template
+* Pentaho 5.4 support
 
 
 What is the road map for the next version?
@@ -19,6 +19,9 @@ What is the road map for the next version?
 
 
 #Old Releases
+
+###0.0.5
+* New plugin template
 
 ###0.0.4
 * See cubes within your schema files
